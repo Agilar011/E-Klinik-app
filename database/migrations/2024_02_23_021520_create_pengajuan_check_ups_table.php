@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('pengajuan_check_ups', function (Blueprint $table) {
             $table->id();
             $table->string('nip');
-            $table->string('nipdokter');
+            $table->string('nipdokter')->nullable();
             $table->unsignedBigInteger('idpoli');
-            $table->string('qrcode');
+            $table->string('qrcode')->nullable();
             $table->date('tglpengajuan');
-            $table->date('tglpemeriksaan');
+            $table->date('tglpemeriksaan')->nullable();
             $table->string('keluhan');
             $table->string('status');
             $table->text('catatan_dokter')->nullable();

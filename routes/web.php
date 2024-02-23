@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PoliController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DoctorController;
 
 
 /*
@@ -38,4 +40,20 @@ Route::middleware([
 });
 
 Route::get('/polis', [PoliController::class, 'index'])->name('polis.index');
+
+Route::get('/poliPage', [UserController::class, 'showPoli'])->name('poliPage');
+
+Route::get('/poli/{poli}', [UserController::class, 'MedicalCheckUp'])->name('poli.show');
+
+Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
+Route::get('/antrianpengajuan', [DoctorController::class, 'index'])->name('Doctor.index');
+
+Route::get('/pagetolakpengajuan/{pengajuan}', [DoctorController::class, 'RejectionPage'])->name('RecectionPage');
+    Route::get('/pagesetujui/{pengajuan}', [DoctorController::class, 'AcceptionPage'])->name('AcceptionPage');
+
+Route::get('/tolakpengajuan/{pengajuan}', [DoctorController::class, 'TolakPengajuan'])->name('tolakpengajuan');
+Route::get('/setujui/{pengajuan}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
+
+
+
 

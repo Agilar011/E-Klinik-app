@@ -11,8 +11,32 @@
         </div>
 
         <div style="display: flex; justify-content: center; align-items: center; height: 10vh; flex-direction: grid; gap: 6px;">
-            <a href="{{ route('login') }}" style="background-color: #007bff; padding: 5px; font-weight: 600; text-decoration: none; color: #333; border-radius: 5px;">Lanjut Ke Halaman Dokter</a>
-            <a href="/polis" style="background-color: #007bff; padding: 5px; font-weight: 600; text-decoration: none; color: #333; border-radius: 5px;">Daftar Antrian</a>
+            <button style="background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;">
+  <a href="/antrianpengajuan">Lihat Daftar Pengajuan</a>
+</button>
+<button style="background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;">
+  <a href="/poliPage">Ajukan Pemeriksaan</a>
+</button>
         </div>
 
 
