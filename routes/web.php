@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PoliController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,17 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        if (Auth()->user()->role === 'admin') {
+            return view('dashboard');
+        }elseif (Auth()->user()->role === 'doctor') {
+            return view('dashboardDoctor');
+        } else {
+            return view('dashboardUser');
+        }
+
+
     })->name('dashboard');
 });
+
+Route::get('/polis', [PoliController::class, 'index'])->name('polis.index');
+
