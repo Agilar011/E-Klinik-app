@@ -29,7 +29,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         if (Auth()->user()->role === 'admin') {
             return view('dashboard');
-        }elseif (Auth()->user()->role === 'doctor') {
+        } elseif (Auth()->user()->role === 'doctor') {
             return view('dashboardDoctor');
         } else {
             return view('dashboardUser');
@@ -49,10 +49,12 @@ Route::put('/user/update', [UserController::class, 'update'])->name('user.update
 Route::get('/antrianpengajuan', [DoctorController::class, 'index'])->name('Doctor.index');
 
 Route::get('/pagetolakpengajuan/{pengajuan}', [DoctorController::class, 'RejectionPage'])->name('RecectionPage');
-    Route::get('/pagesetujui/{pengajuan}', [DoctorController::class, 'AcceptionPage'])->name('AcceptionPage');
+Route::get('/pagesetujui/{pengajuan}', [DoctorController::class, 'AcceptionPage'])->name('AcceptionPage');
 
 Route::get('/tolakpengajuan/{pengajuan}', [DoctorController::class, 'TolakPengajuan'])->name('tolakpengajuan');
-Route::get('/setujui/{pengajuan}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
+Route::put('/setujui/{pengajuan}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
+Route::put('/setujuipengajuan/{id}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
+
 
 
 

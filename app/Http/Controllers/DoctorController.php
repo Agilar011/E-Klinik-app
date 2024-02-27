@@ -23,6 +23,7 @@ class DoctorController extends Controller
     }
     public function AcceptionPage(PengajuanCheckUp $pengajuan)
     {
+
         return view('DoctorUI.AcceptionPage', compact('pengajuan'));
     }
     public function TolakPengajuan(PengajuanCheckUp $pengajuan)
@@ -32,12 +33,33 @@ class DoctorController extends Controller
         ]);
         return redirect()->back();
     }
-    public function SetujuiPengajuan(PengajuanCheckUp $pengajuan)
+    public function SetujuiPengajuan($id, Request $request)
     {
-        $pengajuan->update([
-            'status' => 'approved'
-        ]);
-        return redirect()->back();
+
+        $pengajuan = PengajuanCheckUp::where('id', $id)->first();
+
+        $pengajuan->status = 'approved';
+
+        $pengajuan->nipdokter = Auth::user()->nip;
+         // Access the tglpemeriksaan from the request
+    $tglpemeriksaan = $request->tglpemeriksaan;
+
+    // Update the tglpemeriksaan attribute
+    $pengajuan->tglpemeriksaan = $tglpemeriksaan;
+
+    // Save the changes
+    $pengajuan->save();
+
+        // $pengajuan = PengajuanCheckUp::find($id);
+        // $pengajuan->update([
+        //     'status' => 'approved',
+        //     'nipdokter' => Auth::user()->nip,
+        //     'tglpemeriksaan' => $request->tglpemeriksaan, // '2021-08-12'
+
+
+        // ]);
+
+        return redirect()->route('dashboard')->with('success', 'Pengajuan Telah Disetujui.');
     }
 
 }

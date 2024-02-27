@@ -30,7 +30,12 @@
 
                             </div>
                         @endforeach
+
                     </div>
+                    <button type="button" onclick="window.history.back()"
+                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                    Back
+                </button>
                 </div>
             </div>
         </div>

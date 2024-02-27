@@ -62,8 +62,11 @@
                                 <label for="Berat Badan" class="font-medium text-gray-700">Keluhan:</label>
                                 <textarea name="keluhan" id="keluhan">{{ Auth::user()->keluhan }}</textarea>
                             </div>
-                        </div>
-
+                            <div>
+                                <button type="button" onclick="window.history.back()"
+                        class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                        Back
+                    </button>
                         <button type="submit"
                             style="background-color: #4CAF50; /* Green */
                     border: none;
@@ -78,6 +81,9 @@
                     border-radius: 10px;">
                             Kirim Pengajuan Pemeriksaan </button>
                 </div>
+                            </div>
+                        </div>
+
             </div>
         </div>
 
