@@ -88,37 +88,33 @@ class AdminController extends Controller
 
     }
     public function UpdatePoli($id){
-        $user = User::find($id);
-        $user->update([
-            'nip' => request('nip'),
+        $Poli = Poli::find($id);
+        // dd($Poli);
+
+        $Poli->update([
             'name' => request('name'),
-            'divisi' => request('divisi'),
-            'tanggal_lahir' => request('tanggal_lahir'),
-            'tinggi_badan' => request('tinggi_badan'),
-            'berat_badan' => request('berat_badan'),
-            'role' => request('role'),
         ]);
 
-        return redirect()->route('ShowUser');
+
+        return redirect()->route('ShowPoli');
     }
 
     public function DeletePoli($id)
     {
         // Temukan pengguna berdasarkan ID
-        $user = User::findOrFail($id);
-        // dd($user);
-        // dd($user);
+        $Poli = Poli::findOrFail($id);
+        // dd($Poli);
 
         // // Periksa apakah pengguna ditemukan
-        // if (!$user) {
-        //     return redirect()->route('ShowUser')->with('error', 'Pengguna tidak ditemukan.');
+        // if (!$Poli) {
+        //     return redirect()->route('ShowPoli')->with('error', 'Pengguna tidak ditemukan.');
         // }
 
         // Hapus pengguna
-        $user->delete();
+        $Poli->delete();
 
         // Redirect atau berikan respons sesuai kebutuhan Anda
-        return redirect()->route('ShowUser')->with('success', 'Akun pengguna berhasil dihapus.');
+        return redirect()->route('ShowPoli')->with('success', 'Akun pengguna berhasil dihapus.');
     }
     //
 

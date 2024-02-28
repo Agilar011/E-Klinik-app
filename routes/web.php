@@ -67,4 +67,9 @@ Route::put('/UpdateUser/{id}', [AdminController::class, 'UpdateUser'])->name('Up
 Route::post('/SetDefault/{id}', [AdminController::class, 'SetDefaultUser'])->name('SetDefaultUser');
 Route::delete('/DeleteUser/{id}', [AdminController::class, 'DeleteUser'])->name('DeleteUser');
 
+Route::get('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoliPage'])->name('UpdatePoliPage');
+Route::put('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoli'])->name('UpdatePoli');
+Route::delete('/DeletePoli/{id}', [AdminController::class, 'DeletePoli'])->name('DeletePoli');
+
+
 

@@ -23,7 +23,7 @@
                     <table>
                         <thead>
                             <th class="border px-4 py-2">No</th>
-                            <th class="border px-4 py-2">Nama Polis</th>
+                            <th class="border px-4 py-2">Nama Poli</th>
                             <th class="border px-4 py-2">Action</th>
                         </thead>
 
@@ -46,12 +46,12 @@
 
                                         <x-slot name="content">
                                             {{-- <a href="Create User" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create New User</a> --}}
-                                            <a href="{{ route('UpdateUserPage', $id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update User</a>
+                                            <a href="{{ route('UpdatePoliPage', $id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update Poli</a>
 
-                                            <form method="POST" action="{{ route('DeleteUser', $id) }}">
+                                            <form method="POST" action="{{ route('DeletePoli', $id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Account</button>
+                                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Poli</button>
                                             </form>
 
                                             {{-- <a href="{{ route('SetDefaultUser', $id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Set Default</a> --}}
