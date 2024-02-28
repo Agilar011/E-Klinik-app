@@ -2,48 +2,18 @@
     {{-- <x-application-logo class="block h-12 w-auto" /> --}}
 
     <h1 class="mt-8 text-2xl font-medium text-gray-900">
-        Welcome Doctor
+        Selamat Datang Admin {{ Auth::user()->name }}
     </h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-1 gap-6 lg:gap-8">
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum necessitatibus repellendus nostrum, error vel consectetur et dignissimos maxime, explicabo dicta veniam optio iusto? Quia, repellat consequuntur error odio praesentium quam.
-        </div>
-
-        <div style="display: flex; justify-content: center; align-items: center; height: 10vh; flex-direction: grid; gap: 6px;">
-            <button style="background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 10px;">
-  <a href="/antrianpengajuan">Lihat Daftar Pengajuan</a>
-</button>
-<button style="background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 10px;">
-  <a href="/poliPage">Ajukan Pemeriksaan</a>
-</button>
-        </div>
-
-
-    </div>
+    <p class="mt-6 text-gray-500 leading-relaxed">
+        Laravel Jetstream provides a beautiful, robust starting point for your next Laravel application. Laravel is designed
+        to help you build your application using a development environment that is simple, powerful, and enjoyable. We believe
+        you should love expressing your creativity through programming, so we have spent time carefully crafting the Laravel
+        ecosystem to be a breath of fresh air. We hope you love it.
+    </p>
 </div>
 
-{{-- <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
+<div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
     <div>
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-6 h-6 stroke-gray-400">
@@ -123,4 +93,4 @@
             Authentication and registration views are included with Laravel Jetstream, as well as support for user email verification and resetting forgotten passwords. So, you're free to get started with what matters most: building your application.
         </p>
     </div>
-</div> --}}
+</div>

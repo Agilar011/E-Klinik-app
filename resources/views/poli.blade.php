@@ -868,21 +868,38 @@
                         nostrum, error vel consectetur et dignissimos maxime, explicabo dicta veniam optio iusto? Quia,
                         repellat consequuntur error odio praesentium quam.
                     </div>
+
+                    @php
+                                    $counter = 1;
+                                @endphp
+
+
                     <table style="border: 1px solid black;">
-                                                <thead style="border: 1px solid black;">
+                        <thead style="border: 1px solid black;">
                             <tr>
                                 <th style="border: 1px solid black;">No Antrian</th>
                                 <th>Nama</th>
-                                <th>Jabatan</th>
+                                <th>Divisi</th>
                                 <th>Poli</th>
                             </tr>
                         </thead>
                         <tbody style="border: 1px solid black;">
-                            @foreach ($polis as $poli)
+                            @foreach ($pengajuan as $item)
+                            @php
+                            $poli = \App\Models\Poli::where('id', $item->idpoli)->first();
+                            $user = \App\Models\User::where('nip', $item->nip)->first();
+                        @endphp
+
                                 <tr>
-                                    <td style="border: 1px solid black;">{{ $poli->id }}</td>
-                                    <td>{{ $poli->name }}</td>
+
+                                    <td style="border: 1px solid black;">{{ $counter }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->divisi }}</td>
+                                    <td>{{ $poli->name}} </td>
                                 </tr>
+                                @php
+                                    $counter++;
+                                @endphp
                             @endforeach
                         </tbody>
                     </table>

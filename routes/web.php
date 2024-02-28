@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PoliController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DoctorController;
 
 
 /*
@@ -26,8 +29,8 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         if (Auth()->user()->role === 'admin') {
-            return view('dashboard');
-        }elseif (Auth()->user()->role === 'doctor') {
+            return view('dashboardAdmin');
+        } elseif (Auth()->user()->role === 'doctor') {
             return view('dashboardDoctor');
         } else {
             return view('dashboardUser');
@@ -38,4 +41,29 @@ Route::middleware([
 });
 
 Route::get('/polis', [PoliController::class, 'index'])->name('polis.index');
+
+Route::get('/poliPage', [UserController::class, 'showPoli'])->name('poliPage');
+
+Route::get('/poli/{poli}', [UserController::class, 'MedicalCheckUp'])->name('poli.show');
+
+Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
+Route::get('/antrianpengajuan', [DoctorController::class, 'index'])->name('Doctor.index');
+
+Route::get('/pagetolakpengajuan/{pengajuan}', [DoctorController::class, 'RejectionPage'])->name('RecectionPage');
+Route::get('/pagesetujui/{pengajuan}', [DoctorController::class, 'AcceptionPage'])->name('AcceptionPage');
+
+Route::put('/tolakpengajuan/{pengajuan}', [DoctorController::class, 'TolakPengajuan'])->name('tolakpengajuan');
+Route::put('/setujui/{pengajuan}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
+Route::put('/setujuipengajuan/{id}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
+
+
+Route::get('/DaftarUser', [AdminController::class, 'ShowUser'])->name('ShowUser');
+
+Route::get('/CreateUser', [AdminController::class, 'CreateUser'])->name('CreateUser');
+Route::get('/UpdateUser/{id}', [AdminController::class, 'UpdateUserPage'])->name('UpdateUserPage');
+Route::put('/UpdateUser/{id}', [AdminController::class, 'UpdateUser'])->name('UpdateUser');
+// Route::get('/DeletUser', [AdminController::class, 'CreateUser'])->name('CreateUser');
+Route::post('/SetDefault/{id}', [AdminController::class, 'SetDefaultUser'])->name('SetDefaultUser');
+Route::delete('/DeleteUser/{id}', [AdminController::class, 'DeleteUser'])->name('DeleteUser');
+
 

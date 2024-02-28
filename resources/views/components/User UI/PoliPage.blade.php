@@ -50,7 +50,7 @@
                     margin: 4px 2px;
                     cursor: pointer;
                     border-radius: 10px;">
-          <a href="/poliPage">Ajukan Pemeriksaan</a>
+          <a href="">Ajukan Pemeriksaan</a>
         </button>
       </div>
 </div>
