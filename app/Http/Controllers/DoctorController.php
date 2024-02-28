@@ -19,19 +19,20 @@ class DoctorController extends Controller
     }
     public function RejectionPage(PengajuanCheckUp $pengajuan)
     {
-        return view('DoctorUI.RecectionPage', compact('pengajuan'));
+        return view('DoctorUI.Rejection', compact('pengajuan'));
     }
     public function AcceptionPage(PengajuanCheckUp $pengajuan)
     {
 
         return view('DoctorUI.AcceptionPage', compact('pengajuan'));
     }
-    public function TolakPengajuan(PengajuanCheckUp $pengajuan)
+    public function TolakPengajuan(PengajuanCheckUp $pengajuan, Request $request)
     {
         $pengajuan->update([
+            'catatan_dokter'  => request('catatan_dokter'),
             'status' => 'rejected'
         ]);
-        return redirect()->back();
+        return view('DoctorUI.index');
     }
     public function SetujuiPengajuan($id, Request $request)
     {

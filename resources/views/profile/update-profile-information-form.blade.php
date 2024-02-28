@@ -61,8 +61,8 @@
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="email" value="{{ __('Email') }}" />
-            <x-input id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required autocomplete="username" />
+            <x-label for="NIP" value="{{ __('NIP') }}" />
+            <x-input id="nip" type="text" class="mt-1 block w-full" wire:model="state.nip" required autocomplete="username" readonly />
             <x-input-error for="email" class="mt-2" />
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
@@ -81,6 +81,13 @@
                 @endif
             @endif
         </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="Divisi" value="{{ __('Divisi') }}" />
+            <x-input id="divisi" type="text" class="mt-1 block w-full" wire:model="state.divisi" required autocomplete="divisi" />
+            <x-input-error for="divisi" class="mt-2" />
+        </div>
+
     </x-slot>
 
     <x-slot name="actions">
