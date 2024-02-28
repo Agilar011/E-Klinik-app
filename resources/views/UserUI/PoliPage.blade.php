@@ -22,7 +22,8 @@
                         @foreach ($polis as $item)
                             <div>
 
-                                <div>
+                                <div class="bg-white-500 hover:bg-gray-600 text-black font-bold py-2 px-4 rounded">
+
                                     <a href="{{ route('poli.show', $item->name) }}">{{ $item->name }}</a>
                                     </a>
 
@@ -33,9 +34,9 @@
 
                     </div>
                     <button type="button" onclick="window.history.back()"
-                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
-                    Back
-                </button>
+                        class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                        Back
+                    </button>
                 </div>
             </div>
         </div>

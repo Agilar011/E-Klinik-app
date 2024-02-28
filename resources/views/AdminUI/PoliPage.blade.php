@@ -10,7 +10,7 @@
                             Selamat Datang Admin {{ Auth::user()->name }}
                         </h1>
                         <h3>
-                            Silahkan beri tindakan pada user.
+                            Silahkan beri tindakan pada Poli.
                         </h3>
 
                         {{-- <p class="mt-6 text-gray-500 leading-relaxed">
@@ -23,26 +23,18 @@
                     <table>
                         <thead>
                             <th class="border px-4 py-2">No</th>
-                            <th class="border px-4 py-2">NIP</th>
-                            <th class="border px-4 py-2">Nama Pasien</th>
-                            <th class="border px-4 py-2">Divisi</th>
-                            <th class="border px-4 py-2">Tanggal Lahir</th>
-                            <th class="border px-4 py-2">Role</th>
+                            <th class="border px-4 py-2">Nama Polis</th>
                             <th class="border px-4 py-2">Action</th>
                         </thead>
 
                         <tbody>
-                            @foreach ($user as $key => $item)
+                            @foreach ($polis as $key => $item)
                             @php
                                 $id = App\Models\User::where('id', $item->id)->first();
                             @endphp
                                 <tr>
                                     <td class="border px-4 py-2">{{ $key + 1 }}</td>
-                                    <td class="border px-4 py-2">{{ $item->nip }} </td>
                                     <td class="border px-4 py-2">{{ $item->name }}</td>
-                                    <td class="border px-4 py-2">{{ $item->divisi }}</td>
-                                    <td class="border px-4 py-2">{{ $item->tanggal_lahir }}</td>
-                                    <td class="border px-4 py-2">{{ $item->role }} </td>
                                     <td class="border px-4 py-2">
                                         <x-dropdown align="right" width="48">
                                         <x-slot name="trigger">
@@ -53,33 +45,14 @@
                                         DeleteUser
 
                                         <x-slot name="content">
-                                            <div name="box" class="bg-blue-200 ">
-                                                <a href="{{ route('UpdateUserPage', $id) }}" class="text-left w-48 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update User</a>
-
-                                            <form method="POST" action="{{ route('SetDefaultUser', $id) }}">
-                                                @csrf
-                                                <button type="submit" class="text-left w-48 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Set Default</button>
-                                            </form>
-
-                                            <form method="POST" action="{{ route('DeleteUser', $id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-left w-48 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Account</button>
-                                            </form>
-                                            </div>
                                             {{-- <a href="Create User" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create New User</a> --}}
-                                            {{-- <a href="{{ route('UpdateUserPage', $id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update User</a>
-
-                                            <form method="POST" action="{{ route('SetDefaultUser', $id) }}">
-                                                @csrf
-                                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Set Default</button>
-                                            </form>
+                                            <a href="{{ route('UpdateUserPage', $id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update User</a>
 
                                             <form method="POST" action="{{ route('DeleteUser', $id) }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Account</button>
-                                            </form> --}}
+                                            </form>
 
                                             {{-- <a href="{{ route('SetDefaultUser', $id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Set Default</a> --}}
                                         </x-slot>

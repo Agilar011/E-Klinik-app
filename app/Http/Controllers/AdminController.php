@@ -12,9 +12,15 @@ class AdminController extends Controller
     public function ShowUser()
     {
         $user = User::all();
-        $polis = Poli::all(); // Mengambil semua data poli dari tabel
 
         return view('AdminUI.UserPage', compact('user'));
+
+    }
+    public function ShowPoli()
+    {
+        $polis = Poli::all(); // Mengambil semua data poli dari tabel
+
+        return view('AdminUI.PoliPage', compact('polis'));
 
     }
 
@@ -25,7 +31,7 @@ class AdminController extends Controller
     public function UpdateUserPage($id){
         $user = User::find($id);
 
-        return view('AdminUI.UpdatePage', compact('user'));
+        return view('AdminUI.UpdateUSerPage', compact('user'));
 
     }
     public function UpdateUser($id){
@@ -57,6 +63,46 @@ class AdminController extends Controller
     }
 
     public function DeleteUser($id)
+    {
+        // Temukan pengguna berdasarkan ID
+        $user = User::findOrFail($id);
+        // dd($user);
+        // dd($user);
+
+        // // Periksa apakah pengguna ditemukan
+        // if (!$user) {
+        //     return redirect()->route('ShowUser')->with('error', 'Pengguna tidak ditemukan.');
+        // }
+
+        // Hapus pengguna
+        $user->delete();
+
+        // Redirect atau berikan respons sesuai kebutuhan Anda
+        return redirect()->route('ShowUser')->with('success', 'Akun pengguna berhasil dihapus.');
+    }
+
+    public function UpdatePoliPage($id){
+        $poli = Poli::find($id);
+
+        return view('AdminUI.UpdatePoliPage', compact('poli'));
+
+    }
+    public function UpdatePoli($id){
+        $user = User::find($id);
+        $user->update([
+            'nip' => request('nip'),
+            'name' => request('name'),
+            'divisi' => request('divisi'),
+            'tanggal_lahir' => request('tanggal_lahir'),
+            'tinggi_badan' => request('tinggi_badan'),
+            'berat_badan' => request('berat_badan'),
+            'role' => request('role'),
+        ]);
+
+        return redirect()->route('ShowUser');
+    }
+
+    public function DeletePoli($id)
     {
         // Temukan pengguna berdasarkan ID
         $user = User::findOrFail($id);

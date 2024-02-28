@@ -59,7 +59,7 @@ Route::put('/setujuipengajuan/{id}', [DoctorController::class, 'SetujuiPengajuan
 
 
 Route::get('/DaftarUser', [AdminController::class, 'ShowUser'])->name('ShowUser');
-
+Route::get('/DaftarPoli', [AdminController::class, 'ShowPoli'])->name('ShowPoli');
 Route::get('/CreateUser', [AdminController::class, 'CreateUser'])->name('CreateUser');
 Route::get('/UpdateUser/{id}', [AdminController::class, 'UpdateUserPage'])->name('UpdateUserPage');
 Route::put('/UpdateUser/{id}', [AdminController::class, 'UpdateUser'])->name('UpdateUser');
