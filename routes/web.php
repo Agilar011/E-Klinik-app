@@ -48,6 +48,7 @@ Route::get('/poli/{poli}', [UserController::class, 'MedicalCheckUp'])->name('pol
 
 Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
 Route::get('/antrianpengajuan', [DoctorController::class, 'index'])->name('Doctor.index');
+Route::get('/dashboard.user}', [DoctorController::class, 'UserPage'])->name('Doctor.UserPage');
 
 Route::get('/pagetolakpengajuan/{pengajuan}', [DoctorController::class, 'RejectionPage'])->name('RecectionPage');
 Route::get('/pagesetujui/{pengajuan}', [DoctorController::class, 'AcceptionPage'])->name('AcceptionPage');

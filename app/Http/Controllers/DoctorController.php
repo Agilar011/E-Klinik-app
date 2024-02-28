@@ -10,6 +10,10 @@ use App\Models\PengajuanCheckUp;
 
 class DoctorController extends Controller
 {
+    public function UserPage()
+    {
+        return view('dashboardUser');
+    }
     public function index()
     {
         $nama = Auth::user()->name;

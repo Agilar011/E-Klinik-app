@@ -23,7 +23,6 @@
             cursor: pointer;
             border-radius: 10px;">
   <a href="/antrianpengajuan">Lihat Daftar Pengajuan</a>
-</button>
 <button style="background-color: #4CAF50; /* Green */
             border: none;
             color: white;
@@ -35,7 +34,7 @@
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 10px;">
-  <a href="/poliPage">Ajukan Pemeriksaan</a>
+            <a href="{{ route('Doctor.UserPage') }}">Ajukan Pemeriksaan</a>
 </button>
         </div>
 
