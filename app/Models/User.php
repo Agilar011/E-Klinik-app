@@ -31,6 +31,7 @@ class User extends Authenticatable
         'Tanggal Lahir',
         'Tinggi Badan',
         'Berat Badan',
+        'keluhan',
         'password',
     ];
 
