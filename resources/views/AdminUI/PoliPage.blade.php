@@ -4,6 +4,8 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 lg:p-8 bg-white border-b border-gray-200" style="margin-bottom: 100px;">
                     <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
+                        @include('sweetalert::alert')
+
                         {{-- <x-application-logo class="block h-12 w-auto" /> --}}
 
                         <h1 class="mt-8 text-2xl font-medium text-gray-900">
@@ -29,9 +31,9 @@
 
                         <tbody>
                             @foreach ($polis as $key => $item)
-                            @php
+                            {{-- @php
                                 $id = App\Models\User::where('id', $item->id)->first();
-                            @endphp
+                            @endphp --}}
                                 <tr>
                                     <td class="border px-4 py-2">{{ $key + 1 }}</td>
                                     <td class="border px-4 py-2">{{ $item->name }}</td>
@@ -46,15 +48,22 @@
 
                                         <x-slot name="content">
                                             {{-- <a href="Create User" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create New User</a> --}}
-                                            <a href="{{ route('UpdatePoliPage', $id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update Poli</a>
+                                            <a href="{{ route('CreatePoliPage') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create Poli</a>
 
-                                            <form method="POST" action="{{ route('DeletePoli', $id) }}">
+                                            <a href="{{ route('UpdatePoliPage',  $item->id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update Poli</a>
+                                            {{-- @php
+                                                dd($item->id);
+                                            @endphp --}}
+
+                                            <form method="POST" action="{{ route('DeletePoli', $item->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Poli</button>
+                                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-confirm-delete="true">Delete Poli</button>
                                             </form>
 
-                                            {{-- <a href="{{ route('SetDefaultUser', $id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Set Default</a> --}}
+
+
+
                                         </x-slot>
                                     </x-dropdown>
 
@@ -98,6 +107,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 

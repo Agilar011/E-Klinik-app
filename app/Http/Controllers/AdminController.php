@@ -3,22 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
+
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Poli;
+
 
 class AdminController extends Controller
 {
     public function ShowUser()
     {
         $user = User::all();
-
+        Alert::success('Success Title', 'Success Message');
         return view('AdminUI.UserPage', compact('user'));
 
     }
     public function ShowPoli()
     {
         $polis = Poli::all(); // Mengambil semua data poli dari tabel
+        $title = 'Delete Data!';
+    $text = "Are you sure you want to delete?";
+    confirmDelete($title, $text);
+
 
         return view('AdminUI.PoliPage', compact('polis'));
 
@@ -81,6 +88,23 @@ class AdminController extends Controller
         return redirect()->route('ShowUser')->with('success', 'Akun pengguna berhasil dihapus.');
     }
 
+    public function CreatePoliPage(){
+        return view('AdminUI.CreatePoliPage');
+
+    }
+    public function CreatePoli(){
+        Poli::create([
+            'name' => request('name'),
+        ]);
+        $poli = request('name');
+        // Alert::success('Hore!', 'Poli Created Successfully');
+        alert()->success('Selamat','Poli '. $poli .' Telah Dibuat');
+
+
+
+        return redirect()->route('ShowPoli');
+    }
+
     public function UpdatePoliPage($id){
         $poli = Poli::find($id);
 
@@ -112,6 +136,11 @@ class AdminController extends Controller
 
         // Hapus pengguna
         $Poli->delete();
+        // alert()->question('Title','Lorem Lorem Lorem');
+        alert()->success('Hore!','Post Deleted Successfully');
+
+
+
 
         // Redirect atau berikan respons sesuai kebutuhan Anda
         return redirect()->route('ShowPoli')->with('success', 'Akun pengguna berhasil dihapus.');

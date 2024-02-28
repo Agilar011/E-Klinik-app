@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 
 /*
@@ -54,13 +56,16 @@ Route::get('/pagetolakpengajuan/{pengajuan}', [DoctorController::class, 'Rejecti
 Route::get('/pagesetujui/{pengajuan}', [DoctorController::class, 'AcceptionPage'])->name('AcceptionPage');
 
 Route::put('/tolakpengajuan/{pengajuan}', [DoctorController::class, 'TolakPengajuan'])->name('tolakpengajuan');
-Route::put('/setujui/{pengajuan}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
+// Route::put('/setujui/{pengajuan}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
 Route::put('/setujuipengajuan/{id}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
 
 
 Route::get('/DaftarUser', [AdminController::class, 'ShowUser'])->name('ShowUser');
 Route::get('/DaftarPoli', [AdminController::class, 'ShowPoli'])->name('ShowPoli');
+
 Route::get('/CreateUser', [AdminController::class, 'CreateUser'])->name('CreateUser');
+Route::get('/CreatePoliPage', [AdminController::class, 'CreatePoliPage'])->name('CreatePoliPage');
+Route::post('/CreatePoli', [AdminController::class, 'CreatePoli'])->name('CreatePoli');
 Route::get('/UpdateUser/{id}', [AdminController::class, 'UpdateUserPage'])->name('UpdateUserPage');
 Route::put('/UpdateUser/{id}', [AdminController::class, 'UpdateUser'])->name('UpdateUser');
 // Route::get('/DeletUser', [AdminController::class, 'CreateUser'])->name('CreateUser');
