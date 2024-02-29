@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Carbon;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -20,16 +21,33 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         Validator::make($input, [
+            // 'id' => ['required', 'string', 'max:255', 'unique:users'],
+            'nip' => ['required', 'string', 'max:255', 'unique:users'],
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
+            'divisi' => ['required', 'string', 'max:255'],
+            'role' => ['string', 'max:255'],
+            'tanggal_lahir' => ['required', 'date'],
+            'tinggi_badan' => ['numeric'],
+            'berat_badan' => ['numeric'],
+            // 'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-        ])->validate();
+        ])->validate();     
+        // dd($input['divisi']);
+        $divisi= $input['divisi'];
+
+        $carbonDate = Carbon::parse($input['tanggal_lahir']);
+        $defaultPassword = $carbonDate->format('d-m-Y');
+        $defaultPassword = str_replace('-', '', $defaultPassword);
 
         return User::create([
+            'nip' => $input['nip'],
             'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
+            'divisi' => $divisi,
+            'role' => $input['role'],
+            'tanggal_lahir' => $input['tanggal_lahir'],
+            'tinggi_badan' => $input['tinggi_badan'],
+            'berat_badan' => $input['berat_badan'],
+            'password' => Hash::make($defaultPassword),
         ]);
     }
 }

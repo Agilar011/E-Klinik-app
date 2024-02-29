@@ -44,8 +44,6 @@
                                                 Click Me
                                             </button>
                                         </x-slot>
-                                        DeleteUser
-
                                         <x-slot name="content">
                                             {{-- <a href="Create User" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create New User</a> --}}
                                             <a href="{{ route('CreatePoliPage') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create Poli</a>

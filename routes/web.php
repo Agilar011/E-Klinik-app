@@ -56,24 +56,28 @@ Route::get('/pagetolakpengajuan/{pengajuan}', [DoctorController::class, 'Rejecti
 Route::get('/pagesetujui/{pengajuan}', [DoctorController::class, 'AcceptionPage'])->name('AcceptionPage');
 
 Route::put('/tolakpengajuan/{pengajuan}', [DoctorController::class, 'TolakPengajuan'])->name('tolakpengajuan');
-// Route::put('/setujui/{pengajuan}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
 Route::put('/setujuipengajuan/{id}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
 
 
 Route::get('/DaftarUser', [AdminController::class, 'ShowUser'])->name('ShowUser');
 Route::get('/DaftarPoli', [AdminController::class, 'ShowPoli'])->name('ShowPoli');
 
-Route::get('/CreateUser', [AdminController::class, 'CreateUser'])->name('CreateUser');
+// Route::get('/register', [AdminController::class, 'CreateUser'])->name('CreateUser')->middleware('guest');
+Route::get('/CreateUserPage', [AdminController::class, 'CreateUserPage'])->name('CreateUserPage');
+Route::post('/CreateUser', [AdminController::class, 'CreateUser'])->name('CreateUser');
+
 Route::get('/CreatePoliPage', [AdminController::class, 'CreatePoliPage'])->name('CreatePoliPage');
 Route::post('/CreatePoli', [AdminController::class, 'CreatePoli'])->name('CreatePoli');
+
 Route::get('/UpdateUser/{id}', [AdminController::class, 'UpdateUserPage'])->name('UpdateUserPage');
 Route::put('/UpdateUser/{id}', [AdminController::class, 'UpdateUser'])->name('UpdateUser');
-// Route::get('/DeletUser', [AdminController::class, 'CreateUser'])->name('CreateUser');
+
 Route::post('/SetDefault/{id}', [AdminController::class, 'SetDefaultUser'])->name('SetDefaultUser');
 Route::delete('/DeleteUser/{id}', [AdminController::class, 'DeleteUser'])->name('DeleteUser');
 
 Route::get('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoliPage'])->name('UpdatePoliPage');
 Route::put('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoli'])->name('UpdatePoli');
+
 Route::delete('/DeletePoli/{id}', [AdminController::class, 'DeletePoli'])->name('DeletePoli');
 
 

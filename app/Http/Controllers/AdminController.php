@@ -31,9 +31,30 @@ class AdminController extends Controller
 
     }
 
-    public function CreateUser($id){
-        return view('AdminUI.index', compact('nama', 'Pengajuan'));
+    public function CreateUserPage(){
+        return view('AdminUI.CreateUserPage');
 
+    }
+
+    public function CreateUser(){
+        $carbonDate = Carbon::parse(request('tanggal_lahir'));
+        $defaultPassword = $carbonDate->format('d-m-Y');
+        $defaultPassword = str_replace('-', '', $defaultPassword);
+        $hashedPassword = Hash::make($defaultPassword);
+        User::create([
+            'nip' => request('nip'),
+            'name' => request('name'),
+            'divisi' => request('divisi'),
+            'tanggal_lahir' => request('tanggal_lahir'),
+            'tinggi_badan' => request('tinggi_badan'),
+            'berat_badan' => request('berat_badan'),
+            'role' => request('role'),
+            'password' => $hashedPassword,
+        ]);
+        $name = request('name');
+        // Alert
+        alert()->success('Selamat','User '. $name .' Telah Dibuat');
+        return redirect()->route('ShowUser');
     }
     public function UpdateUserPage($id){
         $user = User::find($id);

@@ -38,21 +38,21 @@
 
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Tanggal Lahir" class="font-medium text-gray-700">Tanggal Lahir:</label>
-                                <input type="date" name="Tanggal Lahir" id="Tanggal Lahir"
+                                <label for="tanggal_lahir" class="font-medium text-gray-700">Tanggal Lahir:</label>
+                                <input type="date" name="tanggal_lahir" id="tanggal_lahir"
                                     value="{{ $user->tanggal_lahir }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Tinggi Badan" class="font-medium text-gray-700">Tinggi Badan:</label>
-                                <input type="text" name="Tinggi Badan" id="Tinggi Badan"
+                                <label for="tinggi_badan" class="font-medium text-gray-700">Tinggi Badan:</label>
+                                <input type="text" name="tinggi_badan" id="tinggi_badan"
                                     value="{{ $user->tinggi_badan }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Berat Badan" class="font-medium text-gray-700">Berat Badan:</label>
+                                <label for="berat_badan" class="font-medium text-gray-700">Berat Badan:</label>
                                 <input type="text" name="Berat Badan" id="Berat Badan"
                                     value="{{ $user->berat_badan }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
