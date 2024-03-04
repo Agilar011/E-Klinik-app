@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataPoli;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -22,21 +23,27 @@ class AdminController extends Controller
     public function ShowPoli()
     {
         $polis = Poli::all(); // Mengambil semua data poli dari tabel
-        $title = 'Delete Data!';
-    $text = "Are you sure you want to delete?";
-    confirmDelete($title, $text);
+        $user = User::all(); // Mengambil semua data user dari tabel
+        $datapoli = DataPoli::all(); // Mengambil semua data user dari tabel
+        // $title = 'Delete Data!';
+        // $text = "Are you sure you want to delete : <br/>" .
+        // "Nama : " . $polis->name . "<br/>" .
+        // "ID : " . $polis->id . " ?";
+        // confirmDelete($title, $text);
 
 
-        return view('AdminUI.PoliPage', compact('polis'));
+        return view('AdminUI.PoliPage', compact('polis', 'user', 'datapoli'));
 
     }
 
-    public function CreateUserPage(){
+    public function CreateUserPage()
+    {
         return view('AdminUI.CreateUserPage');
 
     }
 
-    public function CreateUser(){
+    public function CreateUser()
+    {
         $carbonDate = Carbon::parse(request('tanggal_lahir'));
         $defaultPassword = $carbonDate->format('d-m-Y');
         $defaultPassword = str_replace('-', '', $defaultPassword);
@@ -53,16 +60,18 @@ class AdminController extends Controller
         ]);
         $name = request('name');
         // Alert
-        alert()->success('Selamat','User '. $name .' Telah Dibuat');
+        alert()->success('Selamat', 'User ' . $name . ' Telah Dibuat');
         return redirect()->route('ShowUser');
     }
-    public function UpdateUserPage($id){
+    public function UpdateUserPage($id)
+    {
         $user = User::find($id);
 
         return view('AdminUI.UpdateUSerPage', compact('user'));
 
     }
-    public function UpdateUser($id){
+    public function UpdateUser($id)
+    {
         $user = User::find($id);
         $user->update([
             'nip' => request('nip'),
@@ -76,7 +85,8 @@ class AdminController extends Controller
 
         return redirect()->route('ShowUser');
     }
-    public function SetDefaultUser($id){
+    public function SetDefaultUser($id)
+    {
         $user = User::find($id);
         $carbonDate = Carbon::parse($user->tanggal_lahir);
         $defaultPassword = $carbonDate->format('d-m-Y');
@@ -109,30 +119,34 @@ class AdminController extends Controller
         return redirect()->route('ShowUser')->with('success', 'Akun pengguna berhasil dihapus.');
     }
 
-    public function CreatePoliPage(){
+    public function CreatePoliPage()
+    {
         return view('AdminUI.CreatePoliPage');
 
     }
-    public function CreatePoli(){
+    public function CreatePoli()
+    {
         Poli::create([
             'name' => request('name'),
         ]);
         $poli = request('name');
         // Alert::success('Hore!', 'Poli Created Successfully');
-        alert()->success('Selamat','Poli '. $poli .' Telah Dibuat');
+        alert()->success('Selamat', 'Poli ' . $poli . ' Telah Dibuat');
 
 
 
         return redirect()->route('ShowPoli');
     }
 
-    public function UpdatePoliPage($id){
+    public function UpdatePoliPage($id)
+    {
         $poli = Poli::find($id);
 
         return view('AdminUI.UpdatePoliPage', compact('poli'));
 
     }
-    public function UpdatePoli($id){
+    public function UpdatePoli($id)
+    {
         $Poli = Poli::find($id);
         // dd($Poli);
 
@@ -146,19 +160,14 @@ class AdminController extends Controller
 
     public function DeletePoli($id)
     {
+
         // Temukan pengguna berdasarkan ID
         $Poli = Poli::findOrFail($id);
-        // dd($Poli);
-
-        // // Periksa apakah pengguna ditemukan
-        // if (!$Poli) {
-        //     return redirect()->route('ShowPoli')->with('error', 'Pengguna tidak ditemukan.');
-        // }
-
+                // alert()->question('Title','Apakah anda yakin menghapus poli '.$Poli->name);
         // Hapus pengguna
         $Poli->delete();
         // alert()->question('Title','Lorem Lorem Lorem');
-        alert()->success('Hore!','Post Deleted Successfully');
+        // alert()->success('Hore!', 'Post Deleted Successfully');
 
 
 

@@ -25,45 +25,72 @@
                     <table>
                         <thead>
                             <th class="border px-4 py-2">No</th>
+                            <th class="border px-4 py-2">Nama Dokter</th>
                             <th class="border px-4 py-2">Nama Poli</th>
                             <th class="border px-4 py-2">Action</th>
                         </thead>
 
                         <tbody>
-                            @foreach ($polis as $key => $item)
-                            {{-- @php
-                                $id = App\Models\User::where('id', $item->id)->first();
-                            @endphp --}}
+                            @foreach ($datapoli as $key => $item)
+                                @php
+                                    $user = App\Models\User::where('id', $item->id_dokter)->first();
+                                    $poli = App\Models\Poli::where('id', $item->id_poli)->first();
+                            @endphp
                                 <tr>
                                     <td class="border px-4 py-2">{{ $key + 1 }}</td>
-                                    <td class="border px-4 py-2">{{ $item->name }}</td>
+                                    <td class="border px-4 py-2">{{ $user->name }}</td>
+                                    <td class="border px-4 py-2">{{ $poli->name }}</td>
                                     <td class="border px-4 py-2">
                                         <x-dropdown align="right" width="48">
-                                        <x-slot name="trigger">
-                                            <button class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-2 px-4 rounded">
-                                                Click Me
-                                            </button>
-                                        </x-slot>
-                                        <x-slot name="content">
-                                            {{-- <a href="Create User" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create New User</a> --}}
-                                            <a href="{{ route('CreatePoliPage') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create Poli</a>
+                                            <x-slot name="trigger">
+                                                <button
+                                                    class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-2 px-4 rounded">
+                                                    Click Me
+                                                </button>
+                                            </x-slot>
+                                            <x-slot name="content">
+                                                {{-- <a href="Create User" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create New User</a> --}}
+                                                <a href="{{ route('CreatePoliPage') }}"
+                                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create
+                                                    Poli</a>
 
-                                            <a href="{{ route('UpdatePoliPage',  $item->id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update Poli</a>
-                                            {{-- @php
-                                                dd($item->id);
+                                                <a href="{{ route('UpdatePoliPage', $item->id) }}"
+                                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update
+                                                    Poli</a>
+                                                {{-- @php
+                                                $title = 'Delete Data!';
+        $text = "Are you sure you want to delete : <br/>" .
+        "Nama : " . $item->name . "<br/>" .
+        "ID : " . $item->id . " ?";
+        // confirmDelete($title, $text);
                                             @endphp --}}
+                                                {{-- <script>
+                                                    @php
+                                                        $title = 'Delete Data!';
+                                                        $text = 'Are you sure you want to delete :'.' \n '. 'Nama : ' . $item->name . '<br/>' . 'ID : ' . $item->id . ' ?';
+                                                        // $text = nl2br($text);
+                                                        confirmDelete($title, nl2br($text));
+                                                    @endphp
+                                                    confirmDelete('{!! addslashes($title) !!}', '{!! addslashes($text) !!}');
+                                                </script> --}}
+                                                <form method="POST" action="{{ route('DeletePoli', $item->id) }}">
+                                                    @csrf
+                                                    {{-- <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Delete Poli</button> --}}
 
-                                            <form method="POST" action="{{ route('DeletePoli', $item->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-confirm-delete="true">Delete Poli</button>
-                                            </form>
+                                                    <button type="submit"
+                                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                        data-confirm-delete="true" onclick="return confirm('are You Sure')"
+                                                        >Delete Poli</button>
+
+                                                </form>
+                                                                                            <pre>{{ route('DeletePoli', $item->id) }}</pre>
 
 
 
 
-                                        </x-slot>
-                                    </x-dropdown>
+
+                                            </x-slot>
+                                        </x-dropdown>
 
                                     </td>
                                     {{-- <td><button
@@ -99,6 +126,15 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{-- @php
+                        $nulldoctor = App\Models\DataPoli::
+                        $id = User::where('id', $item->id)->first();
+
+                    @endphp
+
+                    <table>
+
+                    </table> --}}
 
 
                 </div>

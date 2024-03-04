@@ -16,10 +16,9 @@ class DoctorController extends Controller
     }
     public function index()
     {
-        $nama = Auth::user()->name;
-         $Pengajuan = PengajuanCheckUp::where('status', 'pending')->get();
+        $Pengajuan = PengajuanCheckUp::where('status', 'pending')->get();
 
-        return view('DoctorUI.index', compact('nama', 'Pengajuan'));
+        return view('DoctorUI.index', compact('Pengajuan'));
     }
     public function RejectionPage(PengajuanCheckUp $pengajuan)
     {
@@ -36,7 +35,7 @@ class DoctorController extends Controller
             'catatan_dokter'  => request('catatan_dokter'),
             'status' => 'rejected'
         ]);
-        return view('DoctorUI.index');
+        return redirect()->route('Doctor.index')->with('success', 'Pengajuan Telah Disetujui.');
     }
     public function SetujuiPengajuan($id, Request $request)
     {

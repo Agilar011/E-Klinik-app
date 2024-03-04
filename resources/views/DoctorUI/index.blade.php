@@ -30,6 +30,7 @@
                             <th class="border px-4 py-2 col-span-2">Action</th>
                         </thead>
                         <tbody>
+
                             @foreach ($Pengajuan as $item)
                                 <tr>
                                     <td class="border px-4 py-2">{{ $loop->iteration }}</td>

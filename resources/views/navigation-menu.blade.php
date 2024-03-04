@@ -21,7 +21,7 @@
                         </x-nav-link>
 
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <x-nav-link href="{{ route('ShowPoli') }}" :active="request()->routeIs('ShowUser')">
+                            <x-nav-link href="{{ route('ShowPoli') }}" :active="request()->routeIs('ShowPoli')">
                                 {{ __('Poli') }}
                             </x-nav-link>
                         </div>
