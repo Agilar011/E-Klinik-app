@@ -49,7 +49,8 @@
 
                                                     <form method="POST" action="{{ route('DeletePoli', $item->id) }}">
                                                         @csrf
-                                                        <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Delete Poli</button>
+                                                        @method('DELETE')
+                                                        {{-- <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Delete Poli</button> --}}
                                                     <button type="submit"
                                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                         data-confirm-delete="true"
@@ -65,6 +66,45 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @if ($doctorWithoutPoli->count() > 0)
+                    <table>
+                        <thead>
+                            <th class="border px-4 py-2">No</th>
+                            <th class="border px-4 py-2">Nama Poli</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($doctorWithoutPoli as $key => $item)
+                                <tr>
+                                    <td class="border px-4 py-2">{{ $key + 1 }}</td>
+                                    <td class="border px-4 py-2">{{ $item->name }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    @else
+
+                    @endif
+
+                    @if ($polisWithoutDoctor->count() > 0)
+
+                    @else
+
+                    @endif
+                    {{-- <table>
+                        <thead>
+                            <th class="border px-4 py-2">No</th>
+                            <th class="border px-4 py-2">Nama Poli</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($polisWithoutDoctor as $key => $item)
+                                <tr>
+                                    <td class="border px-4 py-2">{{ $key + 1 }}</td>
+                                    <td class="border px-4 py-2">{{ $item->name }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table> --}}
 
                     <a href="{{ route('CreatePoliPage') }}"
                     class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">Create

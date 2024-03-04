@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DataPoli;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Poli;
+use App\Models\DataPoli;
+
 
 
 class AdminController extends Controller
@@ -22,10 +23,18 @@ class AdminController extends Controller
     }
     public function ShowPoli()
     {
-        $dataPolis = DataPoli::join('polis','data_polis.id_poli','=','polis.id')
-                     ->join('users','data_polis.id_dokter','=','users.id')
-                     ->select('data_polis.*', 'users.name as user_name', 'polis.name as poli_name')
-                     ->get();
+        $dataPolis = DataPoli::join('polis', 'data_polis.id_poli', '=', 'polis.id')
+            ->join('users', 'data_polis.id_dokter', '=', 'users.id')
+            ->select('data_polis.*', 'users.name as user_name', 'polis.name as poli_name')
+            ->get();
+
+        $polisWithoutDoctor = Poli::whereDoesntHave('datapoli')->get();
+        $doctorWithoutPoli = User::whereDoesntHave('datapoli')
+            ->where('role', 'dokter')
+            ->get();
+            // dd($doctorWithoutPoli);
+        //  dd($polisWithoutDoctor);
+
 
 
         // $polis = Poli::all(); // Mengambil semua data poli dari tabel
@@ -38,13 +47,15 @@ class AdminController extends Controller
         // confirmDelete($title, $text);
 
 
-        return view('AdminUI.PoliPage', compact('dataPolis'));
+        return view('AdminUI.PoliPage', compact('dataPolis', 'polisWithoutDoctor', 'doctorWithoutPoli'));
 
     }
 
     public function CreateUserPage()
     {
-        return view('AdminUI.CreateUserPage');
+        $polis = Poli::all();
+
+        return view('AdminUI.CreateUserPage', compact('polis'));
 
     }
 
@@ -65,8 +76,8 @@ class AdminController extends Controller
             'password' => $hashedPassword,
         ]);
         $namaPoli = request('poli');
-                $idPoli = Poli::where('name',request('poli'))->first();
-                // dd($idPoli->name);
+        $idPoli = Poli::where('name', request('poli'))->first();
+        // dd($idPoli->name);
 
         if ($namaPoli == $idPoli->name) {
             DataPoli::create([
@@ -75,7 +86,7 @@ class AdminController extends Controller
             ]);
 
             # code...
-        }else {
+        } else {
             dd('gagal');
         }
         // dd($idPoli->name);
@@ -88,7 +99,7 @@ class AdminController extends Controller
         // }
         $name = request('name');
         // Alert
-        alert()->success('Selamat', 'User '.$name. ' Telah Dibuat');
+        alert()->success('Selamat', 'User ' . $name . ' Telah Dibuat');
         return redirect()->route('ShowUser');
     }
     public function UpdateUserPage($id)
@@ -189,11 +200,26 @@ class AdminController extends Controller
     public function DeletePoli($id)
     {
 
-        // Temukan pengguna berdasarkan ID
-        $Poli = Poli::findOrFail($id);
-                // alert()->question('Title','Apakah anda yakin menghapus poli '.$Poli->name);
-        // Hapus pengguna
+        // Temukan data poli berdasarkan ID
+        $DataPoli = DataPoli::findOrFail($id);
+
+        // Temukan poli terkait berdasarkan ID poli dari data poli
+        $Poli = Poli::findOrFail($DataPoli->id_poli);
+
+        // Temukan dan hapus semua data poli terkait dengan ID poli dari data poli
+        $DeletedDataPoli = DataPoli::where('id_poli', $DataPoli->id_poli)->get();
+        foreach ($DeletedDataPoli as $value) {
+            $value->delete();
+        }
+
+        // Hapus poli terkait
         $Poli->delete();
+        // Hapus data poli
+        $DataPoli->delete();
+
+        // Tampilkan poli yang dihapus
+
+
         // alert()->question('Title','Lorem Lorem Lorem');
         // alert()->success('Hore!', 'Post Deleted Successfully');
 

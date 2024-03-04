@@ -14,4 +14,8 @@ class Poli extends Model
         'name',
         // Tambahkan atribut lain di sini jika diperlukan
     ];
+    public function datapoli()
+    {
+        return $this->hasMany(DataPoli::class, 'id_poli');
+    }
 }

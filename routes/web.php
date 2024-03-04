@@ -82,7 +82,7 @@ use App\Http\Middleware\EncryptUrlMiddleware;
 
         Route::get('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoliPage'])->name('UpdatePoliPage');
         Route::put('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoli'])->name('UpdatePoli');
-        Route::post('DeletePoli/{id}', [AdminController::class, 'DeletePoli'])->name('DeletePoli');
+        Route::delete('DeletePoli/{id}', [AdminController::class, 'DeletePoli'])->name('DeletePoli');
     });
 
     Route::middleware('role:doctor')->group(function () {

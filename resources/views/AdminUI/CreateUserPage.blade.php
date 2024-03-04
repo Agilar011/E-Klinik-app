@@ -56,8 +56,22 @@
 
             <div id="FormPoli" name="FormPoli" class="mt-4">
                 <x-label for="poli" value="{{ __('Poli') }}" />
-                <x-input id="poli" class="block mt-1 w-full" type="text" name="poli" :value="old('poli')" required autocomplete="poli" />
+                <select name="poli" id="poli" class="block mt-1 w-full">
+                    @foreach ($polis as $item)
+                    <option value="{{$item->name}}">{{$item->name}}</option>
+                    @endforeach
+                </select>
+                {{-- <x-input id="poli" class="block mt-1 w-full" type="text" name="poli" :value="old('poli')" required autocomplete="poli" /> --}}
             </div>
+{{--
+            <div class="mt-4">
+                <x-label for="role" value="{{ __('Role') }}" />
+                <select id="role" name="role" class="block mt-1 w-full" autocomplete="role">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                    <option value="dokter">Dokter</option>
+                </select>
+            </div> --}}
 
             <script>
                 // Mengambil elemen input form Poli
