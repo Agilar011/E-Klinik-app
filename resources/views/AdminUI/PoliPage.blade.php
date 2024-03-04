@@ -14,13 +14,6 @@
                         <h3>
                             Silahkan beri tindakan pada Poli.
                         </h3>
-
-                        {{-- <p class="mt-6 text-gray-500 leading-relaxed">
-                            Laravel Jetstream provides a beautiful, robust starting point for your next Laravel application. Laravel is designed
-                            to help you build your application using a development environment that is simple, powerful, and enjoyable. We believe
-                            you should love expressing your creativity through programming, so we have spent time carefully crafting the Laravel
-                            ecosystem to be a breath of fresh air. We hope you love it.
-                        </p> --}}
                     </div>
                     <table>
                         <thead>
@@ -35,7 +28,7 @@
                                 @php
                                     $user = App\Models\User::where('id', $item->id_dokter)->first();
                                     $poli = App\Models\Poli::where('id', $item->id_poli)->first();
-                            @endphp
+                                @endphp
                                 <tr>
                                     <td class="border px-4 py-2">{{ $key + 1 }}</td>
                                     <td class="border px-4 py-2">{{ $user->name }}</td>
@@ -57,86 +50,25 @@
                                                 <a href="{{ route('UpdatePoliPage', $item->id) }}"
                                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update
                                                     Poli</a>
-                                                {{-- @php
-                                                $title = 'Delete Data!';
-        $text = "Are you sure you want to delete : <br/>" .
-        "Nama : " . $item->name . "<br/>" .
-        "ID : " . $item->id . " ?";
-        // confirmDelete($title, $text);
-                                            @endphp --}}
-                                                {{-- <script>
-                                                    @php
-                                                        $title = 'Delete Data!';
-                                                        $text = 'Are you sure you want to delete :'.' \n '. 'Nama : ' . $item->name . '<br/>' . 'ID : ' . $item->id . ' ?';
-                                                        // $text = nl2br($text);
-                                                        confirmDelete($title, nl2br($text));
-                                                    @endphp
-                                                    confirmDelete('{!! addslashes($title) !!}', '{!! addslashes($text) !!}');
-                                                </script> --}}
-                                                <form method="POST" action="{{ route('DeletePoli', $item->id) }}">
-                                                    @csrf
-                                                    {{-- <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Delete Poli</button> --}}
 
+                                                    <form method="POST" action="{{ route('DeletePoli', $item->id) }}">
+                                                        @csrf
+                                                        <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Delete Poli</button>
                                                     <button type="submit"
                                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                                        data-confirm-delete="true" onclick="return confirm('are You Sure')"
-                                                        >Delete Poli</button>
-
+                                                        data-confirm-delete="true"
+                                                        onclick="return confirm('are You Sure')">Delete Poli</button>
                                                 </form>
-                                                                                            <pre>{{ route('DeletePoli', $item->id) }}</pre>
 
-
-
-
-
+                                                {{-- <pre>{{ route('DeletePoli', $item->id) }}</pre> --}}
                                             </x-slot>
                                         </x-dropdown>
 
                                     </td>
-                                    {{-- <td><button
-                                            style="background-color: #af4c4c;
-                                        border: none;
-                                        color: white;
-                                        padding: 15px 32px;
-                                        text-align: center;
-                                        text-decoration: none;
-                                        display: inline-block;
-                                        font-size: 16px;
-                                        margin: 4px 2px;
-                                        cursor: pointer;
-                                        border-radius: 10px;">
-
-                                            <a href="{{ route('RecectionPage', $item->id) }}">Tolak Pengajuan</a>
-                                        </button></td> --}}
-                                    {{-- <td><button
-                                            style="background-color: #4CAF50; /* Green */
-                                        border: none;
-                                        color: white;
-                                        padding: 15px 32px;
-                                        text-align: center;
-                                        text-decoration: none;
-                                        display: inline-block;
-                                        font-size: 16px;
-                                        margin: 4px 2px;
-                                        cursor: pointer;
-                                        border-radius: 10px;">
-                                            <a href="{{ route('AcceptionPage', $item->id) }}">Setujui Pengajuan</a>
-                                        </button></td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{-- @php
-                        $nulldoctor = App\Models\DataPoli::
-                        $id = User::where('id', $item->id)->first();
-
-                    @endphp
-
-                    <table>
-
-                    </table> --}}
-
-
                 </div>
             </div>
         </div>

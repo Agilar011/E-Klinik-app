@@ -31,7 +31,7 @@ class CreateNewUser implements CreatesNewUsers
             'berat_badan' => ['numeric'],
             // 'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
-        ])->validate();     
+        ])->validate();
         // dd($input['divisi']);
         $divisi= $input['divisi'];
 
