@@ -25,19 +25,10 @@
                             </div>
                         </div>
 
-                        <button type="submit"
-                            style="background-color: #4CAF50; /* Green */
-                    border: none;
-                    color: white;
-                    padding: 15px 32px;
-                    text-align: center;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 16px;
-                    margin: 4px 2px;
-                    cursor: pointer;
-                    border-radius: 10px;">
-                            Simpan Perubahan </button>
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
+                            Simpan Perubahan
+                        </button>
+
                 </div>
             </div>
         </div>

@@ -22,9 +22,15 @@ class AdminController extends Controller
     }
     public function ShowPoli()
     {
-        $polis = Poli::all(); // Mengambil semua data poli dari tabel
-        $user = User::all(); // Mengambil semua data user dari tabel
-        $datapoli = DataPoli::all(); // Mengambil semua data user dari tabel
+        $dataPolis = DataPoli::join('polis','data_polis.id_poli','=','polis.id')
+                     ->join('users','data_polis.id_dokter','=','users.id')
+                     ->select('data_polis.*', 'users.name as user_name', 'polis.name as poli_name')
+                     ->get();
+
+
+        // $polis = Poli::all(); // Mengambil semua data poli dari tabel
+        // $user = User::all(); // Mengambil semua data user dari tabel
+        // $datapoli = DataPoli::all(); // Mengambil semua data user dari tabel
         // $title = 'Delete Data!';
         // $text = "Are you sure you want to delete : <br/>" .
         // "Nama : " . $polis->name . "<br/>" .
@@ -32,7 +38,7 @@ class AdminController extends Controller
         // confirmDelete($title, $text);
 
 
-        return view('AdminUI.PoliPage', compact('polis', 'user', 'datapoli'));
+        return view('AdminUI.PoliPage', compact('dataPolis'));
 
     }
 
@@ -48,7 +54,7 @@ class AdminController extends Controller
         $defaultPassword = $carbonDate->format('d-m-Y');
         $defaultPassword = str_replace('-', '', $defaultPassword);
         $hashedPassword = Hash::make($defaultPassword);
-        User::create([
+        $user = User::create([
             'nip' => request('nip'),
             'name' => request('name'),
             'divisi' => request('divisi'),
@@ -58,9 +64,31 @@ class AdminController extends Controller
             'role' => request('role'),
             'password' => $hashedPassword,
         ]);
+        $namaPoli = request('poli');
+                $idPoli = Poli::where('name',request('poli'))->first();
+                // dd($idPoli->name);
+
+        if ($namaPoli == $idPoli->name) {
+            DataPoli::create([
+                'id_dokter' => $user->id,
+                'id_poli' => $idPoli->id,
+            ]);
+
+            # code...
+        }else {
+            dd('gagal');
+        }
+        // dd($idPoli->name);
+        // if (request('role') == 'dokter') {
+        //     DataPoli::create([
+        //         'user_id' => request('nip'),
+        //         'poli_id' => $idPoli->id,
+        //     ]);
+        //     # code...
+        // }
         $name = request('name');
         // Alert
-        alert()->success('Selamat', 'User ' . $name . ' Telah Dibuat');
+        alert()->success('Selamat', 'User '.$name. ' Telah Dibuat');
         return redirect()->route('ShowUser');
     }
     public function UpdateUserPage($id)

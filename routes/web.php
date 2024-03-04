@@ -28,7 +28,6 @@ use App\Http\Middleware\EncryptUrlMiddleware;
 
 
 
-Route::middleware(EncryptUrlMiddleware::class)->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
@@ -96,4 +95,3 @@ Route::middleware(EncryptUrlMiddleware::class)->group(function () {
         Route::put('/tolakpengajuan/{pengajuan}', [DoctorController::class, 'TolakPengajuan'])->name('tolakpengajuan');
         Route::put('/setujuipengajuan/{id}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
     });
-});

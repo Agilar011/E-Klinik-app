@@ -13,4 +13,14 @@ class DataPoli extends Model
         'id_poli',
         'id_dokter',
     ];
+
+    public function poli()
+    {
+        return $this->belongsTo(Poli::class, 'id_poli');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_dokter');
+    }
 }

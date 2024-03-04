@@ -24,15 +24,15 @@
                         </thead>
 
                         <tbody>
-                            @foreach ($datapoli as $key => $item)
-                                @php
-                                    $user = App\Models\User::where('id', $item->id_dokter)->first();
-                                    $poli = App\Models\Poli::where('id', $item->id_poli)->first();
-                                @endphp
+                            @foreach ($dataPolis as $key => $item)
+                                {{-- @php
+                                    $user = App\Models\User::where('id', $item->id_dokter);
+                                    $poli = App\Models\Poli::where('id', $item->id_poli);
+                                @endphp --}}
                                 <tr>
                                     <td class="border px-4 py-2">{{ $key + 1 }}</td>
-                                    <td class="border px-4 py-2">{{ $user->name }}</td>
-                                    <td class="border px-4 py-2">{{ $poli->name }}</td>
+                                    <td class="border px-4 py-2">{{ $item->user_name }}</td>
+                                    <td class="border px-4 py-2">{{ $item->poli_name }}</td>
                                     <td class="border px-4 py-2">
                                         <x-dropdown align="right" width="48">
                                             <x-slot name="trigger">
@@ -43,10 +43,6 @@
                                             </x-slot>
                                             <x-slot name="content">
                                                 {{-- <a href="Create User" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create New User</a> --}}
-                                                <a href="{{ route('CreatePoliPage') }}"
-                                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create
-                                                    Poli</a>
-
                                                 <a href="{{ route('UpdatePoliPage', $item->id) }}"
                                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update
                                                     Poli</a>
@@ -69,6 +65,10 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    <a href="{{ route('CreatePoliPage') }}"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">Create
+                    Poli</a>
                 </div>
             </div>
         </div>
