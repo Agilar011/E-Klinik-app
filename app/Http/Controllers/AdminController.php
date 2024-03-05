@@ -18,7 +18,7 @@ class AdminController extends Controller
     public function ShowUser()
     {
         $user = User::all();
-        Alert::success('Success Title', 'Success Message');
+        // Alert::success('Success Title', 'Success Message');
         return view('AdminUI.UserPage', compact('user'));
 
     }
@@ -132,6 +132,7 @@ class AdminController extends Controller
             'role' => request('role'),
         ]);
 
+        alert()->success('Selamat','Data user ' . $user->name . ' dengan NIP :' . $user->nip . ' telah di update.');
         return redirect()->route('ShowUser');
     }
     public function SetDefaultUser($id)
@@ -145,6 +146,10 @@ class AdminController extends Controller
             'password' => $hashedPassword,
         ]);
         // dd($user->password);
+
+        $name = $user->name;
+        // Alert
+        alert()->success('Selamat', 'Password akun user ' . $name . ' telah dikembalikan ke nilai awal');
 
         return redirect()->route('ShowUser');
     }
