@@ -7,12 +7,12 @@
                         {{-- <x-application-logo class="block h-12 w-auto" /> --}}
 
                         <h1 class="mt-8 text-2xl font-medium text-gray-900">
-                            Masukkan Perubahan Data {{ $poli->name }}
+                            Masukkan Perubahan Data {{ $divisi->name }}
                         </h1>
 
                     </div>
 
-                    <form action="{{ route('UpdatePoli', $poli->id) }}" method="POST">
+                    <form action="{{ route('UpdateDivisi', $divisi->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
@@ -20,7 +20,7 @@
 
                             <div class="flex flex-col space-y-2">
                                 <label for="name" class="font-medium text-gray-700">Nama:</label>
-                                <input type="text" name="name" id="name" value="{{ $poli->name }}"
+                                <input type="text" name="name" id="name" value="{{ $divisi->name }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
                             </div>
                         </div>

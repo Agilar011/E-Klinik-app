@@ -26,11 +26,11 @@
                             </x-nav-link>
                         </div>
 
-                        {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <x-nav-link href="{{ route('divisi') }}" :active="request()->routeIs('divisi')">
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <x-nav-link href="{{ route('ShowDivisi') }}" :active="request()->routeIs('ShowDivisi')">
                                 {{ __('Divisi') }}
                             </x-nav-link>
-                        </div> --}}
+                        </div>
 
                     @else
 

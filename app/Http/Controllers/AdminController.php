@@ -52,6 +52,14 @@ class AdminController extends Controller
 
     }
 
+    public function ShowDivisi()
+    {
+        $divisi = Divisi::all();
+
+        return view('AdminUI.DivisiPage', compact('divisi'));
+
+    }
+
     public function CreateUserPage()
     {
         $polis = Poli::all();
@@ -231,6 +239,53 @@ class AdminController extends Controller
         // Redirect atau berikan respons sesuai kebutuhan Anda
         return redirect()->route('ShowPoli')->with('success', 'Akun pengguna berhasil dihapus.');
     }
+
+    public function CreateDivisiPage()
+    {
+        return view('AdminUI.CreateDivisiPage');
+
+
+    }
+
+    public function CreateDivisi()
+    {
+        Divisi::create([
+            'name' => request('name'),]);
+
+        return redirect()->route('ShowUser');
+
+
+    }
+
+    public function UpdateDivisiPage($id){
+        $divisi = Divisi::findOrFail($id);
+
+        return view('AdminUI.UpdateDivisiPage', compact('divisi'));
+
+    }
+
+    public function UpdateDivisi($id)
+    {
+        $divisi = Divisi::find($id);
+        // dd($Poli);
+
+        $divisi->update([
+            'name' => request('name'),
+        ]);
+
+
+        return redirect()->route('ShowDivisi');
+    }
+
+    public function DeleteDivisi($id){
+        $divisi = Divisi::findOrFail($id);
+        $divisi->delete();
+
+        return redirect()->route('ShowDivisi');
+
+    }
+
+
     //
 
 

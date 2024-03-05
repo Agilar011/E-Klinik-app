@@ -67,6 +67,9 @@
                         </tbody>
                     </table>
                     @if ($doctorWithoutPoli->count() > 0)
+                    <h3>
+                        Daftar Dokter yang belum memiliki Poli,Silahkan beri tindakan pada Dokter.
+                    </h3>
                     <table>
                         <thead>
                             <th class="border px-4 py-2">No</th>
@@ -87,6 +90,9 @@
                     @endif
 
                     @if ($polisWithoutDoctor->count() > 0)
+                    <h3>
+                        Daftar Poli yang belum memiliki Dokter,Silahkan beri tindakan pada Poli.
+                    </h3>
                     <table>
                         <thead>
                             <th class="border px-4 py-2">No</th>

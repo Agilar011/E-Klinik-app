@@ -64,8 +64,10 @@ use App\Http\Middleware\EncryptUrlMiddleware;
 
 
     Route::middleware('role:admin')->group(function () {
+
         Route::get('/DaftarUser', [AdminController::class, 'ShowUser'])->name('ShowUser');
         Route::get('/DaftarPoli', [AdminController::class, 'ShowPoli'])->name('ShowPoli');
+        Route::get('/DaftarDivisi', [AdminController::class, 'ShowDivisi'])->name('ShowDivisi');
 
         // Route::get('/register', [AdminController::class, 'CreateUser'])->name('CreateUser')->middleware('guest');
         Route::get('/CreateUserPage', [AdminController::class, 'CreateUserPage'])->name('CreateUserPage');
@@ -74,15 +76,24 @@ use App\Http\Middleware\EncryptUrlMiddleware;
         Route::get('/CreatePoliPage', [AdminController::class, 'CreatePoliPage'])->name('CreatePoliPage');
         Route::post('/CreatePoli', [AdminController::class, 'CreatePoli'])->name('CreatePoli');
 
+        Route::get('/CreateDivisiPage', [AdminController::class, 'CreateDivisiPage'])->name('CreateDivisiPage');
+        Route::post('/CreateDivisi', [AdminController::class, 'CreateDivisi'])->name('CreateDivisi');
+
         Route::get('/UpdateUser/{id}', [AdminController::class, 'UpdateUserPage'])->name('UpdateUserPage');
         Route::put('/UpdateUser/{id}', [AdminController::class, 'UpdateUser'])->name('UpdateUser');
 
-        Route::post('/SetDefault/{id}', [AdminController::class, 'SetDefaultUser'])->name('SetDefaultUser');
-        Route::delete('/DeleteUser/{id}', [AdminController::class, 'DeleteUser'])->name('DeleteUser');
-
         Route::get('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoliPage'])->name('UpdatePoliPage');
         Route::put('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoli'])->name('UpdatePoli');
+
+        Route::get('/UpdateDivisi/{id}', [AdminController::class, 'UpdateDivisiPage'])->name('UpdateDivisiPage');
+        Route::put('/UpdateDivisi/{id}', [AdminController::class, 'UpdateDivisi'])->name('UpdateDivisi');
+
+        Route::post('/SetDefault/{id}', [AdminController::class, 'SetDefaultUser'])->name('SetDefaultUser');
+
         Route::delete('DeletePoli/{id}', [AdminController::class, 'DeletePoli'])->name('DeletePoli');
+        Route::delete('/DeleteUser/{id}', [AdminController::class, 'DeleteUser'])->name('DeleteUser');
+        Route::delete('/DeleteDivisi/{id}', [AdminController::class, 'DeleteDivisi'])->name('DeleteDivisi');
+
     });
 
     Route::middleware('role:doctor')->group(function () {
