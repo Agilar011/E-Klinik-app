@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('divisi');
             $table->string('role')->default('user');
             $table->date('tanggal_lahir');
-            $table->float('tinggi_badan');
-            $table->float('berat_badan');
+            $table->float('tinggi_badan')->nullable();
+            $table->float('berat_badan')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

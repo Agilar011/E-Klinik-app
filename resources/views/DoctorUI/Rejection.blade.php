@@ -8,15 +8,14 @@
                     </h1>
 
                     @php
-                    $datapoli = App\Models\Poli::where('id', $pengajuan->idpoli)->first();
-                    $datauser = App\Models\User::where('nip', $pengajuan->nip)->first();
-                    $idpengajuan = $pengajuan->id;
-                    // dd($idpengajuan);
-                @endphp
+                        $datapoli = App\Models\Poli::where('id', $pengajuan->idpoli)->first();
+                        $datauser = App\Models\User::where('nip', $pengajuan->nip)->first();
+                        // dd($idpengajuan);
+                    @endphp
 
 
                     {{-- <form action="{{ route('setujuipengajuan', $pengajuan->id) }}" method="POST"> --}}
-                        <form action="{{ route('tolakpengajuan', $idpengajuan)}}" method="POST">
+                    <form action="{{ route('tolakpengajuan', $pengajuan->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         {{-- @php
@@ -71,10 +70,11 @@
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Catatan Doctor" class="font-medium text-gray-700">Catatan Untuk Pasien:</label>
-                                <input type="text" name="catatan_dokter" id="catatan_dokter" value="{{ $pengajuan->catatan_dokter }}"
-                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
-                                    >
+                                <label for="Catatan Doctor" class="font-medium text-gray-700">Catatan Untuk
+                                    Pasien:</label>
+                                <input type="text" name="catatan_dokter" id="catatan_dokter"
+                                    value="{{ $pengajuan->catatan_dokter }}"
+                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
 
                             </div>
 
@@ -90,18 +90,9 @@
                                 Back
                             </button>
                             <button type="submit"
-                            style="background-color: #4CAF50; /* Green */
-                        border: none;
-                        color: white;
-                        padding: 15px 32px;
-                        text-align: center;
-                        text-decoration: none;
-                        display: inline-block;
-                        font-size: 16px;
-                        margin: 4px 2px;
-                        cursor: pointer;
-                        border-radius: 10px;">Tolak Pengajuan
-                        </button>
+                                class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
+                                Tolak Pengajuan
+                            </button>
                         </div>
                     </form>
                 </div>

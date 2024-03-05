@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
             'nip' => '11111111',
             'name' => 'Rambimo',
             'divisi' => 'Divisi IT',
-            'role' => 'doctor',
+            'role' => 'dokter',
             'tanggal_lahir' => '2022-11-10',
             'tinggi_badan' => 175.5,
             'berat_badan' => 63,

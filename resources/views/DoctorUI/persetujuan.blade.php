@@ -65,17 +65,7 @@
                         </div>
 
                         <button type="submit"
-                            style="background-color: #4CAF50; /* Green */
-                    border: none;
-                    color: white;
-                    padding: 15px 32px;
-                    text-align: center;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 16px;
-                    margin: 4px 2px;
-                    cursor: pointer;
-                    border-radius: 10px;">
+                        class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
                             Kirim Pengajuan Pemeriksaan </button>
                 </div>
             </div>

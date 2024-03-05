@@ -11,31 +11,10 @@
         </div>
 
         <div style="display: flex; justify-content: center; align-items: center; height: 10vh; flex-direction: grid; gap: 6px;">
-            <button style="background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 10px;">
+            <button class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
   <a href="/antrianpengajuan">Lihat Daftar Pengajuan</a>
-</button>
-<button style="background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 10px;">
-  <a href="/poliPage">Ajukan Pemeriksaan</a>
+<button class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
+            <a href="{{ route('Doctor.UserPage') }}">Ajukan Pemeriksaan</a>
 </button>
         </div>
 

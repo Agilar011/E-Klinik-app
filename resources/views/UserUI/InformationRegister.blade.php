@@ -1,16 +1,14 @@
 <x-app-layout>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                    <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
+                <div class="pt-1 pb-8 px-8 bg-white border-b border-gray-200">
                         {{-- <x-application-logo class="block h-12 w-auto" /> --}}
 
                         <h1 class="mt-8 text-2xl font-medium text-gray-900">
                             Masukkan Data Diri Anda
                         </h1>
 
-                    </div>
 
                     <form action="{{ route('user.update', Auth::user()->id) }}" method="POST">
                         @csrf
@@ -38,29 +36,29 @@
 
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Tanggal Lahir" class="font-medium text-gray-700">Tanggal Lahir:</label>
-                                <input type="date" name="Tanggal Lahir" id="Tanggal Lahir"
+                                <label for="tanggal_lahir" class="font-medium text-gray-700">Tanggal Lahir:</label>
+                                <input type="date" name="tanggal_lahir" id="tanggal_lahir"
                                     value="{{ Auth::user()->tanggal_lahir }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Tinggi Badan" class="font-medium text-gray-700">Tinggi Badan:</label>
-                                <input type="text" name="Tinggi Badan" id="Tinggi Badan"
+                                <label for="tinggi_badan" class="font-medium text-gray-700">Tinggi Badan:</label>
+                                <input type="text" name="tinggi_badan" id="tinggi_badan"
                                     value="{{ Auth::user()->tinggi_badan }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Berat Badan" class="font-medium text-gray-700">Berat Badan:</label>
-                                <input type="text" name="Berat Badan" id="Berat Badan"
+                                <label for="berat_badan" class="font-medium text-gray-700">Berat Badan:</label>
+                                <input type="text" name="berat_badan" id="berat_badan"
                                     value="{{ Auth::user()->berat_badan }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Berat Badan" class="font-medium text-gray-700">Keluhan:</label>
-                                <textarea name="keluhan" id="keluhan">{{ Auth::user()->keluhan }}</textarea>
+                                <label for="keluhan" class="font-medium text-gray-700">Keluhan:</label>
+                                <textarea name="keluhan" id="keluhan" required>{{ Auth::user()->keluhan }}</textarea>
                             </div>
 
                             </div>
@@ -69,17 +67,7 @@
                         Back
                     </button>
                         <button type="submit"
-                            style="background-color: #4CAF50; /* Green */
-                    border: none;
-                    color: white;
-                    padding: 15px 32px;
-                    text-align: center;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 16px;
-                    margin: 4px 2px;
-                    cursor: pointer;
-                    border-radius: 10px;">
+                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                             Kirim Pengajuan Pemeriksaan </button>
                         </div>
 

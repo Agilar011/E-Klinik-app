@@ -22,51 +22,32 @@
                     </div>
                     <table>
                         <thead>
-                            <th>No</th>
-                            <th>Nama Pasien</th>
-                            <th>Divisi</th>
-                            <th>Keluhan</th>
-                            <th>Tanggal Pengajuan Pemeriksaan</th>
-                            <th>Action</th>
+                            <th class="border px-4 py-2">No</th>
+                            <th class="border px-4 py-2">Nama Pasien</th>
+                            <th class="border px-4 py-2">Divisi</th>
+                            <th class="border px-4 py-2">Keluhan</th>
+                            <th class="border px-4 py-2">Tanggal Pengajuan Pemeriksaan</th>
+                            <th class="border px-4 py-2 col-span-2">Action</th>
                         </thead>
                         <tbody>
+
                             @foreach ($Pengajuan as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="border px-4 py-2">{{ $loop->iteration }}</td>
                                     @php
                                         $user = App\Models\User::where('nip', $item->nip)->first();
                                     @endphp
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->divisi }}</td>
-                                    <td>{{ $item->keluhan }}</td>
-                                    <td>{{ $item->tglpengajuan }} </td>
-                                    <td><button
-                                            style="background-color: #af4c4c;
-                                        border: none;
-                                        color: white;
-                                        padding: 15px 32px;
-                                        text-align: center;
-                                        text-decoration: none;
-                                        display: inline-block;
-                                        font-size: 16px;
-                                        margin: 4px 2px;
-                                        cursor: pointer;
-                                        border-radius: 10px;">
+                                    <td class="border px-4 py-2">{{ $user->name }}</td>
+                                    <td class="border px-4 py-2">{{ $user->divisi }}</td>
+                                    <td class="border px-4 py-2">{{ $item->keluhan }}</td>
+                                    <td class="border px-4 py-2">{{ $item->tglpengajuan }} </td>
+                                    <td class="border px-4 py-2"><button
+                                        class="bg-red-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-red-600">
 
                                             <a href="{{ route('RecectionPage', $item->id) }}">Tolak Pengajuan</a>
                                         </button></td>
                                     <td><button
-                                            style="background-color: #4CAF50; /* Green */
-                                        border: none;
-                                        color: white;
-                                        padding: 15px 32px;
-                                        text-align: center;
-                                        text-decoration: none;
-                                        display: inline-block;
-                                        font-size: 16px;
-                                        margin: 4px 2px;
-                                        cursor: pointer;
-                                        border-radius: 10px;">
+                                        class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
                                             <a href="{{ route('AcceptionPage', $item->id) }}">Setujui Pengajuan</a>
                                         </button></td>
                                 </tr>

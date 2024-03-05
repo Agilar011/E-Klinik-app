@@ -26,12 +26,11 @@ class User extends Authenticatable
     protected $fillable = [
         'nip',
         'name',
-        'Divisi',
+        'divisi',
         'role',
-        'Tanggal Lahir',
-        'Tinggi Badan',
-        'Berat Badan',
-        'keluhan',
+        'tanggal_lahir',
+        'tinggi_badan',
+        'berat_badan',
         'password',
     ];
 
@@ -64,4 +63,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function datapoli()
+    {
+        return $this->hasMany(DataPoli::class, 'id_dokter', 'id');
+    }
 }
