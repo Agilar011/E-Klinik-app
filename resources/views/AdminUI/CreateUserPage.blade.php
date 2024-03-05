@@ -22,8 +22,11 @@
 
             <div class="mt-4">
                 <x-label for="divisi" value="{{ __('Divisi') }}" />
-                <x-input id="divisi" class="block mt-1 w-full" type="text" name="divisi" :value="old('divisi')"
-                    required autocomplete="divisi" />
+                <select name="divisi" id="divisi" class="block mt-1 w-full">
+                    @foreach ($divisi as $item)
+                    <option value="{{$item->name}}">{{$item->name}}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mt-4">

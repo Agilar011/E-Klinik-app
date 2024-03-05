@@ -87,6 +87,20 @@
                     @endif
 
                     @if ($polisWithoutDoctor->count() > 0)
+                    <table>
+                        <thead>
+                            <th class="border px-4 py-2">No</th>
+                            <th class="border px-4 py-2">Nama Poli</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($polisWithoutDoctor as $key => $item)
+                                <tr>
+                                    <td class="border px-4 py-2">{{ $key + 1 }}</td>
+                                    <td class="border px-4 py-2">{{ $item->name }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
                     @else
 

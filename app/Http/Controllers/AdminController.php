@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Divisi;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -54,8 +55,9 @@ class AdminController extends Controller
     public function CreateUserPage()
     {
         $polis = Poli::all();
+        $divisi = Divisi::all();
 
-        return view('AdminUI.CreateUserPage', compact('polis'));
+        return view('AdminUI.CreateUserPage', compact('polis', 'divisi'));
 
     }
 

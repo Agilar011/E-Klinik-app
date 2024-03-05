@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             PoliSeeder::class,
             PengajuanCheckUpSeeder::class,
-            DataPoliSeeder::class,]);
+            DataPoliSeeder::class,
+            DivisiSeeder::class,]);
     }
 }
