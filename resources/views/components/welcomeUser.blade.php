@@ -14,7 +14,11 @@
             <th class="border px-4 py-2 text-left">No</th>
             <th class="border px-4 py-2 text-left">Nama Pengajuan</th>
             <th class="border px-4 py-2 text-left">Poli</th>
+            <th class="border px-4 py-2 text-left">Waktu Pengajuan</th>
             <th class="border px-4 py-2 text-left">Keluhan</th>
+            <th class="border px-4 py-2 text-left">Catatan</th>
+            <th class="border px-4 py-2 text-left">status</th>
+
         </thead>
 
         <tbody>
@@ -23,7 +27,11 @@
                     <td class="border px-4 py-2">{{ $loop->iteration }}</td>
                     <td class="border px-4 py-2">{{ Auth::user()->name }}</td>
                     <td class="border px-4 py-2">{{ $item->poli->name }}</td>
-                    <td class="border px-4 py-2">{{ $item->keluhan }}</td>
+                    <td class="border px-4 py-2">{{ $item->created_at->format('d-m-Y') }}</td>
+                    <td cla`ss="border px-4 py-2">{{ $item->keluhan }}</td>
+                    <td class="border px-4 py-2">{{ $item->catatan }}</td>
+                    <td class="border px-4 py-2">{{ $item->status }}</td>
+
 
 
                 </tr>

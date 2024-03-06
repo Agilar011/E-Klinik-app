@@ -66,7 +66,7 @@
                                     <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
                                     <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin
                                     </option>
-                                    <option value="doctor" {{ $user->role === 'doctor' ? 'selected' : '' }}>Doctor
+                                    <option value="dokter" {{ $user->role === 'dokter' ? 'selected' : '' }}>Doctor
                                     </option>
 
                                     <!-- Tambahkan opsi lain sesuai kebutuhan -->

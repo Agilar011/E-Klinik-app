@@ -40,7 +40,7 @@ use App\Http\Middleware\EncryptUrlMiddleware;
         Route::get('/dashboard', function () {
             if (Auth()->user()->role === 'admin') {
                 return view('dashboardAdmin');
-            } elseif (Auth()->user()->role === 'doctor') {
+            } elseif (Auth()->user()->role === 'dokter') {
                 return view('dashboardDoctor');
             } else {
                 return view('dashboardUser');
@@ -85,6 +85,12 @@ use App\Http\Middleware\EncryptUrlMiddleware;
         Route::get('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoliPage'])->name('UpdatePoliPage');
         Route::put('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoli'])->name('UpdatePoli');
 
+        Route::get('/UpdatePoliWithoutDoctor/{id}', [AdminController::class, 'UpdatePoliWithoutDoctorPage'])->name('UpdatePoliWithoutDoctorPage');
+        Route::put('/UpdatePoliWithoutDoctor/{id}', [AdminController::class, 'UpdatePoliWithoutDoctor'])->name('UpdatePoliWithoutDoctor');
+
+        Route::get('/UpdateDoctorWithoutPoli/{id}', [AdminController::class, 'UpdateDoctorWithoutPoliPage'])->name('UpdateDoctorWithoutPoliPage');
+        Route::put('/UpdateDoctorWithoutPoli/{id}', [AdminController::class, 'UpdateDoctorWithoutPoli'])->name('UpdateDoctorWithoutPoli');
+
         Route::get('/UpdateDivisi/{id}', [AdminController::class, 'UpdateDivisiPage'])->name('UpdateDivisiPage');
         Route::put('/UpdateDivisi/{id}', [AdminController::class, 'UpdateDivisi'])->name('UpdateDivisi');
 
@@ -93,10 +99,11 @@ use App\Http\Middleware\EncryptUrlMiddleware;
         Route::delete('DeletePoli/{id}', [AdminController::class, 'DeletePoli'])->name('DeletePoli');
         Route::delete('/DeleteUser/{id}', [AdminController::class, 'DeleteUser'])->name('DeleteUser');
         Route::delete('/DeleteDivisi/{id}', [AdminController::class, 'DeleteDivisi'])->name('DeleteDivisi');
+        Route::delete('/DeleteDataPoli/{id}', [AdminController::class, 'DeleteDataPoli'])->name('DeleteDataPoli');
 
     });
 
-    Route::middleware('role:doctor')->group(function () {
+    Route::middleware('role:dokter')->group(function () {
         Route::get('/antrianpengajuan', [DoctorController::class, 'index'])->name('Doctor.index');
         Route::get('/dashboard.user', [DoctorController::class, 'UserPage'])->name('Doctor.UserPage');
 

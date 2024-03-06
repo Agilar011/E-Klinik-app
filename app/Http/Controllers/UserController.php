@@ -42,12 +42,19 @@ class UserController extends Controller
             'berat_badan' => $request->berat_badan,
             // 'keluhan' => $request->keluhan,
         ]);
+
+
         $pengajuan = new PengajuanCheckUp();
         $pengajuan->nip = $user->nip;
         $pengajuan->idpoli = $idpoli->id;
         $pengajuan->tglpengajuan = now()->format('Y-m-d');
         $pengajuan->keluhan = $request->keluhan;
         $pengajuan->status = 'pending';
+        if ($request->tglpemeriksaan == null) {
+            # code...
+        } else {
+            $pengajuan->tglpemeriksaan = $request->tglpemeriksaan;
+        }
         $pengajuan->save();
 
 

@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'nip' => '00000000',
             'name' => 'Agilar',
-            'divisi' => 'Divisi IT',
+            'divisi' => 'Teknologi Informasi',
             'role' => 'user',
             'tanggal_lahir' => '2022-11-10',
             'tinggi_badan' => 175.5,
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'nip' => '11111111',
             'name' => 'Rambimo',
-            'divisi' => 'Divisi IT',
+            'divisi' => 'Teknologi Informasi',
             'role' => 'dokter',
             'tanggal_lahir' => '2022-11-10',
             'tinggi_badan' => 175.5,
@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'nip' => '22222222',
             'name' => 'Fergie',
-            'divisi' => 'Divisi IT',
+            'divisi' => 'Teknologi Informasi',
             'role' => 'admin',
             'tanggal_lahir' => '2022-11-10',
             'tinggi_badan' => 175.5,
