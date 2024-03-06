@@ -83,87 +83,19 @@
 
         <div id="home">
             <div class="container" style="flex-direction: column;">
-                <img src="img/pal-logo.png" width="400px" align-item="center">
+                <img src="img/pal-logo.png" width="400px">
+                <div class="bor">
+                    <p class="paragraf1">
+                        Welcome to E-klinik PT. PAL Indonesia
+                    </p>
+                    <p class="paragraf2">
+                        Situs Rekam Medis untuk Membantu Pemantauan Kesehatan Anda 
+                    </p>
+                </div>
+                </div>
             </div>
         </div>
-
-        {{-- <div class="bgv">
-            <video id="player" width="100%" height="auto" controls autoplay muted>
-                <source src="{{ asset('img/videoplayback.mp4') }}" type="video/mp4">
-            </video>
-
-            <script>
-                // Dapatkan referensi elemen video
-                var player = document.getElementById('player');
-            
-                // Fungsi yang dipanggil saat pemutar video siap
-                player.onloadedmetadata = function() {
-                    // Atur waktu mulai dan waktu selesai pemutaran ulang
-                    var startTime = 0; // Detik mulai
-                    var endTime = 18; // Detik akhir
-            
-                    // Mulai pemutaran video
-                    player.play();
-            
-                    // Set interval untuk memeriksa waktu saat ini setiap 100ms
-                    var checkTime = setInterval(function() {
-                        // Cek apakah waktu saat ini melebihi waktu akhir
-                        if (player.currentTime >= endTime) {
-                            // Kembalikan waktu pemutaran ke awal
-                            player.currentTime = startTime;
-                        }
-                    }, 100);
-                };
-    
-                // Fungsi yang dipanggil saat halaman dimuat
-                window.onload = function() {
-                    resizeVideo();
-                };
-            
-                // Fungsi untuk menangani perubahan lebar halaman
-                window.onresize = function() {
-                    resizeVideo();
-                };
-            
-                // Fungsi untuk mengatur ukuran video
-                function resizeVideo() {
-                    // Atur lebar video sesuai dengan lebar body website
-                    var bodyWidth = document.body.clientWidth;
-                    player.style.width = bodyWidth + 'px';
-                    player.style.height = Math.floor(bodyWidth / 16 * 9) + 'px'; // Aspek rasio 16:9
-                };
-            </script>
-        </div> --}}
-
-        {{-- <div class="bgv">
-            <img id="player" src="{{ asset('img/Logo Pal.jpg') }}" width="100%" height="auto">
-        
-            <script>
-                // Fungsi yang dipanggil saat halaman dimuat
-                window.onload = function() {
-                    resizeImage();
-                };
-        
-                // Fungsi untuk menangani perubahan lebar halaman
-                window.onresize = function() {
-                    resizeImage();
-                };
-        
-                // Fungsi untuk mengatur ukuran gambar
-                function resizeImage() {
-                    // Atur lebar gambar sesuai dengan lebar body website
-                    var bodyWidth = document.body.clientWidth;
-                    var image = document.getElementById('player');
-                    image.style.width = bodyWidth + 'px';
-                    image.style.height = Math.floor(bodyWidth / 16 * 9) + 'px'; // Aspek rasio 16:9
-                };
-            </script>
-        </div> --}}
-        
-        {{-- <div class="footer">
-            2024 PT PAL INDONESIA
-        </div>                  --}}
-        <footer class="text-center py-4 bg-blue-400 fixed bottom-0 w-full font-semibold" style="font-family: sans-serif">
+        <footer class="text-white text-center py-4 bg-blue-400 fixed bottom-0 w-full font-semibold" style="font-family: sans-serif">
             <div class="footer">
                 2024 PT PAL INDONESIA
             </div>
@@ -184,26 +116,58 @@
         background-image: linear-gradient(rgba(252, 252, 252, 0.6), rgba(119, 191, 249, 0.6)),url(img/KapalRS3.jpg);
         background-attachment: fixed;
         background-size: 100%;
-        color: #ffffff;
+        color: #000000;
         scroll-behavior: smooth;
         overflow-y: hidden;
     }
 
     html::-webkit-scrollbar {
-    display: none;
+        display: none;
     }
 
-    #home{
-    position: relative;
-    height: 100vh;
+    #home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh; /* Mengisi tinggi layar */
+        margin-top: 100px;
     }
 
-    #home .container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-    margin-top: 125px;
+    #home .container {
+        text-align: center; /* Mengatur teks menjadi ditengah */
+    }
+
+    #home .container img {
+        margin-top: -200px;
+        margin-bottom: 50px;
+        margin-left: auto; /* Mengatur margin kiri menjadi auto */
+        margin-right: auto; /* Mengatur margin kanan menjadi auto */
+        display: block; /* Memastikan gambar berada di tengah */
+    }
+
+    #home .container .bor {
+        border-width: 1px;
+        border-color: #000000;
+        background-image: linear-gradient(rgba(252, 252, 252, 0.6), rgba(252, 252, 252, 0.6));
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.6);
+        border-radius: 8px; /* Sesuaikan dengan nilai yang diinginkan */
+        outline: 0;
+    }
+
+    #home .container .paragraf1 {
+        font-size: 45px;
+        text-align: center;
+        padding: 2px;
+        font-weight: bold;
+        font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    }
+
+    #home .container .paragraf2 {
+        font-size: 25px;
+        text-align: center;
+        padding: 4px;
+        font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     }
 </style>
 
