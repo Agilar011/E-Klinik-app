@@ -85,6 +85,12 @@ use App\Http\Middleware\EncryptUrlMiddleware;
         Route::get('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoliPage'])->name('UpdatePoliPage');
         Route::put('/UpdatePoli/{id}', [AdminController::class, 'UpdatePoli'])->name('UpdatePoli');
 
+        Route::get('/UpdatePoliWithoutDoctor/{id}', [AdminController::class, 'UpdatePoliWithoutDoctorPage'])->name('UpdatePoliWithoutDoctorPage');
+        Route::put('/UpdatePoliWithoutDoctor/{id}', [AdminController::class, 'UpdatePoliWithoutDoctor'])->name('UpdatePoliWithoutDoctor');
+
+        Route::get('/UpdateDoctorWithoutPoli/{id}', [AdminController::class, 'UpdateDoctorWithoutPoliPage'])->name('UpdateDoctorWithoutPoliPage');
+        Route::put('/UpdateDoctorWithoutPoli/{id}', [AdminController::class, 'UpdateDoctorWithoutPoli'])->name('UpdateDoctorWithoutPoli');
+
         Route::get('/UpdateDivisi/{id}', [AdminController::class, 'UpdateDivisiPage'])->name('UpdateDivisiPage');
         Route::put('/UpdateDivisi/{id}', [AdminController::class, 'UpdateDivisi'])->name('UpdateDivisi');
 

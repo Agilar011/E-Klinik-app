@@ -1,145 +1,90 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<x-app-layout>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
+                    <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
+                        {{-- <x-application-logo class="block h-12 w-auto" /> --}}
 
-        <x-validation-errors class="mb-4" />
+                        <h1 class="mt-8 text-2xl font-medium text-gray-900">
+                            Masukkan Perubahan Data User {{ $user->name }}
+                        </h1>
 
-        <form method="POST" action="{{ route('CreateUser') }}">
-            @include('sweetalert::alert')
-            @csrf
-            <div>
-                <x-label for="nip" value="{{ __('Nip') }}" />
-                <x-input id="nip" class="block mt-1 w-full" type="text" name="nip" :value="old('nip')" required
-                    autofocus autocomplete="nip" />
-            </div>
+                    </div>
 
-            <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"
-                    required autofocus autocomplete="name" />
-            </div>
+                    <form action="{{ route('UpdateUser', $user->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-            <div class="mt-4">
-                <x-label for="divisi" value="{{ __('Divisi') }}" />
-                <select name="divisi" id="divisi" class="block mt-1 w-full">
-                    @foreach ($divisi as $item)
-                    <option value="{{$item->name}}">{{$item->name}}</option>
-                    @endforeach
-                </select>
-            </div>
+                        <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
 
-            <div class="mt-4">
-                <x-label for="role" value="{{ __('Role') }}" />
-                <select id="role" name="role" class="block mt-1 w-full" autocomplete="role">
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                    <option value="dokter">Dokter</option>
-                </select>
-            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="nip" class="font-medium text-gray-700">NIP:</label>
+                                <input type="text" name="nip" id="nip" value="{{ $user->nip }}"
+                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
+                            </div>
+
+                            <div class="flex flex-col space-y-2">
+                                <label for="name" class="font-medium text-gray-700">Name:</label>
+                                <input type="text" name="name" id="name" value="{{ $user->name }}"
+                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
+                            </div>
+
+                            <div class="flex flex-col space-y-2">
+                                <label for="divisi" class="font-medium text-gray-700">Divisi:</label>
+                                <input type="text" name="divisi" id="divisi" value="{{ $user->divisi }}"
+                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
+                            </div>
 
 
-            <div class="mt-4">
-                <x-label for="tanggal_lahir" value="{{ __('Tanggal Lahir') }}" />
-                <x-input id="tanggal_lahir" class="block mt-1 w-full" type="date" name="tanggal_lahir" required
-                    autocomplete="tanggal_lahir" />
-            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="tanggal_lahir" class="font-medium text-gray-700">Tanggal Lahir:</label>
+                                <input type="date" name="tanggal_lahir" id="tanggal_lahir"
+                                    value="{{ $user->tanggal_lahir }}"
+                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
+                            </div>
 
-            <div class="mt-4">
-                <x-label for="tinggi_badan" value="{{ __('tinggi_badan') }}" />
-                <x-input id="tinggi_badan" class="block mt-1 w-full" type="number" name="tinggi_badan"
-                    :value="old('tinggi_badan')" autocomplete="tinggi_badan" />
-            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label for="tinggi_badan" class="font-medium text-gray-700">Tinggi Badan:</label>
+                                <input type="text" name="tinggi_badan" id="tinggi_badan"
+                                    value="{{ $user->tinggi_badan }}"
+                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
+                            </div>
 
-            <div class="mt-4">
-                <x-label for="berat_badan" value="{{ __('berat_badan') }}" />
-                <x-input id="berat_badan" class="block mt-1 w-full" type="number" name="berat_badan" :value="old('berat_badan')"
-                    autocomplete="berat_badan" />
-            </div>
-
-            <div id="FormPoli" name="FormPoli" class="mt-4">
-                <x-label for="poli" value="{{ __('Poli') }}" />
-                <select name="poli" id="poli" class="block mt-1 w-full">
-                    @foreach ($polis as $item)
-                    <option value="{{$item->name}}">{{$item->name}}</option>
-                    @endforeach
-                </select>
-                {{-- <x-input id="poli" class="block mt-1 w-full" type="text" name="poli" :value="old('poli')" required autocomplete="poli" /> --}}
-            </div>
-{{--
-            <div class="mt-4">
-                <x-label for="role" value="{{ __('Role') }}" />
-                <select id="role" name="role" class="block mt-1 w-full" autocomplete="role">
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                    <option value="dokter">Dokter</option>
-                </select>
-            </div> --}}
-
-            <script>
-                // Mengambil elemen input form Poli
-                const poliInput = document.getElementById('poli');
-
-                // Mengambil elemen input form Role
-                const roleInput = document.getElementById('role');
-
-                // Fungsi untuk menampilkan atau menyembunyikan input form Poli berdasarkan nilai peran
-                function togglePoliInputVisibility() {
-                    // Jika nilai peran adalah 'dokter', tampilkan input form Poli
-                    if (roleInput.value.toLowerCase() === 'dokter') {
-                        FormPoli.style.display = 'block'; // Tampilkan div FormPoli
-                        poliInput.setAttribute('required', true); // Tambahkan atribut required pada input form Poli
-                    } else {
-                        FormPoli.style.display = 'none'; // Sembunyikan div FormPoli
-                        poliInput.removeAttribute('required'); // Hapus atribut required dari input form Poli
-                    }
-                }
-
-                // Panggil fungsi togglePoliInputVisibility saat halaman dimuat dan ketika nilai peran berubah
-                document.addEventListener('DOMContentLoaded', togglePoliInputVisibility);
-                roleInput.addEventListener('change', togglePoliInputVisibility);
-            </script>
+                            <div class="flex flex-col space-y-2">
+                                <label for="berat_badan" class="font-medium text-gray-700">Berat Badan:</label>
+                                <input type="text" name="Berat Badan" id="Berat Badan"
+                                    value="{{ $user->berat_badan }}"
+                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
+                            </div>
 
 
 
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
+                            <div class="flex flex-col space-y-2">
+                                <label for="role">Role:</label>
+                                <select name="role" id="role">
+                                    <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
+                                    <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin
+                                    </option>
+                                    <option value="dokter" {{ $user->role === 'dokter' ? 'selected' : '' }}>Doctor
+                                    </option>
 
-                            <div class="ms-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                    'terms_of_service' =>
-                                        '<a target="_blank" href="' .
-                                        route('terms.show') .
-                                        '" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
-                                        __('Terms of Service') .
-                                        '</a>',
-                                    'privacy_policy' =>
-                                        '<a target="_blank" href="' .
-                                        route('policy.show') .
-                                        '" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
-                                        __('Privacy Policy') .
-                                        '</a>',
-                                ]) !!}
+                                    <!-- Tambahkan opsi lain sesuai kebutuhan -->
+                                </select>
                             </div>
                         </div>
-                    </x-label>
+
+                        <button type="submit"
+                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
+                            Simpan Perubahan
+                        </button>
+
                 </div>
-            @endif
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ms-4">
-                    {{ __('Register') }}
-                </x-button>
             </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+        </div>
+
+
+
+
+
+</x-app-layout>

@@ -33,7 +33,7 @@ class AdminController extends Controller
         $doctorWithoutPoli = User::whereDoesntHave('datapoli')
             ->where('role', 'dokter')
             ->get();
-            // dd($doctorWithoutPoli);
+        // dd($doctorWithoutPoli);
         //  dd($polisWithoutDoctor);
 
 
@@ -132,7 +132,7 @@ class AdminController extends Controller
             'role' => request('role'),
         ]);
 
-        alert()->success('Selamat','Data user ' . $user->name . ' dengan NIP :' . $user->nip . ' telah di update.');
+        alert()->success('Selamat', 'Data user ' . $user->name . ' dengan NIP :' . $user->nip . ' telah di update.');
         return redirect()->route('ShowUser');
     }
     public function SetDefaultUser($id)
@@ -208,6 +208,67 @@ class AdminController extends Controller
             'name' => request('name'),
         ]);
 
+        $poli = request('name');
+        // Alert::success('Hore!', 'Poli Created Successfully');
+        alert()->success('Selamat', 'Data poli ' . $poli . ' telah diperbaharui');
+
+        return redirect()->route('ShowPoli');
+    }
+
+
+    public function UpdatePoliWithoutDoctorPage($id)
+    {
+        $poli = Poli::find($id);
+        $user = User::where('role', 'dokter')->get();
+
+        return view('AdminUI.UpdatePoliWithoutDoctorPage', compact('poli', 'user'));
+
+    }
+
+    public function UpdatePoliWithoutDoctor($id)
+    {
+        DataPoli::create([
+            'id_dokter' => request('DoctorPoli'),
+            'id_poli' => $id,
+        ]);
+        $poli = Poli::find($id);
+        $user = User::find(request('DoctorPoli')); // Menggunakan find karena hanya mencari satu record, bukan koleksi
+
+        // dd($user->name); // Sebaiknya ini dihapus karena sudah ada peringatan error sebelumnya
+
+        $poliName = $poli->name; // Menggunakan variable baru untuk nama poli
+        $doctorName = $user->name; // Menggunakan variable baru untuk nama dokter
+
+        // Alert::success('Hore!', 'Poli Created Successfully');
+        alert()->success('Selamat', 'Dokter : ' . $doctorName . ' telah ditugaskan ke poli ' . $poliName);
+
+        return redirect()->route('ShowPoli');
+    }
+
+    public function UpdateDoctorWithoutPoliPage($id)
+    {
+        $user = User::find($id);
+        $poli = Poli::all();
+        return view('AdminUI.UpdateDoctorWithoutPoli', compact('poli', 'user'));
+
+    }
+
+    public function UpdateDoctorWithoutPoli($id)
+    {
+        DataPoli::create([
+            'id_dokter' => $id,
+            'id_poli' => request('DoctorPoli'),
+        ]);
+        $poli = Poli::find(request('DoctorPoli'));
+        $user = User::find($id); // Menggunakan find karena hanya mencari satu record, bukan koleksi
+
+        // dd($user->name); // Sebaiknya ini dihapus karena sudah ada peringatan error sebelumnya
+
+        $poliName = $poli->name; // Menggunakan variable baru untuk nama poli
+        $doctorName = $user->name; // Menggunakan variable baru untuk nama dokter
+
+        // Alert::success('Hore!', 'Poli Created Successfully');
+        alert()->success('Selamat', 'Dokter : ' . $doctorName . ' telah ditugaskan ke poli ' . $poliName);
 
         return redirect()->route('ShowPoli');
     }
@@ -255,14 +316,22 @@ class AdminController extends Controller
     public function CreateDivisi()
     {
         Divisi::create([
-            'name' => request('name'),]);
+            'name' => request('name'),
+        ]);
+
+        // $poliName = $poli->name; // Menggunakan variable baru untuk nama poli
+        // $doctorName = $user->name; // Menggunakan variable baru untuk nama dokter
+
+        // Alert::success('Hore!', 'Poli Created Successfully');
+        alert()->success('Selamat', 'Divisi ' . request('name') . ' telah dibuat');
 
         return redirect()->route('ShowUser');
 
 
     }
 
-    public function UpdateDivisiPage($id){
+    public function UpdateDivisiPage($id)
+    {
         $divisi = Divisi::findOrFail($id);
 
         return view('AdminUI.UpdateDivisiPage', compact('divisi'));
@@ -278,23 +347,17 @@ class AdminController extends Controller
             'name' => request('name'),
         ]);
 
+        alert()->success('Selamat', 'Divisi ' . request('name') . ' telah diperbaharui');
 
         return redirect()->route('ShowDivisi');
     }
 
-    public function DeleteDivisi($id){
+    public function DeleteDivisi($id)
+    {
         $divisi = Divisi::findOrFail($id);
         $divisi->delete();
 
         return redirect()->route('ShowDivisi');
 
     }
-
-
-    //
-
-
-
-
-
 }
