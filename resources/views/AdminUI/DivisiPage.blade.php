@@ -49,6 +49,21 @@
                                                 <button type="submit" class="text-left w-48 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Divisi</button>
                                             </form>
                                             </div>
+                                            {{-- <a href="Create User" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create New User</a> --}}
+                                            {{-- <a href="{{ route('UpdateUserPage', $id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update User</a>
+
+                                            <form method="POST" action="{{ route('SetDefaultUser', $id) }}">
+                                                @csrf
+                                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Set Default</button>
+                                            </form>
+
+                                            <form method="POST" action="{{ route('DeleteUser', $id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Account</button>
+                                            </form> --}}
+
+                                            {{-- <a href="{{ route('SetDefaultUser', $id) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Set Default</a> --}}
                                         </x-slot>
                                     </x-dropdown>
                                     </td>

@@ -57,7 +57,7 @@
 
                                             <form method="POST" action="{{ route('SetDefaultUser', $id) }}">
                                                 @csrf
-                                                <button type="submit" class="text-left w-48 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Set Default</button>
+                                                <button type="submit" class="text-left w-48 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Reset Password</button>
                                             </form>
 
                                             <form method="POST" action="{{ route('DeleteUser', $id) }}">
