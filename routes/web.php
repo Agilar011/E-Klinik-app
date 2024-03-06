@@ -99,6 +99,7 @@ use App\Http\Middleware\EncryptUrlMiddleware;
         Route::delete('DeletePoli/{id}', [AdminController::class, 'DeletePoli'])->name('DeletePoli');
         Route::delete('/DeleteUser/{id}', [AdminController::class, 'DeleteUser'])->name('DeleteUser');
         Route::delete('/DeleteDivisi/{id}', [AdminController::class, 'DeleteDivisi'])->name('DeleteDivisi');
+        Route::delete('/DeleteDataPoli/{id}', [AdminController::class, 'DeleteDataPoli'])->name('DeleteDataPoli');
 
     });
 

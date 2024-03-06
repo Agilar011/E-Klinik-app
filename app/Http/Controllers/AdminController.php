@@ -122,6 +122,15 @@ class AdminController extends Controller
     public function UpdateUser($id)
     {
         $user = User::find($id);
+
+        if ($user->role == 'dokter' && (request('role') != 'dokter')) {
+            $dataPoli = DataPoli::where('id_dokter', $user->id)->get();
+            foreach ($dataPoli as $key => $value) {
+                $value->delete();
+            }
+        } else {
+        }
+
         $user->update([
             'nip' => request('nip'),
             'name' => request('name'),
@@ -131,6 +140,8 @@ class AdminController extends Controller
             'berat_badan' => request('berat_badan'),
             'role' => request('role'),
         ]);
+
+
 
         alert()->success('Selamat', 'Data user ' . $user->name . ' dengan NIP :' . $user->nip . ' telah di update.');
         return redirect()->route('ShowUser');
@@ -302,6 +313,13 @@ class AdminController extends Controller
 
 
         // Redirect atau berikan respons sesuai kebutuhan Anda
+        return redirect()->route('ShowPoli')->with('success', 'Akun pengguna berhasil dihapus.');
+    }
+
+    public function deleteDataPoli($id){
+        $dataPoli = DataPoli::findOrFail($id);
+        $dataPoli->delete();
+
         return redirect()->route('ShowPoli')->with('success', 'Akun pengguna berhasil dihapus.');
     }
 

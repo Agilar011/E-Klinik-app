@@ -20,16 +20,18 @@
 
                     <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8">
                         @foreach ($polis as $item)
-                            <div>
+                        <a href="{{ route('poli.show', $item->name) }}"><div>
 
-                                <div class="bg-white-500 hover:bg-gray-600 text-black font-bold py-2 px-4 rounded">
+                            <div class="bg-white-500 hover:bg-gray-600 text-black font-bold py-2 px-4 rounded">
+                                {{ $item->name }}
 
-                                    <a href="{{ route('poli.show', $item->name) }}">{{ $item->name }}</a>
-                                    </a>
 
-                                </div>
 
                             </div>
+
+                        </div></a>
+                                    </a>
+
                         @endforeach
 
                     </div>

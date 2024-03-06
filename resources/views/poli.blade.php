@@ -12,6 +12,9 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
     <!-- Styles -->
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <style>
         /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
         *,
@@ -870,32 +873,30 @@
                     </div>
 
                     @php
-                                    $counter = 1;
-                                @endphp
+                        $counter = 1;
+                    @endphp
 
 
-                    <table style="border: 1px solid black;">
-                        <thead style="border: 1px solid black;">
+                    <table class="table-auto w-full border-collapse border border-black">
+                        <thead>
                             <tr>
-                                <th style="border: 1px solid black;">No Antrian</th>
-                                <th>Nama</th>
-                                <th>Divisi</th>
-                                <th>Poli</th>
+                                <th class="border border-black">No Antrian</th>
+                                <th class="border border-black px-4 py-2">Nama</th>
+                                <th class="border border-black px-4 py-2">Divisi</th>
+                                <th class="border border-black px-4 py-2">Poli</th>
                             </tr>
                         </thead>
-                        <tbody style="border: 1px solid black;">
+                        <tbody>
                             @foreach ($pengajuan as $item)
-                            @php
-                            $poli = \App\Models\Poli::where('id', $item->idpoli)->first();
-                            $user = \App\Models\User::where('nip', $item->nip)->first();
-                        @endphp
-
+                                @php
+                                    $poli = \App\Models\Poli::where('id', $item->idpoli)->first();
+                                    $user = \App\Models\User::where('nip', $item->nip)->first();
+                                @endphp
                                 <tr>
-
-                                    <td style="border: 1px solid black;">{{ $counter }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->divisi }}</td>
-                                    <td>{{ $poli->name}} </td>
+                                    <td class="border border-black px-4 py-2">{{ $counter }}</td>
+                                    <td class="border border-black px-4 py-2">{{ $user->name }}</td>
+                                    <td class="border border-black px-4 py-2">{{ $user->divisi }}</td>
+                                    <td class="border border-black px-4 py-2">{{ $poli->name }}</td>
                                 </tr>
                                 @php
                                     $counter++;
@@ -903,10 +904,6 @@
                             @endforeach
                         </tbody>
                     </table>
-
-
-
-
                 </div>
             </div>
 

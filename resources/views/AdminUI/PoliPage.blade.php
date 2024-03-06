@@ -48,7 +48,14 @@
                                                 <a href="{{ route('UpdatePoliPage', $item->id) }}"
                                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update
                                                     Poli</a>
-
+                                                    <form method="POST" action="{{ route('DeleteDataPoli', $item->id) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    <button type="submit"
+                                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                        data-confirm-delete="true"
+                                                        onclick="return confirm('are You Sure')">Delete Data Poli</button>
+                                                </form>
                                                     <form method="POST" action="{{ route('DeletePoli', $item->id) }}">
                                                         @csrf
                                                         @method('DELETE')
@@ -141,7 +148,7 @@
                                             <form method="POST" action="{{ route('DeletePoli', $item->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-left w-48 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Poli</button>
+                                                <button type="submit" onclick="" class="text-left w-48 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Poli</button>
                                             </form>
                                             </div>
                                         </x-slot>
