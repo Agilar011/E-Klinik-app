@@ -40,7 +40,7 @@ use App\Http\Middleware\EncryptUrlMiddleware;
         Route::get('/dashboard', function () {
             if (Auth()->user()->role === 'admin') {
                 return view('dashboardAdmin');
-            } elseif (Auth()->user()->role === 'doctor') {
+            } elseif (Auth()->user()->role === 'dokter') {
                 return view('dashboardDoctor');
             } else {
                 return view('dashboardUser');
@@ -102,7 +102,7 @@ use App\Http\Middleware\EncryptUrlMiddleware;
 
     });
 
-    Route::middleware('role:doctor')->group(function () {
+    Route::middleware('role:dokter')->group(function () {
         Route::get('/antrianpengajuan', [DoctorController::class, 'index'])->name('Doctor.index');
         Route::get('/dashboard.user', [DoctorController::class, 'UserPage'])->name('Doctor.UserPage');
 

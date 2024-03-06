@@ -41,12 +41,13 @@
                                     <td class="border px-4 py-2">{{ $user->divisi }}</td>
                                     <td class="border px-4 py-2">{{ $item->keluhan }}</td>
                                     <td class="border px-4 py-2">{{ $item->tglpengajuan }} </td>
-                                    <td class="border px-4 py-2"><button
+                                    <td class="border px-4 py-2 flex">
+                                        <button
                                         class="bg-red-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-red-600">
 
                                             <a href="{{ route('RecectionPage', $item->id) }}">Tolak Pengajuan</a>
-                                        </button></td>
-                                    <td><button
+                                        </button>
+                                        <button
                                         class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
                                             <a href="{{ route('AcceptionPage', $item->id) }}">Setujui Pengajuan</a>
                                         </button></td>

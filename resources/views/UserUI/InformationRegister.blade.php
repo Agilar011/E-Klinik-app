@@ -3,11 +3,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="pt-1 pb-8 px-8 bg-white border-b border-gray-200">
-                        {{-- <x-application-logo class="block h-12 w-auto" /> --}}
+                    {{-- <x-application-logo class="block h-12 w-auto" /> --}}
 
-                        <h1 class="mt-8 text-2xl font-medium text-gray-900">
-                            Masukkan Data Diri Anda
-                        </h1>
+                    <h1 class="mt-8 text-2xl font-medium text-gray-900">
+                        Masukkan Data Diri Anda
+                    </h1>
 
 
                     <form action="{{ route('user.update', Auth::user()->id) }}" method="POST">
@@ -61,15 +61,22 @@
                                 <textarea name="keluhan" id="keluhan" required>{{ Auth::user()->keluhan }}</textarea>
                             </div>
 
+                            <div class="flex flex-col space-y-2">
+                                <label for="tglpemeriksaan" class="font-medium text-gray-700">Tanggal
+                                    Pemeriksaan:</label>
+                                <input type="date" name="tglpemeriksaan" id="tglpemeriksaan"
+                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500" required>
                             </div>
-                            <button type="button" onclick="window.history.back()"
-                        class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
-                        Back
-                    </button>
-                        <button type="submit"
-                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-                            Kirim Pengajuan Pemeriksaan </button>
+
                         </div>
+                        <button type="button" onclick="window.history.back()"
+                            class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+                            Back
+                        </button>
+                        <button type="submit"
+                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                            Kirim Pengajuan Pemeriksaan </button>
+                </div>
 
             </div>
         </div>

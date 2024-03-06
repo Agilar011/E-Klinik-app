@@ -8,15 +8,15 @@
                     </h1>
 
                     @php
-                    $datapoli = App\Models\Poli::where('id', $pengajuan->idpoli)->first();
-                    $datauser = App\Models\User::where('nip', $pengajuan->nip)->first();
-                    $idpengajuan = $pengajuan->id;
-                    // dd($idpengajuan);
-                @endphp
+                        $datapoli = App\Models\Poli::where('id', $pengajuan->idpoli)->first();
+                        $datauser = App\Models\User::where('nip', $pengajuan->nip)->first();
+                        $idpengajuan = $pengajuan->id;
+                        // dd($idpengajuan);
+                    @endphp
 
 
                     {{-- <form action="{{ route('setujuipengajuan', $pengajuan->id) }}" method="POST"> --}}
-                        <form action="{{ route('setujuipengajuan', $idpengajuan)}}" method="POST">
+                    <form action="{{ route('setujuipengajuan', $idpengajuan) }}" method="POST">
                         @csrf
                         @method('PUT')
                         {{-- @php
@@ -79,8 +79,11 @@
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="tglpemeriksaan" class="font-medium text-gray-700">Tanggal Pemeriksaan:</label>
-                                <input type="date" name="tglpemeriksaan" id="tglpemeriksaan">
+                                <label for="tglpemeriksaan" class="font-medium text-gray-700">Tanggal
+                                    Pemeriksaan:</label>
+                                <input type="date" name="tglpemeriksaan" id="tglpemeriksaan"
+                                    value="{{ $pengajuan->tglpemeriksaan }}">
+
                             </div>
                         </div>
 
@@ -90,9 +93,9 @@
                                 Back
                             </button>
                             <button type="submit"
-                            class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
-                            Terima Pengajuan
-                        </button>
+                                class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
+                                Terima Pengajuan
+                            </button>
                         </div>
                     </form>
                 </div>
