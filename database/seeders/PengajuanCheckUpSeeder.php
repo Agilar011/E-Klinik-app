@@ -21,7 +21,6 @@ class PengajuanCheckUpSeeder extends Seeder
             'nip' => '00000000',
             'nipdokter' => '11111111',
             'idpoli' => 1,
-            'qrcode' => 'QR0001',
             'tglpengajuan' => '2022-11-10',
             'tglpemeriksaan' => '2022-11-15',
             'status' => 'pending',
@@ -35,7 +34,6 @@ class PengajuanCheckUpSeeder extends Seeder
             'nip' => '00000000',
             'nipdokter' => '11111111',
             'idpoli' => 2,
-            'qrcode' => 'QR0002',
             'tglpengajuan' => '2022-11-11',
             'tglpemeriksaan' => '2022-11-16',
             'status' => 'pending',
@@ -46,10 +44,9 @@ class PengajuanCheckUpSeeder extends Seeder
 
         PengajuanCheckUp::create([
             'id' => 3,
-            'nip' => '22222222',
+            'nip' => '00000000',
             'nipdokter' => '11111111',
             'idpoli' => 1,
-            'qrcode' => 'QR0003',
             'tglpengajuan' => '2022-11-12',
             'tglpemeriksaan' => '2022-11-18',
             'status' => 'pending',
