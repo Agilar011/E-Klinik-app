@@ -112,4 +112,8 @@ use App\Http\Middleware\EncryptUrlMiddleware;
 
         Route::put('/tolakpengajuan/{pengajuan}', [DoctorController::class, 'TolakPengajuan'])->name('tolakpengajuan');
         Route::put('/setujuipengajuan/{id}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
+
+        Route::get('/scan-qr-code',  [DoctorController::class, 'ScanQrPage'])->name('scanQrPage');
+        Route::post('/QrCodeProcessing',  [DoctorController::class, 'ScanQr'])->name('scanQr');
+
     });

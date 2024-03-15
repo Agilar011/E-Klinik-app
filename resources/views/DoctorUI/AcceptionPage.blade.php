@@ -75,7 +75,6 @@
                                 <input type="text" name="keluhan" id="keluhan" value="{{ $pengajuan->keluhan }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
                                     readonly>
-
                             </div>
 
                             <div class="flex flex-col space-y-2">
