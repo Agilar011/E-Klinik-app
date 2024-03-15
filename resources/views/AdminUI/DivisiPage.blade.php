@@ -1,29 +1,38 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 lg:p-8 bg-white border-b border-gray-200" style="margin-bottom: 100px;">
-                    <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                        <h1 class="mt-8 text-2xl font-medium text-gray-900">
+            <div class="bg-gray-400 overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="p-10 lg:p-10 bg-gray-200 border-b border-gray-200 justify-center ">
+                    <div class="p-3 lg:p-4 bg-white border-b border-gray-200">
+                        <h1 class="text-2xl font-medium text-gray-900">
                             Selamat Datang Admin {{ Auth::user()->name }}
                         </h1>
                         <h3>
                             Silahkan beri tindakan pada Divisi.
                         </h3>
                     </div>
-                    <table>
-                        <thead>
-                            <th class="border px-4 py-2">No</th>
-                            <th class="border px-4 py-2">Divisi</th>
-                            <th class="border px-4 py-2">Action</th>
+
+                    <style>
+                        .custom-table {
+                            border-collapse: separate;
+                            border-spacing: 0 0.5rem;
+                            /* Menentukan jarak vertikal antara baris (0.5 rem disini, bisa disesuaikan) */
+                        }
+                    </style>
+
+                    <table class="custom-table w-full text-center mt-2 mb-2">
+                        <thead class="bg-gray-400 mb-[10px]">
+                            <th class="px-4 py-2">No</th>
+                            <th class="px-4 py-2">Divisi</th>
+                            <th class="px-4 py-2">Action</th>
                         </thead>
 
                         <tbody>
                             @foreach ($divisi as $key => $item)
                                 <tr>
-                                    <td class="border px-4 py-2">{{ $key + 1 }}</td>
-                                    <td class="border px-4 py-2">{{ $item->name }}</td>
-                                    <td class="border px-4 py-2">
+                                    <td class="bg-white py-2 px-4">{{ $key + 1 }}</td>
+                                    <td class="bg-white py-2 px-4">{{ $item->name }}</td>
+                                    <td class="bg-white py-2 px-4">
                                         <x-dropdown align="right" width="48">
                                         <x-slot name="trigger">
                                             <button class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-2 px-4 rounded">
