@@ -18,9 +18,9 @@
                     </form>
                     <canvas id="canvas" style="display:none;"></canvas>
                 </div>
+                </div>
             </div>
         </div>
-    </div>
 </x-app-layout>
 
 <script>
