@@ -20,7 +20,7 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div id="bguser">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
@@ -44,25 +44,11 @@
     </body>
 </html>
 
-{{-- <style>
-    *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: .3s ease-in-out;
-    }
-
-    html{
-        font-family: 'inter', 'Times New Roman', Times, serif;
-        background-image: linear-gradient(rgba(252, 252, 252, 0.6), rgba(119, 191, 249, 0.6)),url(img/KapalRS3.jpg);
+<style>
+    #bguser {
+        min-height: 100vh;
+        background-image: linear-gradient(rgba(255, 163, 241, 0.6), rgba(124, 99, 119, 0.6)),url(img/Bg1.jpg);
         background-attachment: fixed;
         background-size: 100%;
-        color: #000000;
-        scroll-behavior: smooth;
-        overflow-y: hidden;
     }
-
-    html::-webkit-scrollbar {
-        display: none;
-    }
-</style> --}}
+</style>
