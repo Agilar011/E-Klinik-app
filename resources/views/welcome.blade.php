@@ -11,7 +11,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-        
+
 
         <!-- Styles -->
         <style>
@@ -33,9 +33,9 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="hidden md:flex md:items-center md:space-x-6">
-                        <a href="#" class="text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Home </a>            
+                        <a href="#" class="text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Home </a>
                         <div class="container mx-auto">
                             <!-- Dropdown with dividers -->
                             <div class="relative inline-block text-right">
@@ -47,7 +47,7 @@
                                   </svg>
                                 </button>
                               </div>
-                        
+
                               <!-- Dropdown menu with dividers -->
                               <div class="absolute right-0 w-38 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" style="display: none;" id="dropdown-menu" style="font-family: sans-serif">
                                 <div class="py-1" role="none">
@@ -57,20 +57,20 @@
                                 </div>
                               </div>
                         </div>
-                        <a href="#" class="ml-3 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">About Us</a>                        
+                        <a href="#" class="ml-3 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">About Us</a>
                         <a href="#" class="ml-4 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Information</a>
                         <a href="#" class="ml-4 mr-5 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Contact</a>
                         <a href="{{ route('login') }}" class="right-0 inline-flex items-center justify-center px-3 py-1 border border-transparent rounded-md shadow-sm text-white bg-blue-400 font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" style="font-family: sans-serif">Log In</a>
                     </div>
                 </div>
-            </div>    
+            </div>
         </nav>
 
         <script>
             function toggleDropdown() {
               var dropdownMenu = document.getElementById("dropdown-menu");
               var menuButton = document.getElementById("menu-button");
-        
+
               if (dropdownMenu.style.display === "none") {
                 dropdownMenu.style.display = "block";
                 menuButton.setAttribute("aria-expanded", "true");
@@ -89,7 +89,7 @@
                         Welcome to E-klinik PT. PAL Indonesia
                     </p>
                     <p class="paragraf2">
-                        Situs Rekam Medis untuk Membantu Pemantauan Kesehatan Anda 
+                        Situs Rekam Medis untuk Membantu Pemantauan Kesehatan Anda
                     </p>
                 </div>
                 </div>

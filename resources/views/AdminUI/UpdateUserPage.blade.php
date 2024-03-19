@@ -16,8 +16,7 @@
                         @csrf
                         @method('PUT')
                         <div class="bg-gray-400 rounded-xl grid">
-                            <div
-                                class=" grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
+                            <div class=" grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
 
                                 <div class="flex flex-col space-y-2">
                                     <label for="nip" class="font-bold text-black">NIP:</label>
@@ -76,10 +75,14 @@
                                 </div>
                             </div>
                             <div class="flex flex-cols-2 justify-center p-3 ">
-                                <button type="submit"
+                                <a href="/DaftarUser"
                                     class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-full m-auto">
                                     Batal
-                                </button>
+                                </a>
+                                {{-- <button type="submit"
+                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded-full m-auto">
+                                    Batal
+                                </button> --}}
 
                                 <button type="submit"
                                     class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 rounded-full m-auto">

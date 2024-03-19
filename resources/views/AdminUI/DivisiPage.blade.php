@@ -35,18 +35,18 @@
                                     <td class="bg-white py-2 px-4">
                                         <x-dropdown align="right" width="48">
                                         <x-slot name="trigger">
-                                            <button class="bg-blue-500 hover:bg-blue-600 text-black font-bold py-2 px-4 rounded">
+                                            <button class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                                                 Click Me
                                             </button>
                                         </x-slot>
                                         <x-slot name="content">
-                                            <div name="box" class="bg-blue-200 ">
-                                                <a href="{{ route('UpdateDivisiPage', $item->id) }}" class="text-left w-48 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Update Divisi</a>
+                                            <div name="box" class="bg-gray-400 ">
+                                                <a href="{{ route('UpdateDivisiPage', $item->id) }}" class="text-left w-48 block px-4 py-2 text-sm text-white hover:bg-gray-600">Update Divisi</a>
 
                                             <form method="POST" action="{{ route('DeleteDivisi', $item->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-left w-48 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Divisi</button>
+                                                <button type="submit" class="text-left w-48 block px-4 py-2 text-sm text-white hover:bg-gray-600">Delete Divisi</button>
                                             </form>
                                             </div>
                                         </x-slot>
@@ -56,7 +56,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <a href="{{ route('CreateDivisiPage') }}"><button class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">Create User</button>
+                    <a href="{{ route('CreateDivisiPage') }}"><button class="bg-blue-400 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-blue-600">Create User</button>
                     </a>
                 </div>
             </div>

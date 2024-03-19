@@ -33,20 +33,6 @@ class AdminController extends Controller
         $doctorWithoutPoli = User::whereDoesntHave('datapoli')
             ->where('role', 'dokter')
             ->get();
-        // dd($doctorWithoutPoli);
-        //  dd($polisWithoutDoctor);
-
-
-
-        // $polis = Poli::all(); // Mengambil semua data poli dari tabel
-        // $user = User::all(); // Mengambil semua data user dari tabel
-        // $datapoli = DataPoli::all(); // Mengambil semua data user dari tabel
-        // $title = 'Delete Data!';
-        // $text = "Are you sure you want to delete : <br/>" .
-        // "Nama : " . $polis->name . "<br/>" .
-        // "ID : " . $polis->id . " ?";
-        // confirmDelete($title, $text);
-
 
         return view('AdminUI.PoliPage', compact('dataPolis', 'polisWithoutDoctor', 'doctorWithoutPoli'));
 
@@ -115,12 +101,15 @@ class AdminController extends Controller
     public function UpdateUserPage($id)
     {
         $user = User::find($id);
+        $polis = Poli::all();
 
-        return view('AdminUI.UpdateUSerPage', compact('user'));
+
+        return view('AdminUI.UpdateUSerPage', compact('user','polis'));
 
     }
     public function UpdateUser($id)
     {
+
         $user = User::find($id);
 
         if ($user->role == 'dokter' && (request('role') != 'dokter')) {
@@ -204,25 +193,80 @@ class AdminController extends Controller
 
     public function UpdatePoliPage($id)
     {
-        $poli = Poli::find($id);
+        $datapoli = DataPoli::find($id);
+        $poli = Poli::findOrFail($datapoli->id_poli);
+        $dokter = User::findOrFail($datapoli->id_dokter);
+        $polis = Poli::all();
+        $dokters = User::where('role', 'dokter')->get();
 
-        return view('AdminUI.UpdatePoliPage', compact('poli'));
+
+
+
+        return view('AdminUI.UpdatePoliPage', compact('datapoli', 'poli', 'dokter','polis','dokters'));
 
     }
     public function UpdatePoli($id)
     {
-        $Poli = Poli::find($id);
-        // dd($Poli);
+        $dataPoli = DataPoli::find($id);
+        // dd($dataPoli);
 
-        $Poli->update([
-            'name' => request('name'),
+        $poli = Poli::where('name', request('poli'))->first();
+        // dd($poli);
+
+
+        $dokter = User::where('name', request('dokter'))->first();
+        // dd($dokter);
+
+        if ($dataPoli->id_dokter == $dokter->id) {
+
+             $dataPoli->update([
+            'id_poli' => $poli->id,
+            'id_dokter' => $dokter->id,
+
         ]);
-
-        $poli = request('name');
         // Alert::success('Hore!', 'Poli Created Successfully');
-        alert()->success('Selamat', 'Data poli ' . $poli . ' telah diperbaharui');
+        alert()->success('Selamat', 'Data Poli telah diganti menjadi poli: ' . request('poli'));
 
         return redirect()->route('ShowPoli');
+        }
+        else if ($dataPoli->id_poli == $poli->id) {
+
+            $dataPoli->update([
+                'id_poli' => $poli->id,
+                'id_dokter' => $dokter->id,
+
+            ]);
+
+            alert()->success('Selamat', 'Dokter dari Poli '. $poli->name . ' telah diganti menjadi Dokter: ' . request('dokter'));
+
+        return redirect()->route('ShowPoli');
+            # code...
+        } else {
+            // Panggil kembali fungsi 'UpdatePoli' dengan parameter '$id'
+            $dataPoli->update([
+                'id_poli' => $poli->id,
+                'id_dokter' => $dokter->id,
+
+            ]);
+
+            alert()->success('Selamat', 'Data Poli telah diubah menjadi Dokter: '. $dokter->name. ' dengan poli: '.$poli->name);
+            return redirect()->route('ShowPoli');
+        }
+
+
+
+
+        // $dataPoli->update([
+        //     'id_poli' => $poli->id,
+        //     'id_dokter' => $poli->id,
+
+        // ]);
+
+        // $poli = request('name');
+        // // Alert::success('Hore!', 'Poli Created Successfully');
+        // alert()->success('Selamat', 'Data poli ' . $poli . ' telah diperbaharui');
+
+        // return redirect()->route('ShowPoli');
     }
 
 
