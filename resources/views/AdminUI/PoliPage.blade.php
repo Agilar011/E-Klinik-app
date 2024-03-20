@@ -4,9 +4,19 @@
             <div class="bg-gray-400 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-10 lg:p-10 bg-gray-200 border-b border-gray-200 justify-center ">
                     <div class="p-3 lg:p-4 bg-white border-b border-gray-200 sm:rounded-lg">
-                        <h1 class="text-2xl font-medium text-gray-900">
-                            Pilih Poli yang Ingin diubah
-                        </h1>
+                        <div class="flex p-5 my-auto gap-10 justify-between">
+                            <div class="text-2xl font-medium text-gray-900">
+                                Pilih Poli yang Ingin diubah
+                            </div>
+                            <div class="flex items-center">
+                                <form action="{{ route('searchUser') }}" method="GET" class="flex">
+                                    <input type="text" name="query" placeholder="Search..." class="border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300">
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
+                                </form>
+                            </div>
+
+                        </div>
+
                     </div>
 
                     <style>
@@ -18,7 +28,7 @@
                     </style>
                     <table class="custom-table w-full text-center mt-2 mb-2">
 
-                        <thead class="bg-gray-400 mb-[10px]">
+                        <thead class="bg-gray-300 mb-[10px]">
                             <th class="px-4 py-2">No</th>
                             <th class="px-4 py-2">Nama Dokter</th>
                             <th class="px-4 py-2">Nama Poli</th>
@@ -81,7 +91,7 @@
 
                         <table class="custom-table w-full text-center mt-2 mb-2">
 
-                            <thead class="bg-gray-400 mb-[10px]">
+                            <thead class="bg-gray-300 mb-[10px]">
                                 <th class="px-4 py-2">No</th>
                                 <th class="px-4 py-2">Nama Poli</th>
                                 <th class="px-4 py-2">Action</th>
@@ -134,7 +144,7 @@
 
                         <table class="custom-table w-full text-center mt-2 mb-2">
 
-                            <thead class="bg-gray-400 mb-[10px]">
+                            <thead class="bg-gray-300 mb-[10px]">
                                 <th class="px-4 py-2">No</th>
                                 <th class="px-4 py-2">Nama Poli</th>
                                 <th class="px-4 py-2">Action</th>

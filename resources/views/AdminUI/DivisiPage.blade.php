@@ -3,13 +3,20 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray-400 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-10 lg:p-10 bg-gray-200 border-b border-gray-200 justify-center ">
-                    <div class="p-3 lg:p-4 bg-white border-b border-gray-200">
-                        <h1 class="text-2xl font-medium text-gray-900">
-                            Selamat Datang Admin {{ Auth::user()->name }}
-                        </h1>
-                        <h3>
-                            Silahkan beri tindakan pada Divisi.
-                        </h3>
+                    <div class="bg-white border-b border-gray-200 sm:rounded-lg ">
+                        <div class="flex p-5 my-auto gap-10 justify-between">
+                            <div class="text-2xl font-medium text-gray-900">
+                                Selamat Datang Admin {{ Auth::user()->name }}
+                            </div>
+
+                            <div class="flex items-center">
+                                <form action="{{ route('searchDivisi') }}" method="GET" class="flex">
+                                    <input type="text" name="query" placeholder="Search..." class="border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300">
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
 
                     <style>
@@ -20,8 +27,8 @@
                         }
                     </style>
 
-                    <table class="custom-table w-full text-center mt-2 mb-2">
-                        <thead class="bg-gray-400 mb-[10px]">
+                    <table class="custom-table w-full text-center mt-2 mb-2 ">
+                        <thead class="bg-gray-300 mb-[10px]">
                             <th class="px-4 py-2">No</th>
                             <th class="px-4 py-2">Divisi</th>
                             <th class="px-4 py-2">Action</th>

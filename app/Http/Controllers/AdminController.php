@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Divisi;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Carbon\Carbon;
@@ -22,6 +25,20 @@ class AdminController extends Controller
         return view('AdminUI.UserPage', compact('user'));
 
     }
+
+    public function searchUser(Request $request)
+    {
+        $query = $request->input('query');
+
+        $user = User::where('name', 'like', "%$query%")
+                     ->orWhere('divisi', 'like', "%$query%")
+                     ->orWhere('role', 'like', "%$query%")
+                     ->get();
+
+        return view('AdminUI.UserPage', compact('user'));
+
+    }
+
     public function ShowPoli()
     {
         $dataPolis = DataPoli::join('polis', 'data_polis.id_poli', '=', 'polis.id')
@@ -38,6 +55,19 @@ class AdminController extends Controller
 
     }
 
+    public function searchPoli(Request $request)
+    {
+        $query = $request->input('query');
+
+        $user = User::where('name', 'like', "%$query%")
+                     ->orWhere('divisi', 'like', "%$query%")
+                     ->orWhere('role', 'like', "%$query%")
+                     ->get();
+
+        return view('AdminUI.UserPage', compact('user'));
+
+    }
+
     public function ShowDivisi()
     {
         $divisi = Divisi::all();
@@ -45,6 +75,17 @@ class AdminController extends Controller
         return view('AdminUI.DivisiPage', compact('divisi'));
 
     }
+
+    public function searchDivisi(Request $request)
+    {
+        $query = $request->input('query');
+
+        $divisi = Divisi::where('name', 'like', "%$query%")->get();
+
+        return view('AdminUI.DivisiPage', compact('divisi'));
+    }
+
+
 
     public function CreateUserPage()
     {

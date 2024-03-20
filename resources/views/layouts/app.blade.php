@@ -24,50 +24,87 @@
     </head>
     <body class="font-sans antialiased">
         <x-banner />
+        @if(auth()->check())
+    @if(auth()->user()->role === 'admin')
+    <div class="min-h-screen bg-gray-100">
+        @livewire('navigation-menu')
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+        {{-- Tampilkan sesuatu untuk admin --}}
+    @elseif(auth()->user()->role === 'user')
+    <div class="min-h-screen bg-gray-100">
+        @livewire('navigation-menu')
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
 
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+        {{-- Tampilkan sesuatu untuk user --}}
+    @elseif(auth()->user()->role === 'dokter')
+    <div class="min-h-screen bg-gray-100">
+        @livewire('navigation-menu')
+
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
+
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+        {{-- Tampilkan sesuatu untuk dokter --}}
+    @endif
+    @else
+    <div class="min-h-screen bg-gray-100">
+        @livewire('navigation-menu')
+
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
+
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+
+@endif
         @stack('modals')
 
         @livewireScripts
     </body>
 </html>
-
-{{-- <style>
-    *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: .3s ease-in-out;
-    }
-
-    html{
-        font-family: 'inter', 'Times New Roman', Times, serif;
-        background-image: linear-gradient(rgba(252, 252, 252, 0.6), rgba(119, 191, 249, 0.6)),url(img/KapalRS3.jpg);
-        background-attachment: fixed;
-        background-size: 100%;
-        color: #000000;
-        scroll-behavior: smooth;
-        overflow-y: hidden;
-    }
-
-    html::-webkit-scrollbar {
-        display: none;
-    }
-</style> --}}

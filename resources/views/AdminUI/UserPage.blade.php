@@ -4,14 +4,19 @@
             <div class="bg-yellow-200 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-10 lg:p-10 bg-gray-200 border-b border-gray-200 justify-center ">
                     <div class="bg-white border-b border-gray-200 sm:rounded-lg  m-2">
-                        <div class="px-2 py-2">
-                            <h1 class=" text-2xl font-medium text-gray-900">
+                        <div class="flex p-5 my-auto gap-10 justify-between">
+                            <div class="text-2xl font-medium text-gray-900">
                                 Selamat Datang Admin {{ Auth::user()->name }}
-                            </h1>
-                            <h3>
-                                Silahkan beri tindakan pada user.
-                            </h3>
+                            </div>
+
+                            <div class="flex items-center">
+                                <form action="{{ route('searchUser') }}" method="GET" class="flex">
+                                    <input type="text" name="query" placeholder="Search..." class="border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300">
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
+                                </form>
+                            </div>
                         </div>
+
                     </div>
 
                     <style>
@@ -23,7 +28,7 @@
                     </style>
 
                     <table class="custom-table w-full text-center m-2">
-                        <thead class="bg-gray-400 mb-[10px]">
+                        <thead class="bg-gray-300 mb-[10px]">
                             <th class="py-2">No</th>
                             <th class="py-2">NIP</th>
                             <th class="py-2">Nama Pasien</th>
