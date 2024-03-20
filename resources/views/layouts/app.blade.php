@@ -64,7 +64,9 @@
     </div>
         {{-- Tampilkan sesuatu untuk user --}}
     @elseif(auth()->user()->role === 'dokter')
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100"
+        style="background-image: url('/img/Bg-dokter.jpg'); background-repeat: no-repeat; background-size: cover;"
+>
         @livewire('navigation-menu')
 
         <!-- Page Heading -->
