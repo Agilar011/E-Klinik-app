@@ -21,7 +21,7 @@
                 // Mendapatkan daftar pengajuan check up berdasarkan NIP pengguna saat ini
                 $pengajuanCheckUps = App\Models\PengajuanCheckUp::where('nip', Auth::user()->nip)->get();
             @endphp
-            
+
             <tbody>
                 @foreach ($pengajuanCheckUps as $item)
                     <tr>

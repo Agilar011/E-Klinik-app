@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\PengajuanCheckUp;
 use Illuminate\Support\Facades\Auth;
-use SimpleSoftwareIO\QrChttps://github.com/Agilar011/E-Klinik-app/pull/11/conflict?name=app%252FHttp%252FControllers%252FDoctorController.php&ancestor_oid=dc03015da6fe4602d4d29be86ef509623f452e1e&base_oid=f4080291880d6878b090b8f54be9897c29d372ff&head_oid=cdc57fa38c3164a5cbbe0065f6bda7cff436f606ode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
 use Zxing\QrReader;
 use BaconQrCode\Renderer\ImageRenderer;
@@ -55,8 +54,13 @@ class DoctorController extends Controller
             new RendererStyle(400),
             new ImagickImageBackEnd()
         );
+
+        // Mengubah rute penyimpanan QR menjadi public/images/
+        $ruteSimpan = public_path('qrcodes/') . $text . '.png';
+
         $writer = new Writer($renderer);
-        $writer->writeFile($text, $text.'.png');
+        $writer->writeFile($text, $ruteSimpan);
+
 
         // $id_string = $pengajuan->id;
 

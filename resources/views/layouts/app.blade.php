@@ -1,36 +1,100 @@
-<x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                    <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                        {{-- <x-application-logo class="block h-12 w-auto" /> --}}
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                        <h1 class="mt-8 text-2xl font-medium text-gray-900">
-                            Pilih Poli yang Anda Inginkan
-                        </h1>
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
+        <!-- Scripts -->
+        @include('sweetalert::alert')
+
+        <!-- Styles -->
+        @livewireStyles
+    </head>
+    <body class="font-sans antialiased">
+        <x-banner />
+
+        @if (auth()->user()->role === 'admin')
+        <div class="min-h-screen bg-gray-100"
+        style="background-image: url('/img/KapalRS.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            @livewire('navigation-menu')
+
+            <!-- Page Heading -->
+            @if (isset($header))
+                <header class="bg-white shadow">
+                    <div class="max-w-full mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
                     </div>
+                </header>
+            @endif
 
-                    <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8">
-                        @foreach ($polis as $item)
-                        <a href="{{ route('poli.show', $item->name) }}"><div>
-
-                            <div class="bg-white-500 hover:bg-gray-600 text-black font-bold py-2 px-4 rounded border border-black text-center">
-                                {{ $item->name }}
-                            </div>
-                        </div>
-                    </a>
-                                    </a>
-
-                        @endforeach
-
-                    </div>
-                    <button type="button" onclick="window.history.back()"
-                        class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
-                        Back
-                    </button>
-                </div>
-            </div>
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
         </div>
-    </div>
-</x-app-layout>
+                @elseif (auth()->user()->role === 'user')
+                <div class="min-h-screen bg-gray-100"
+                style="background-image: url('/img/KapalRS.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+                    @livewire('navigation-menu')
+
+                    <!-- Page Heading -->
+                    @if (isset($header))
+                        <header class="bg-white shadow">
+                            <div class="max-w-full mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                                {{ $header }}
+                            </div>
+                        </header>
+                    @endif
+
+                    <!-- Page Content -->
+                    <main>
+                        {{ $slot }}
+                    </main>
+                </div>
+                    @elseif (auth()->user()->role === 'dokter')
+                    <div class="min-h-screen bg-gray-100"
+                    style="background-image: url('/img/KapalRS.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+                        @livewire('navigation-menu')
+
+                        <!-- Page Heading -->
+                        @if (isset($header))
+                            <header class="bg-white shadow">
+                                <div class="max-w-full mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                                    {{ $header }}
+                                </div>
+                            </header>
+                        @endif
+
+                        <!-- Page Content -->
+                        <main>
+                            {{ $slot }}
+                        </main>
+                    </div>
+
+
+                @endif
+
+
+
+
+
+        @stack('modals')
+
+        @livewireScripts
+    </body>
+</html>

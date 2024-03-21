@@ -15,6 +15,7 @@ class UserController extends Controller
     {
         $polis = Poli::all(); // Mengambil semua data poli dari tabel
 
+
         return view('UserUI.PoliPage', compact('polis'));
     }
 
