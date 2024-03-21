@@ -6,9 +6,13 @@
                     <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
                         {{-- <x-application-logo class="block h-12 w-auto" /> --}}
 
-                        <h1 class="mt-8 text-2xl font-medium text-gray-900">
-                            Pilih Poli yang Anda Inginkan
+                        <h1 class="text-center text-2xl font-medium text-gray-900">
+                            Menuju Sehat Bersama E-Klinik PT. PAL Indonesia
                         </h1>
+
+                        <p class="text-center font-medium">
+                            E-Klinik PT.PAL berdedikasi untuk membantu memperoleh fasilitas dan pelayanan kesehatan yang baik
+                        </p>
 
                         {{-- <p class="mt-6 text-gray-500 leading-relaxed">
                             Laravel Jetstream provides a beautiful, robust starting point for your next Laravel application. Laravel is designed
@@ -41,9 +45,4 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 </x-app-layout>

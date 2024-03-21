@@ -19,36 +19,34 @@
     </head>
     <body class="font-sans antialiased">
         <x-banner />
-
-        <div id="bguser">
-            @livewire('navigation-menu')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-
+        
+        @livewire('navigation-menu')
+        
+        <!-- Page Heading -->
+        @if (isset($header))
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
+        @endif
+        
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+        
         @stack('modals')
-
+        
         @livewireScripts
     </body>
 </html>
 
-<style>
+{{-- <style>
     #bguser {
         min-height: 100vh;
         background-image: linear-gradient(rgba(255, 163, 241, 0.6), rgba(124, 99, 119, 0.6)),url(img/Bg1.jpg);
         background-attachment: fixed;
         background-size: 100%;
     }
-</style>
+</style> --}}

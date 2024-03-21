@@ -13,9 +13,13 @@
         <table class="table-auto w-full">
             <thead>
                 <th class="border px-4 py-2 text-left">No</th>
-                <th class="border px-4 py-2 text-left">Nama Pengajuan</th>
+                <th class="border px-4 py-2 text-left">Nama</th>
                 <th class="border px-4 py-2 text-left">Poli</th>
+                {{-- <th class="border px-4 py-2 text-left">Tanggal Pengajuan</th> --}}
                 <th class="border px-4 py-2 text-left">Keluhan</th>
+                {{-- <th class="border px-4 py-2 text-left">Catatan</th>
+                <th class="border px-4 py-2 text-left">Status</th>
+                <th class="border px-4 py-2 text-left">QR Code</th> --}}
                 </thead>
 
             <tbody>
@@ -30,6 +34,7 @@
                 <td class="border px-4 py-2">{{$item->keluhan}}</td>
 
 
+
                 </tr>
 
 
@@ -38,7 +43,7 @@
             </tbody>
         </table>
     </p>
-    <div class="text-center">
+    <div class="text-center pt-5">
         <button class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
             <a href="/poliPage">Ajukan Pemeriksaan</a>
         </button>
