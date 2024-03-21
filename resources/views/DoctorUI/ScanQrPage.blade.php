@@ -1,56 +1,43 @@
-<!-- resources/views/ambil-foto.blade.php -->
-
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                    <h1 class="mt-8 text-2xl font-medium text-gray-900">
-                        Ambil Foto
-                    </h1>
-                    <div>
-                        <video id="video" width="100%" height="auto" autoplay></video>
-                        <button id="capture-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Ambil dan Simpan Foto</button>
-                    </div>
-                    <form id="form-foto" method="POST" action="{{ route('scanQr') }}" enctype="multipart/form-data">
+                    <div id="reader" style="width: 600px" class="mb-4"></div>
+                    <form method="POST" action="{{ route('ScanQrResult') }}">
                         @csrf
-                        <input type="hidden" name="foto" id="foto">
+                        <label for="">Kode QR: <br></label>
+                        <input type="text" name="qr_code_result" id="result" class="w-1/2">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Kirim</button>
                     </form>
-                    <canvas id="canvas" style="display:none;"></canvas>
-                </div>
                 </div>
             </div>
         </div>
+    </div>
+    @include('sweetalert::alert')
+
 </x-app-layout>
 
+
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
 <script>
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const captureBtn = document.getElementById('capture-btn');
-    const formFoto = document.getElementById('form-foto');
+    function onScanSuccess(decodedText, decodedResult) {
+        // handle the scanned code as you like, for example:
+        // console.log(`Code matched = ${decodedText}`, decodedResult);
+        document.getElementById("result").value = decodedText;
+    }
 
-    // Mendapatkan akses ke kamera pengguna
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-            video.srcObject = stream;
-            video.play();
-        })
-        .catch(function(err) {
-            console.error('Gagal mendapatkan akses ke kamera', err);
-        });
+    function onScanFailure(error) {
+        // handle scan failure, usually better to ignore and keep scanning.
+        // for example:
+        console.warn(`Code scan error = ${error}`);
+    }
 
-    // Mengambil foto dari video stream dan menyimpannya di canvas
-    captureBtn.addEventListener('click', function() {
-        const context = canvas.getContext('2d');
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        // Mengambil gambar dari canvas sebagai data URL
-        const foto = canvas.toDataURL('image/png');
-
-        // Menyimpan foto ke input hidden
-        document.getElementById('foto').value = foto;
-
-        // Mengirimkan form secara otomatis setelah foto diambil
-        formFoto.submit();
-    });
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        { fps: 10, qrbox: { width: 250, height: 250 } },
+        /* verbose= */ false
+    );
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 </script>

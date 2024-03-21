@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Divisi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\PengajuanCheckUp;
 use Illuminate\Support\Facades\Auth;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
 use Zxing\QrReader;
-
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 
 
 class DoctorController extends Controller
@@ -44,15 +49,24 @@ class DoctorController extends Controller
     {
         $pengajuan = PengajuanCheckUp::where('id', $id)->first();
 
-        $id_string = $pengajuan->id;
+        $text = $pengajuan->id.' '.$pengajuan->nip.' '.$pengajuan->tglpemeriksaan;
 
-        // Generate QR code and simpan ke dalam folder 'qrcodes'
-        QrCode::format('png')->generate($id_string, public_path('qrcodes/' . $id_string . '.png'));
+        $renderer = new ImageRenderer(
+            new RendererStyle(400),
+            new ImagickImageBackEnd()
+        );
+        $writer = new Writer($renderer);
+        $writer->writeFile($text, $text.'.png');
+
+        // $id_string = $pengajuan->id;
+
+        // // Generate QR code and simpan ke dalam folder 'qrcodes'
+        // QrCode::format('png')->generate($id_string, public_path('qrcodes/' . $id_string . '.png'));
 
 
 
-        // Simpan path ke dalam kolom 'qrcode'
-        $pengajuan->qrcode = 'qrcodes/' . $id_string . '.png';
+        // // Simpan path ke dalam kolom 'qrcode'
+        // $pengajuan->qrcode = 'qrcodes/' . $id_string . '.png';
 
         // Set atribut-atribut lainnya
         $pengajuan->status = 'approved';
@@ -133,5 +147,27 @@ class DoctorController extends Controller
         //     # code...
         // }
 
+    }
+
+    public function ScanQrResult(Request $request)
+    {
+        $dataHariIni = PengajuanCheckUp::where('tglpemeriksaan', date('Y-m-d'))->get();
+        foreach ($dataHariIni as $key => $value) {
+            $text = $value->id . ' ' . $value->nip . ' ' . $value->tglpemeriksaan;
+            $pasien = User::where('nip', $value->nip)->first();
+            // dd($pasien->divisi);
+            $value->pasien = $pasien->name;
+            $value->divisi = $pasien->divisi;
+            if ($text == request('qr_code_result')) {
+                alert()->success('Data ditemukan','pasien ditemukan');
+                return view('DoctorUI.resultPage', compact('value'));
+                # code...
+            } else {
+                # code...
+            }
+
+            # code...
+        }
+        return redirect()->route('scanQrPage')->with('success', 'Pengajuan Telah Disetujui.');
     }
 }
