@@ -48,6 +48,10 @@ class DoctorController extends Controller
     {
         $pengajuan = PengajuanCheckUp::where('id', $id)->first();
 
+        $pengajuan->status = 'approved';
+        $pengajuan->nipdokter = Auth::user()->nip;
+        $pengajuan->tglpemeriksaan = $request->tglpemeriksaan;
+
         $text = $pengajuan->id.' '.$pengajuan->nip.' '.$pengajuan->tglpemeriksaan;
 
         $renderer = new ImageRenderer(
@@ -60,17 +64,7 @@ class DoctorController extends Controller
 
         $writer = new Writer($renderer);
         $writer->writeFile($text, $ruteSimpan);
-
-
-        // $id_string = $pengajuan->id;
-
-        // // Simpan path ke dalam kolom 'qrcode'
-        // $pengajuan->qrcode = 'qrcodes/' . $id_string . '.png';
-
-        // Set atribut-atribut lainnya
-        $pengajuan->status = 'approved';
-        $pengajuan->nipdokter = Auth::user()->nip;
-        $pengajuan->tglpemeriksaan = $request->tglpemeriksaan;
+        $pengajuan->qrcode = $text . '.png';
 
         // Simpan perubahan ke dalam database
         $pengajuan->save();
@@ -168,5 +162,12 @@ class DoctorController extends Controller
             # code...
         }
         return redirect()->route('scanQrPage')->with('success', 'Pengajuan Telah Disetujui.');
+    }
+    public function QrPage(Request $request)
+    { $QR = PengajuanCheckUp::where('qrcode', $request->QR)->first();
+
+        $QR = $QR->qrcode;
+        dd($QR);
+        return view('DoctorUI.QRPage', compact('QR'));
     }
 }

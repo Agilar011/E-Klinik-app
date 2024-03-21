@@ -34,9 +34,19 @@
                         <td class="border px-4 py-2">{{ $item->status }}</td>
                         <td class="border px-4 py-2">
                             @if ($item->qrcode != null)
-                            <img src="{{ asset($item->qrcode) }}" alt="QR Code" class="w-40 h-auto object-cover">
+                            <form method="POST" action="{{ route('ScanQrResult') }}">
+                                @csrf
+                                <input type="hidden" name="qr_code_result" id="result" value="{{ $item->qrcode }}">
+                                <button type="submit">
+                                    <img src="{{ asset('qrcodes/' . $item->qrcode) }}" alt="QR Code" class="w-40 h-auto object-cover">
+                                </button>
+                            </form>
+
+                                {{--
+                            <a href="{{ route('QRPage', ['QR' => $item->qrcode]) }}">
+                            </a> --}}
                             @else
-                            <p>QR Code belum tersedia</p>
+                                <p>QR Code belum tersedia</p>
                             @endif
                         </td>
                     </tr>

@@ -123,6 +123,7 @@ use App\Http\Middleware\EncryptUrlMiddleware;
         Route::get('/scan-qr-code',  [DoctorController::class, 'ScanQrPage'])->name('scanQrPage');
         Route::post('/QrCodeProcessing',  [DoctorController::class, 'ScanQr'])->name('scanQr');
         Route::post('/QrCodeResultProcessing',  [DoctorController::class, 'ScanQrResult'])->name('ScanQrResult');
+        Route::post('/QRPage', [DoctorController::class, 'QrPage'])->name('QRPage');
 
 
     });
