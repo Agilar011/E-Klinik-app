@@ -74,9 +74,7 @@
                                                     <form method="POST" action="{{ route('DeleteUser', $id) }}">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" onclick=""
-                                                            class="text-left w-48 block px-4 py-2 text-sm text-white hover:bg-gray-600">Delete
-                                                            Account</button>
+                                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this account?')" class="text-left w-48 block px-4 py-2 text-sm text-white hover:bg-gray-600">Delete Account</button>
                                                     </form>
                                                 </div>
                                             </x-slot>

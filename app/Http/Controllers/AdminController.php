@@ -112,11 +112,11 @@ class AdminController extends Controller
             'role' => request('role'),
             'password' => $hashedPassword,
         ]);
-        $namaPoli = request('poli');
+        // $namaPoli = request('poli');
         $idPoli = Poli::where('name', request('poli'))->first();
         // dd($idPoli->name);
 
-        if ($namaPoli == $idPoli->name) {
+        if (request('role') == 'dokter') {
             DataPoli::create([
                 'id_dokter' => $user->id,
                 'id_poli' => $idPoli->id,
@@ -124,7 +124,7 @@ class AdminController extends Controller
 
             # code...
         } else {
-            dd('gagal');
+            // dd('gagal');
         }
         // dd($idPoli->name);
         // if (request('role') == 'dokter') {
@@ -208,6 +208,8 @@ class AdminController extends Controller
 
         // Hapus pengguna
         $user->delete();
+
+        alert()->warning('Penghapusan User','Akun user '.$user->name.' telah dihapus');
 
         // Redirect atau berikan respons sesuai kebutuhan Anda
         return redirect()->route('ShowUser')->with('success', 'Akun pengguna berhasil dihapus.');
