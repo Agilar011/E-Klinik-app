@@ -1,15 +1,12 @@
 <x-app-layout>
-    <div class="py-12">
+    <div class="py-6 pt-[90px]">
         <div class="min-w-screen mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-3 lg:p-4 bg-white border-b border-gray-200">
-                    <div class="p-3 lg:p-4 bg-white border-b border-gray-200">
+                    <div class="p-3 lg:p-4 bg-white">
                         <h1 class=" text-2xl font-medium text-gray-900">
                             Selamat Datang Dokter {{ Auth::user()->name }}
                         </h1>
-                        <h3>
-                            Silahkan beri tindakan pada pengajuan yang ada.
-                        </h3>
                     </div>
 
                     <style>
@@ -24,7 +21,6 @@
                         <table class="custom-table min-w-full divide-y divide-gray-200 text-center">
                             <thead class="bg-gray-300">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Pasien</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Divisi</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Keluhan</th>
@@ -36,7 +32,6 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($Pengajuan as $item)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
                                         @php
                                             $user = App\Models\User::where('nip', $item->nip)->first();
                                         @endphp
@@ -54,6 +49,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="mt-6">
+        {{ $Pengajuan->links() }}
+    </div>
                     </div>
                 </div>
             </div>

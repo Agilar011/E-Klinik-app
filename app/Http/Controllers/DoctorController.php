@@ -24,7 +24,9 @@ class DoctorController extends Controller
     }
     public function index()
     {
-        $Pengajuan = PengajuanCheckUp::where('status', 'pending')->get();
+        $Pengajuan = PengajuanCheckUp::where('status', 'pending')
+        ->orderBy('created_at', 'desc') // Urutkan berdasarkan waktu pengajuan dari yang terbaru
+        ->paginate(5);
 
         return view('DoctorUI.index', compact('Pengajuan'));
     }
