@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="min-h-screen mx-auto sm:px-6 lg:px-8">
-            <div class="bg-yellow-200 overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-10 lg:p-10 bg-gray-200 border-b border-gray-200 justify-center ">
-                    <div class="bg-white border-b border-gray-200 sm:rounded-lg  m-2">
+    <div class="py-12 pt-[80px]">
+        <div class="mx-auto sm:px-6 lg:px-8">
+            <div class="overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="p-5 lg:p-5 bg-gray-200 border-b border-gray-200 justify-center ">
+                    <div class="bg-white border-b border-gray-200 sm:rounded-lg">
                         <div class="flex p-5 my-auto gap-10 justify-between">
                             <div class="text-2xl font-medium text-gray-900">
                                 Selamat Datang Admin {{ Auth::user()->name }}
@@ -29,7 +29,6 @@
 
                     <table class="custom-table w-full text-center m-2">
                         <thead class="bg-gray-300 mb-[10px]">
-                            <th class="py-2">No</th>
                             <th class="py-2">NIP</th>
                             <th class="py-2">Nama Pasien</th>
                             <th class="py-2">Divisi</th>
@@ -39,12 +38,12 @@
                         </thead>
 
                         <tbody>
+
                             @foreach ($user as $key => $item)
                                 @php
                                     $id = App\Models\User::where('id', $item->id)->first();
                                 @endphp
                                 <tr class="m-2">
-                                    <td class="bg-white py-2 px-4">{{ $key + 1 }}</td>
                                     <td class="bg-white py-2 px-4">{{ $item->nip }} </td>
                                     <td class="bg-white py-2 px-4">{{ $item->name }}</td>
                                     <td class="bg-white py-2 px-4">{{ $item->divisi }}</td>
@@ -86,11 +85,18 @@
                                 </tr>
                             @endforeach
                         </tbody>
+
                     </table>
+                    <div class="">
+                        {{ $user->links() }}
+                    </div>
+
                     <a href="{{ route('CreateUserPage') }}"><button
-                            class="bg-blue-400 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-blue-600  m-2">Create
+                            class="bg-blue-400 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-blue-600">Create
                             User</button>
                     </a>
+
+
 
 
 

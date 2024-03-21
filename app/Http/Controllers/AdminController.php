@@ -20,7 +20,7 @@ class AdminController extends Controller
 {
     public function ShowUser()
     {
-        $user = User::all();
+        $user = User::paginate(5);
         // Alert::success('Success Title', 'Success Message');
         return view('AdminUI.UserPage', compact('user'));
 
@@ -68,19 +68,19 @@ class AdminController extends Controller
 
     }
 
-    public function ShowDivisi()
-    {
-        $divisi = Divisi::all();
+    public function showDivisi()
+{
+    $divisi = Divisi::paginate(5);
 
-        return view('AdminUI.DivisiPage', compact('divisi'));
+    return view('AdminUI.DivisiPage', compact('divisi'));
+}
 
-    }
 
     public function searchDivisi(Request $request)
     {
         $query = $request->input('query');
 
-        $divisi = Divisi::where('name', 'like', "%$query%")->get();
+        $divisi = Divisi::where('name', 'like', "%$query%")->paginate(5);
 
         return view('AdminUI.DivisiPage', compact('divisi'));
     }

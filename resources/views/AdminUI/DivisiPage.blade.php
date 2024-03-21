@@ -1,10 +1,12 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="min-h-screen mx-auto sm:px-6 lg:px-8">
-            <div class="bg-gray-400 overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-10 lg:p-10 bg-gray-200 border-b border-gray-200 justify-center ">
+    <div class="py-4 pt-[80px]">
+        <div class="mx-auto sm:px-6 lg:px-8">
+            <div class="bg-gray-400 overflow-hidden shadow-xl sm:rounded-lg"
+            {{-- style="max-height: calc(100vh * 2 / 3);" --}}
+            >
+                <div class="p-4 lg:p-4 bg-gray-200 border-b border-gray-200 justify-center ">
                     <div class="bg-white border-b border-gray-200 sm:rounded-lg ">
-                        <div class="flex p-5 my-auto gap-10 justify-between">
+                        <div class="flex p-5 gap-10 justify-between">
                             <div class="text-2xl font-medium text-gray-900">
                                 Selamat Datang Admin {{ Auth::user()->name }}
                             </div>
@@ -29,15 +31,22 @@
 
                     <table class="custom-table w-full text-center mt-2 mb-2 ">
                         <thead class="bg-gray-300 mb-[10px]">
-                            <th class="px-4 py-2">No</th>
                             <th class="px-4 py-2">Divisi</th>
                             <th class="px-4 py-2">Action</th>
                         </thead>
 
                         <tbody>
+                            {{-- Showing {{ $divisi->firstItem() }} to {{ $divisi->lastItem() }} of {{ $divisi->total() }} entries --}}
+
+                            @php
+                                $counter = 0;
+                            @endphp
                             @foreach ($divisi as $key => $item)
+                            @php
+                            $counter++;
+
+                            @endphp
                                 <tr>
-                                    <td class="bg-white py-2 px-4">{{ $key + 1 }}</td>
                                     <td class="bg-white py-2 px-4">{{ $item->name }}</td>
                                     <td class="bg-white py-2 px-4">
                                         <x-dropdown align="right" width="48">
@@ -61,9 +70,13 @@
                                     </td>
                                 </tr>
                             @endforeach
+
                         </tbody>
                     </table>
-                    <a href="{{ route('CreateDivisiPage') }}"><button class="bg-blue-400 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-blue-600">Create User</button>
+                    <div class="bg-blue">
+                        {{ $divisi->links() }}
+                      </div>
+\                    <a href="{{ route('CreateDivisiPage') }}"><button class="bg-blue-400 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-blue-600">Create User</button>
                     </a>
                 </div>
             </div>

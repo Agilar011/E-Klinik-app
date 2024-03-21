@@ -90,7 +90,7 @@
                                 Back
                             </button>
                             <button type="submit"
-                                class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
+                                class="bg-red-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
                                 Tolak Pengajuan
                             </button>
                         </div>

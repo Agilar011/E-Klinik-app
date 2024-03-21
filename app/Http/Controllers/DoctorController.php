@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\PengajuanCheckUp;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use NunoMaduro\Collision\Adapters\Phpunit\Style;
 use Zxing\QrReader;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
@@ -164,10 +165,14 @@ class DoctorController extends Controller
         return redirect()->route('scanQrPage')->with('success', 'Pengajuan Telah Disetujui.');
     }
     public function QrPage(Request $request)
-    { $QR = PengajuanCheckUp::where('qrcode', $request->QR)->first();
+    // dd($request);
+    {
+        // dd($request->qr_code_result);
+        $QR = PengajuanCheckUp::where('qrcode', $request->qr_code_result)->first();
 
         $QR = $QR->qrcode;
-        dd($QR);
         return view('DoctorUI.QRPage', compact('QR'));
     }
 }
+
+
