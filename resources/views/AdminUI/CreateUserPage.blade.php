@@ -10,7 +10,7 @@
             @include('sweetalert::alert')
             @csrf
             <div>
-                <x-label for="nip" value="{{ __('Nip') }}" />
+                <x-label for="nip" value="{{ __('Nip') }}" />  
                 <x-input id="nip" class="block mt-1 w-full" type="text" name="nip" :value="old('nip')" required
                     autofocus autocomplete="nip" />
             </div>

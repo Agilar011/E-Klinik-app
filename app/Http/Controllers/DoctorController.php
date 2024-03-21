@@ -47,7 +47,7 @@ class DoctorController extends Controller
         $id_string = $pengajuan->id;
 
         // Generate QR code and simpan ke dalam folder 'qrcodes'
-        QrCode::format('png')->generate($id_string, public_path('qrcodes/' . $id_string . '.png'));
+        // QrCode::format('png')->generate($id_string, public_path('qrcodes/' . $id_string . '.png'));
 
 
 

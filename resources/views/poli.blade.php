@@ -24,6 +24,7 @@
             border-width: 0;
             border-style: solid;
             border-color: #e5e7eb
+            
         }
 
         ::after,
