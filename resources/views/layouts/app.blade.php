@@ -46,7 +46,7 @@
             </main>
         </div>
                 @elseif (auth()->user()->role === 'user')
-                <div class="min-h-screen bg-gray-100"
+                <div class="min-h-screen"
                 style="background-image: url('/img/User.jpg'); background-repeat: no-repeat; background-size: cover;">
 
                     @livewire('navigation-menu')

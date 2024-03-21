@@ -64,3 +64,5 @@
         </button>
     </div>
 </div>
+@include('sweetalert::alert')
+

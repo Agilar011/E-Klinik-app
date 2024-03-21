@@ -57,6 +57,9 @@ class UserController extends Controller
             $pengajuan->tglpemeriksaan = $request->tglpemeriksaan;
         }
         $pengajuan->save();
+        alert()->success('Pengajuan Telah Dikirim','Pengajuan kesehatan anda telah tercatat');
+
+
 
 
         // Redirect pengguna kembali ke halaman yang sesuai

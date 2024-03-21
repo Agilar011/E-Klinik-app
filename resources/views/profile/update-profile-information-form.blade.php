@@ -84,7 +84,7 @@
 
         <div class="col-span-6 sm:col-span-4">
             <x-label for="Divisi" value="{{ __('Divisi') }}" />
-            <x-input id="divisi" type="text" class="mt-1 block w-full" wire:model="state.divisi" required autocomplete="divisi" />
+            <x-input id="divisi" type="text" class="mt-1 block w-full" wire:model="state.divisi" required autocomplete="divisi" readonly/>
             <x-input-error for="divisi" class="mt-2" />
         </div>
 
