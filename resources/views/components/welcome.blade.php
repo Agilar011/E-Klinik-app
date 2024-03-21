@@ -89,7 +89,7 @@
             </h2>
         </div>
 
-        <p class="mt-4 text-gray-500 text-sm leading-relaxed">
+        <p class="mt-4 text-gray-500 text-sm leading-relaxed font-semibold">
             Authentication and registration views are included with Laravel Jetstream, as well as support for user email verification and resetting forgotten passwords. So, you're free to get started with what matters most: building your application.
         </p>
     </div>

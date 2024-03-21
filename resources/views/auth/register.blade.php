@@ -8,6 +8,10 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
+            <div>
+                <x-label for="nip" value="{{ __('Nip') }}" />
+                <x-input id="nip" class="block mt-1 w-full" type="text" name="nip" :value="old('nip')" required autofocus autocomplete="nip" />
+            </div>
 
             <div>
                 <x-label for="name" value="{{ __('Name') }}" />
@@ -15,19 +19,30 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                <x-label for="divisi" value="{{ __('Divisi') }}" />
+                <x-input id="divisi" class="block mt-1 w-full" type="text" name="divisi" :value="old('divisi')" required autocomplete="divisi" />
             </div>
 
             <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <x-label for="role" value="{{ __('role') }}" />
+                <x-input id="role" class="block mt-1 w-full" type="text" name="role" :value="old('role')"  autocomplete="role" />
             </div>
 
             <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <x-label for="tanggal_lahir" value="{{ __('Tanggal Lahir') }}" />
+                <x-input id="tanggal_lahir" class="block mt-1 w-full" type="date" name="tanggal_lahir" required autocomplete="tanggal_lahir" />
             </div>
+
+            <div class="mt-4">
+                <x-label for="tinggi_badan" value="{{ __('tinggi_badan') }}" />
+                <x-input id="tinggi_badan" class="block mt-1 w-full" type="number" name="tinggi_badan" :value="old('tinggi_badan')"  autocomplete="tinggi_badan" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="berat_badan" value="{{ __('berat_badan') }}" />
+                <x-input id="berat_badan" class="block mt-1 w-full" type="number" name="berat_badan" :value="old('berat_badan')"  autocomplete="berat_badan" />
+
+
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
@@ -54,6 +69,9 @@
                 <x-button class="ms-4">
                     {{ __('Register') }}
                 </x-button>
+                <button type="submit"
+                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                            Kirim Pengajuan Pemeriksaan </button>
             </div>
         </form>
     </x-authentication-card>

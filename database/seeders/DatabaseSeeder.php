@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             PoliSeeder::class,
-            PengajuanCheckUpSeeder::class]);
+            PengajuanCheckUpSeeder::class,
+            DataPoliSeeder::class,
+            DivisiSeeder::class,]);
     }
 }

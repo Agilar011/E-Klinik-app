@@ -38,21 +38,21 @@
 
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Tanggal Lahir" class="font-medium text-gray-700">Tanggal Lahir:</label>
-                                <input type="date" name="Tanggal Lahir" id="Tanggal Lahir"
+                                <label for="tanggal_lahir" class="font-medium text-gray-700">Tanggal Lahir:</label>
+                                <input type="date" name="tanggal_lahir" id="tanggal_lahir"
                                     value="{{ $user->tanggal_lahir }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Tinggi Badan" class="font-medium text-gray-700">Tinggi Badan:</label>
-                                <input type="text" name="Tinggi Badan" id="Tinggi Badan"
+                                <label for="tinggi_badan" class="font-medium text-gray-700">Tinggi Badan:</label>
+                                <input type="text" name="tinggi_badan" id="tinggi_badan"
                                     value="{{ $user->tinggi_badan }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="Berat Badan" class="font-medium text-gray-700">Berat Badan:</label>
+                                <label for="berat_badan" class="font-medium text-gray-700">Berat Badan:</label>
                                 <input type="text" name="Berat Badan" id="Berat Badan"
                                     value="{{ $user->berat_badan }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
@@ -62,29 +62,23 @@
 
                             <div class="flex flex-col space-y-2">
                                 <label for="role">Role:</label>
-<select name="role" id="role">
-    <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
-    <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
-    <option value="doctor" {{ $user->role === 'doctor' ? 'selected' : '' }}>Doctor</option>
+                                <select name="role" id="role">
+                                    <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
+                                    <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin
+                                    </option>
+                                    <option value="dokter" {{ $user->role === 'dokter' ? 'selected' : '' }}>Doctor
+                                    </option>
 
-    <!-- Tambahkan opsi lain sesuai kebutuhan -->
-</select>
+                                    <!-- Tambahkan opsi lain sesuai kebutuhan -->
+                                </select>
                             </div>
                         </div>
 
                         <button type="submit"
-                            style="background-color: #4CAF50; /* Green */
-                    border: none;
-                    color: white;
-                    padding: 15px 32px;
-                    text-align: center;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 16px;
-                    margin: 4px 2px;
-                    cursor: pointer;
-                    border-radius: 10px;">
-                            Simpan Perubahan </button>
+                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
+                            Simpan Perubahan
+                        </button>
+
                 </div>
             </div>
         </div>

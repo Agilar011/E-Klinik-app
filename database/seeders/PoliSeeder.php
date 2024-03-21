@@ -15,9 +15,9 @@ class PoliSeeder extends Seeder
     public function run()
     {
         // Buat beberapa data poli
-        Poli::create(['name' => 'Poli Umum']);
-        Poli::create(['name' => 'Poli Gigi']);
-        Poli::create(['name' => 'Poli Mata']);
+        Poli::create(['name' => 'Umum']);   
+        Poli::create(['name' => 'Gigi']);
+        Poli::create(['name' => 'Mata']);
         // Tambahkan data poli lainnya di sini jika diperlukan
     }
 }
