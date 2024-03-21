@@ -6,34 +6,20 @@
                     <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
                         {{-- <x-application-logo class="block h-12 w-auto" /> --}}
 
-                        <h1 class="text-center text-2xl font-medium text-gray-900">
-                            Menuju Sehat Bersama E-Klinik PT. PAL Indonesia
+                        <h1 class="mt-8 text-2xl font-medium text-gray-900">
+                            Pilih Poli yang Anda Inginkan
                         </h1>
-
-                        <p class="text-center font-medium">
-                            E-Klinik PT.PAL berdedikasi untuk membantu memperoleh fasilitas dan pelayanan kesehatan yang baik
-                        </p>
-
-                        {{-- <p class="mt-6 text-gray-500 leading-relaxed">
-                            Laravel Jetstream provides a beautiful, robust starting point for your next Laravel application. Laravel is designed
-                            to help you build your application using a development environment that is simple, powerful, and enjoyable. We believe
-                            you should love expressing your creativity through programming, so we have spent time carefully crafting the Laravel
-                            ecosystem to be a breath of fresh air. We hope you love it.
-                        </p> --}}
                     </div>
 
                     <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 p-6 lg:p-8">
                         @foreach ($polis as $item)
                         <a href="{{ route('poli.show', $item->name) }}"><div>
 
-                            <div class="bg-white-500 hover:bg-gray-600 text-black font-bold py-2 px-4 rounded">
+                            <div class="bg-white-500 hover:bg-gray-600 text-black font-bold py-2 px-4 rounded border border-black text-center">
                                 {{ $item->name }}
-
-
-
                             </div>
-
-                        </div></a>
+                        </div>
+                    </a>
                                     </a>
 
                         @endforeach

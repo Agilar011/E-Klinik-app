@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-blue-400">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -32,13 +32,14 @@
                             </x-nav-link>
                         </div>
 
-                    @else
-
+                    @elseif (Auth::user()->role == 'dokter')
+                    <x-nav-link href="{{ route('scanQrPage') }}" :active="request()->routeIs('scanQrPage')">
+                        {{ __('Scan QR') }}
+                    </x-nav-link>
                     @endif
 
                 </div>
             </div>
-
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())

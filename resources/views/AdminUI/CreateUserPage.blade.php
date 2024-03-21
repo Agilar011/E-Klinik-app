@@ -57,6 +57,10 @@
                 <x-input id="berat_badan" class="block mt-1 w-full" type="number" name="berat_badan" :value="old('berat_badan')"
                     autocomplete="berat_badan" />
             </div>
+            {{-- @php
+
+                $polis = Poli::all();
+            @endphp --}}
 
             <div id="FormPoli" name="FormPoli" class="mt-4">
                 <x-label for="poli" value="{{ __('Poli') }}" />

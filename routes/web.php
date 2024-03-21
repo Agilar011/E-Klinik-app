@@ -66,8 +66,15 @@ use App\Http\Middleware\EncryptUrlMiddleware;
     Route::middleware('role:admin')->group(function () {
 
         Route::get('/DaftarUser', [AdminController::class, 'ShowUser'])->name('ShowUser');
+        Route::get('/DaftarUser/search', [AdminController::class, 'searchUser'])->name('searchUser');
+
+
         Route::get('/DaftarPoli', [AdminController::class, 'ShowPoli'])->name('ShowPoli');
+        Route::get('/DaftarPoli/search', [AdminController::class, 'searchPoli'])->name('searchPoli');
+
+
         Route::get('/DaftarDivisi', [AdminController::class, 'ShowDivisi'])->name('ShowDivisi');
+        Route::get('/DaftarDivisi/search', [AdminController::class, 'searchDivisi'])->name('searchDivisi');
 
         // Route::get('/register', [AdminController::class, 'CreateUser'])->name('CreateUser')->middleware('guest');
         Route::get('/CreateUserPage', [AdminController::class, 'CreateUserPage'])->name('CreateUserPage');
@@ -115,5 +122,7 @@ use App\Http\Middleware\EncryptUrlMiddleware;
 
         Route::get('/scan-qr-code',  [DoctorController::class, 'ScanQrPage'])->name('scanQrPage');
         Route::post('/QrCodeProcessing',  [DoctorController::class, 'ScanQr'])->name('scanQr');
+        Route::post('/QrCodeResultProcessing',  [DoctorController::class, 'ScanQrResult'])->name('ScanQrResult');
+        
 
     });
