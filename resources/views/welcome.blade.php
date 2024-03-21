@@ -104,13 +104,6 @@
 </html>
 
 <style>
-    *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: .3s ease-in-out;
-    }
-
     html{
         font-family: 'inter', 'Times New Roman', Times, serif;
         background-image: linear-gradient(rgba(252, 252, 252, 0.6), rgba(119, 191, 249, 0.6)),url(img/KapalRS3.jpg);
@@ -131,27 +124,26 @@
         align-items: center;
         justify-content: center;
         height: 100vh; /* Mengisi tinggi layar */
-        margin-top: 100px;
     }
 
     #home .container {
+        width: 100%;
         text-align: center; /* Mengatur teks menjadi ditengah */
+        padding-left: 100px;
+        padding-right: 100px;
     }
 
     #home .container img {
-        margin-top: -200px;
-        margin-bottom: 50px;
-        margin-left: auto; /* Mengatur margin kiri menjadi auto */
-        margin-right: auto; /* Mengatur margin kanan menjadi auto */
-        display: block; /* Memastikan gambar berada di tengah */
+        display: inline-block; /* Memastikan gambar berada di tengah */
+        padding-bottom: 50px;
     }
 
     #home .container .bor {
-        border-width: 1px;
+        border: solid;
         border-color: #000000;
         background-image: linear-gradient(rgba(252, 252, 252, 0.6), rgba(252, 252, 252, 0.6));
         box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.6);
-        border-radius: 8px; /* Sesuaikan dengan nilai yang diinginkan */
+        border-radius: 8px;
         outline: 0;
     }
 
@@ -164,6 +156,7 @@
     }
 
     #home .container .paragraf2 {
+        justify-items: center;
         font-size: 25px;
         text-align: center;
         padding: 4px;
