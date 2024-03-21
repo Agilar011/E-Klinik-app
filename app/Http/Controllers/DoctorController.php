@@ -45,6 +45,8 @@ class DoctorController extends Controller
             'catatan_dokter' => request('catatan_dokter'),
             'status' => 'rejected'
         ]);
+        alert()->warning('Penolakan Pengajuan','Pengajuan oleh user dengan nip '.$pengajuan->nip.' telah ditolak');
+
         return redirect()->route('Doctor.index')->with('success', 'Pengajuan Telah Disetujui.');
     }
     public function SetujuiPengajuan($id, Request $request)
@@ -71,8 +73,10 @@ class DoctorController extends Controller
 
         // Simpan perubahan ke dalam database
         $pengajuan->save();
+        alert()->success('Pengajuan Diterima','Pengajuan oleh user dengan nip '.$pengajuan->nip.' telah disetujui');
 
-        return redirect()->route('dashboard')->with('success', 'Pengajuan Telah Disetujui.');
+
+        return redirect()->route('Doctor.index')->with('success', 'Pengajuan Telah Disetujui.');
     }
 
     public function ScanQrPage()

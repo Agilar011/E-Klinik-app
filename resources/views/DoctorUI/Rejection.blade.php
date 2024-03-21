@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="py-12">
+    <div class="py-12 pt-[90px]">
         <div class="min-w-screen mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                    <h1 class="mt-8 text-2xl font-medium text-gray-900">
+                <div class="p-3 lg:p-4 bg-white border-b border-gray-200">
+                    <h1 class="text-2xl font-medium text-gray-900">
                         Lengkapi Data Persetujuan Yang Diperlukan
                     </h1>
 
@@ -74,7 +74,8 @@
                                     Pasien:</label>
                                 <input type="text" name="catatan_dokter" id="catatan_dokter"
                                     value="{{ $pengajuan->catatan_dokter }}"
-                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500">
+                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
+                                    required>
 
                             </div>
 
@@ -90,7 +91,7 @@
                                 Back
                             </button>
                             <button type="submit"
-                                class="bg-red-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-green-600">
+                                class="bg-red-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-red-800">
                                 Tolak Pengajuan
                             </button>
                         </div>
