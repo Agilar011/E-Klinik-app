@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\PengajuanCheckUp;
 use Illuminate\Support\Facades\Auth;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use SimpleSoftwareIO\QrChttps://github.com/Agilar011/E-Klinik-app/pull/11/conflict?name=app%252FHttp%252FControllers%252FDoctorController.php&ancestor_oid=dc03015da6fe4602d4d29be86ef509623f452e1e&base_oid=f4080291880d6878b090b8f54be9897c29d372ff&head_oid=cdc57fa38c3164a5cbbe0065f6bda7cff436f606ode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
 use Zxing\QrReader;
 use BaconQrCode\Renderer\ImageRenderer;
@@ -59,11 +59,6 @@ class DoctorController extends Controller
         $writer->writeFile($text, $text.'.png');
 
         // $id_string = $pengajuan->id;
-
-        // // Generate QR code and simpan ke dalam folder 'qrcodes'
-        // QrCode::format('png')->generate($id_string, public_path('qrcodes/' . $id_string . '.png'));
-
-
 
         // // Simpan path ke dalam kolom 'qrcode'
         // $pengajuan->qrcode = 'qrcodes/' . $id_string . '.png';
