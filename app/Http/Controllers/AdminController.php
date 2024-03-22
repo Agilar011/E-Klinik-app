@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Divisi;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 
 
 use RealRashid\SweetAlert\Facades\Alert;
@@ -13,8 +14,6 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Poli;
 use App\Models\DataPoli;
-
-
 
 class AdminController extends Controller
 {
@@ -31,11 +30,33 @@ class AdminController extends Controller
         $query = $request->input('query');
 
         $user = User::where('name', 'like', "%$query%")
-                     ->orWhere('divisi', 'like', "%$query%")
-                     ->orWhere('role', 'like', "%$query%")
-                     ->get();
-
+            ->orWhere('divisi', 'like', "%$query%")
+            ->orWhere('role', 'like', "%$query%")
+            ->paginate(5);
         return view('AdminUI.UserPage', compact('user'));
+    }
+
+    public function searchPoli(Request $request)
+    {
+        $query = $request->input('query');
+        $dataPolis = DataPoli::join('polis', 'data_polis.id_poli', '=', 'polis.id')
+        ->join('users', 'data_polis.id_dokter', '=', 'users.id')
+        ->select('data_polis.*', 'users.name as user_name', 'polis.name as poli_name')
+        ->get();
+
+    $polisWithoutDoctor = Poli::whereDoesntHave('datapoli')->get();
+    $polisWithoutDoctor = Poli::where('name', 'like', "%$query%")
+            ->get();
+    $doctorWithoutPoli = User::whereDoesntHave('datapoli')
+        ->where('role', 'dokter')
+        ->get();
+
+
+            $display = false;
+
+        // return view('AdminUI.PoliPage', compact('dataPolis'));
+        return view('AdminUI.PoliPage', compact('dataPolis', 'polisWithoutDoctor', 'doctorWithoutPoli','display'));
+
 
     }
 
@@ -51,29 +72,17 @@ class AdminController extends Controller
             ->where('role', 'dokter')
             ->get();
 
-        return view('AdminUI.PoliPage', compact('dataPolis', 'polisWithoutDoctor', 'doctorWithoutPoli'));
+            $display = true;
+
+        return view('AdminUI.PoliPage', compact('dataPolis', 'polisWithoutDoctor', 'doctorWithoutPoli','display'));
 
     }
-
-    public function searchPoli(Request $request)
-    {
-        $query = $request->input('query');
-
-        $user = User::where('name', 'like', "%$query%")
-                     ->orWhere('divisi', 'like', "%$query%")
-                     ->orWhere('role', 'like', "%$query%")
-                     ->get();
-
-        return view('AdminUI.UserPage', compact('user'));
-
-    }
-
     public function showDivisi()
-{
-    $divisi = Divisi::paginate(5);
+    {
+        $divisi = Divisi::paginate(5);
 
-    return view('AdminUI.DivisiPage', compact('divisi'));
-}
+        return view('AdminUI.DivisiPage', compact('divisi'));
+    }
 
 
     public function searchDivisi(Request $request)
@@ -126,14 +135,8 @@ class AdminController extends Controller
         } else {
             // dd('gagal');
         }
-        // dd($idPoli->name);
-        // if (request('role') == 'dokter') {
-        //     DataPoli::create([
-        //         'user_id' => request('nip'),
-        //         'poli_id' => $idPoli->id,
-        //     ]);
-        //     # code...
-        // }
+
+
         $name = request('name');
         // Alert
         alert()->success('Selamat', 'User ' . $name . ' Telah Dibuat');
@@ -145,7 +148,7 @@ class AdminController extends Controller
         $polis = Poli::all();
 
 
-        return view('AdminUI.UpdateUSerPage', compact('user','polis'));
+        return view('AdminUI.UpdateUSerPage', compact('user', 'polis'));
 
     }
     public function UpdateUser($id)
@@ -209,7 +212,7 @@ class AdminController extends Controller
         // Hapus pengguna
         $user->delete();
 
-        alert()->warning('Penghapusan User','Akun user '.$user->name.' telah dihapus');
+        alert()->warning('Penghapusan User', 'Akun user ' . $user->name . ' telah dihapus');
 
         // Redirect atau berikan respons sesuai kebutuhan Anda
         return redirect()->route('ShowUser')->with('success', 'Akun pengguna berhasil dihapus.');
@@ -245,7 +248,7 @@ class AdminController extends Controller
 
 
 
-        return view('AdminUI.UpdatePoliPage', compact('datapoli', 'poli', 'dokter','polis','dokters'));
+        return view('AdminUI.UpdatePoliPage', compact('datapoli', 'poli', 'dokter', 'polis', 'dokters'));
 
     }
     public function UpdatePoli($id)
@@ -262,17 +265,16 @@ class AdminController extends Controller
 
         if ($dataPoli->id_dokter == $dokter->id) {
 
-             $dataPoli->update([
-            'id_poli' => $poli->id,
-            'id_dokter' => $dokter->id,
+            $dataPoli->update([
+                'id_poli' => $poli->id,
+                'id_dokter' => $dokter->id,
 
-        ]);
-        // Alert::success('Hore!', 'Poli Created Successfully');
-        alert()->success('Selamat', 'Data Poli telah diganti menjadi poli: ' . request('poli'));
+            ]);
+            // Alert::success('Hore!', 'Poli Created Successfully');
+            alert()->success('Selamat', 'Data Poli telah diganti menjadi poli: ' . request('poli'));
 
-        return redirect()->route('ShowPoli');
-        }
-        else if ($dataPoli->id_poli == $poli->id) {
+            return redirect()->route('ShowPoli');
+        } else if ($dataPoli->id_poli == $poli->id) {
 
             $dataPoli->update([
                 'id_poli' => $poli->id,
@@ -280,9 +282,9 @@ class AdminController extends Controller
 
             ]);
 
-            alert()->success('Selamat', 'Dokter dari Poli '. $poli->name . ' telah diganti menjadi Dokter: ' . request('dokter'));
+            alert()->success('Selamat', 'Dokter dari Poli ' . $poli->name . ' telah diganti menjadi Dokter: ' . request('dokter'));
 
-        return redirect()->route('ShowPoli');
+            return redirect()->route('ShowPoli');
             # code...
         } else {
             // Panggil kembali fungsi 'UpdatePoli' dengan parameter '$id'
@@ -292,7 +294,7 @@ class AdminController extends Controller
 
             ]);
 
-            alert()->success('Selamat', 'Data Poli telah diubah menjadi Dokter: '. $dokter->name. ' dengan poli: '.$poli->name);
+            alert()->success('Selamat', 'Data Poli telah diubah menjadi Dokter: ' . $dokter->name . ' dengan poli: ' . $poli->name);
             return redirect()->route('ShowPoli');
         }
 
@@ -393,8 +395,8 @@ class AdminController extends Controller
         // Tampilkan poli yang dihapus
 
 
-        // alert()->question('Title','Lorem Lorem Lorem');
-        // alert()->success('Hore!', 'Post Deleted Successfully');
+        alert()->warning('Penghapusan Poli', 'Poli ' . $Poli->nama . ' telah dihapus');
+
 
 
 
@@ -403,9 +405,15 @@ class AdminController extends Controller
         return redirect()->route('ShowPoli')->with('success', 'Akun pengguna berhasil dihapus.');
     }
 
-    public function deleteDataPoli($id){
+    public function deleteDataPoli($id)
+    {
         $dataPoli = DataPoli::findOrFail($id);
+        $dokter = User::find($dataPoli->id_dokter)->first();
+        $Poli = Poli::findOrFail($dataPoli->id_poli);
+
         $dataPoli->delete();
+
+        alert()->warning('Penghapusan Relasi Poli', 'Relasi Dokter ' . $dokter->name . ' dengan poli ' . $Poli->nama . ' telah dihapus');
 
         return redirect()->route('ShowPoli')->with('success', 'Akun pengguna berhasil dihapus.');
     }
@@ -429,7 +437,7 @@ class AdminController extends Controller
         // Alert::success('Hore!', 'Poli Created Successfully');
         alert()->success('Selamat', 'Divisi ' . request('name') . ' telah dibuat');
 
-        return redirect()->route('ShowUser');
+        return redirect()->route('ShowDivisi');
 
 
     }
@@ -460,6 +468,9 @@ class AdminController extends Controller
     {
         $divisi = Divisi::findOrFail($id);
         $divisi->delete();
+
+        alert()->warning('Penghapusan Divisi', 'Divisi ' . $divisi->name . ' telah dihapus');
+
 
         return redirect()->route('ShowDivisi');
 

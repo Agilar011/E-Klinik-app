@@ -85,9 +85,12 @@
                         </tbody>
 
                     </table>
-                    <div class="">
-                        {{ $user->links() }}
-                    </div>
+                    @if ($user instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                    {{ $user->links() }}
+                @endif
+
+
+
 
                     <a href="{{ route('CreateUserPage') }}"><button
                             class="bg-blue-400 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-blue-600">Create

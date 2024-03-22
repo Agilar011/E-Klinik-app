@@ -2,7 +2,6 @@
     <div class="py-4 pt-[80px]">
         <div class="mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray-400 overflow-hidden shadow-xl sm:rounded-lg"
-            {{-- style="max-height: calc(100vh * 2 / 3);" --}}
             >
                 <div class="p-4 lg:p-4 bg-gray-200 border-b border-gray-200 justify-center ">
                     <div class="bg-white border-b border-gray-200 sm:rounded-lg ">
@@ -14,7 +13,7 @@
                             <div class="flex items-center">
                                 <form action="{{ route('searchDivisi') }}" method="GET" class="flex">
                                     <input type="text" name="query" placeholder="Search..." class="border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300">
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
+                                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
                                 </form>
                             </div>
                         </div>
@@ -62,7 +61,9 @@
                                             <form method="POST" action="{{ route('DeleteDivisi', $item->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-left w-48 block px-4 py-2 text-sm text-white hover:bg-gray-600">Delete Divisi</button>
+                                                <button type="submit"
+                                                onclick="return confirm('Are you sure you want to delete this?')"
+                                                class="text-left w-48 block px-4 py-2 text-sm text-white hover:bg-gray-600">Delete Divisi</button>
                                             </form>
                                             </div>
                                         </x-slot>

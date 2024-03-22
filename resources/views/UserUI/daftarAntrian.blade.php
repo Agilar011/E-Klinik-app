@@ -11,6 +11,9 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
+        @vite('resources/css/app.css')
+
+
 
 
         <!-- Styles -->
@@ -19,26 +22,23 @@
         </style>
     </head>
 
-    <body class="antialiased">
+    <body class="antialiased font-sans">
 
         <nav class="bg-white shadow-md sticky top-0 z-50">
             <div class="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-14 rounded-md">
                     <div class="flex">
                         <div class="flex-shrink-0 flex items-center">
-                            <a href="/">
-                                <div class="flex-shrink-0">
-                                    <img class="h-7 w-100" src="https://www.pal.co.id/wp-content/uploads/2020/07/BUMN-PAL-R1.png" alt="">
-                                    <span align="left"></span>
-                                </div>
-                            </a>
-
+                            <div class="flex-shrink-0">
+                                <img class="h-7 w-100" src="https://www.pal.co.id/wp-content/uploads/2020/07/BUMN-PAL-R1.png" alt="">
+                                <span align="left"></span>
+                            </div>
                         </div>
                     </div>
 
 
                     <div class="hidden md:flex md:items-center md:space-x-6">
-                        <a href="/" class="text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Home </a>
+                        <a href="#" class="text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Home </a>
                         <div class="container mx-auto">
                             <!-- Dropdown with dividers -->
                             <div class="relative inline-block text-right">
@@ -52,27 +52,23 @@
                               </div>
 
                               <!-- Dropdown menu with dividers -->
-                              <div class="absolute right-0 w-38 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-left" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" style="display: none;" id="dropdown-menu" style="font-family: sans-serif">
+                              <div class="absolute right-0 w-38 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" style="display: none;" id="dropdown-menu" style="font-family: sans-serif">
                                 <div class="py-1" role="none">
                                   <!-- Menu items with dividers -->
-                                  @php
-                                        $polis = \App\Models\Poli::all();
-                                  @endphp
-                                  @foreach ($polis as $item)
-
-                                  <a href="{{ route('daftarAntrian', $item->name) }}"
-                                  class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" style="font-family: sans-serif">Poli {{ $item->name }}</a>
-
-                                  @endforeach
+                                  <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" style="font-family: sans-serif">Poli Umum</a>
+                                  <a href="#" class="text-gray-700 block px-4 py-2 text-sm border-t border-gray-200" role="menuitem" tabindex="-1" id="menu-item-1" style="font-family: sans-serif">Poli Mata</a>
                                 </div>
                               </div>
                         </div>
                         <a href="https://www.pal.co.id/" class="ml-3 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">About Us</a>
+                        <a href="#" class="ml-4 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Information</a>
                         <a href="#" class="ml-4 mr-5 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Contact</a>
                         <a href="{{ route('login') }}" class="right-0 inline-flex items-center justify-center px-3 py-1 border border-transparent rounded-md shadow-sm text-white bg-blue-400 font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" style="font-family: sans-serif">Log In</a>
                     </div>
                 </div>
             </div>
+        </div>
+
         </nav>
 
         <script>
@@ -91,17 +87,56 @@
         </script>
 
         <div id="home">
-            <div class="container" style="flex-direction: column;">
-                <img src="img/pal-logo.png" width="400px">
-                <div class="bor">
-                    <p class="paragraf1">
-                        Welcome to E-klinik PT. PAL Indonesia
-                    </p>
-                    <p class="paragraf2">
-                        Situs Rekam Medis untuk Membantu Pemantauan Kesehatan Anda
-                    </p>
-                </div>
-                </div>
+            <div class="bg-white p-4 rounded-xl"
+            style="min-width: 80%;"
+            >
+
+            <div class="flex py-auto justify-between mb-5">
+                <p class=" text-2xl text-bold">
+                    Daftar Antrian
+                    {{-- dari poli {{$poli->name}} --}}
+                </p>
+
+                {{-- <div class="flex items-center">
+                    <form action="{{ route('searchAntrian') }}" method="GET" class="flex bg-blue-500 rounded-md">
+                        <input type="text" name="query" placeholder="Search..." class="border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300">
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
+                    </form>
+                </div> --}}
+
+
+            </div>
+
+
+
+
+                <table class="custom-table w-full text-center">
+                    <thead class="bg-gray-300 mb-[10px]">
+                        <th class="py-2">No</th>
+                        <th class="py-2">NIP</th>
+                        <th class="py-2">Nama Pasien</th>
+                        <th class="py-2">Divisi</th>
+                        <th class="py-2">Keluhan</th>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach ($antrian as $key => $item)
+                            @php
+                                $id = App\Models\User::where('id', $item->id)->first();
+                            @endphp
+                            <tr class="m-2">
+                                <td class="bg-white py-2 px-4">{{$key+1}} </td>
+                                <td class="bg-white py-2 px-4">{{ $item->nip }} </td>
+                                <td class="bg-white py-2 px-4">{{ $item->user_name }}</td>
+                                <td class="bg-white py-2 px-4">{{ $item->user_divisi }}</td>
+                                <td class="bg-white py-2 px-4">{{ $item->keluhan }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+
+                </table>
+
             </div>
         </div>
         <footer class="text-white text-center py-4 bg-blue-400 fixed bottom-0 w-full font-semibold" style="font-family: sans-serif">

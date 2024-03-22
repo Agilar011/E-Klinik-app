@@ -58,6 +58,10 @@ use App\Http\Middleware\EncryptUrlMiddleware;
 
     Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
 
+    Route::get('daftarAntrian/{poli}', [UserController::class, 'daftarAntrian'])->name('daftarAntrian');
+
+    Route::get('daftarAntrian/search', [UserController::class, 'searchAntrian'])->name('searchAntrian');
+
 
 
 

@@ -3,15 +3,17 @@
         <div class="mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray-400 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-10 lg:p-10 bg-gray-200 border-b border-gray-200 justify-center ">
-                    <div class="p-3 lg:p-4 bg-white border-b border-gray-200 sm:rounded-lg">
+                    <div class="p-3 lg:p-4 bg-white border-b border-gray-200 sm:rounded-lg mb-5">
                         <div class="flex p-5 my-auto gap-10 justify-between">
                             <div class="text-2xl font-medium text-gray-900">
-                                Pilih Poli yang Ingin diubah
+                                Halaman Poli
                             </div>
                             <div class="flex items-center">
-                                <form action="{{ route('searchUser') }}" method="GET" class="flex">
-                                    <input type="text" name="query" placeholder="Search..." class="border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300">
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
+                                <form action="{{ route('searchPoli') }}" method="GET" class="flex">
+                                    <input type="text" name="query" placeholder="Search..."
+                                        class="border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300">
+                                    <button type="submit"
+                                        class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
                                 </form>
                             </div>
 
@@ -26,63 +28,72 @@
                             /* Menentukan jarak vertikal antara baris (0.5 rem disini, bisa disesuaikan) */
                         }
                     </style>
-                    <table class="custom-table w-full text-center mt-2 mb-2">
+                    @if ($dataPolis->count() > 0 && $display == true)
 
-                        <thead class="bg-gray-300 mb-[10px]">
-                            <th class="px-4 py-2">No</th>
-                            <th class="px-4 py-2">Nama Dokter</th>
-                            <th class="px-4 py-2">Nama Poli</th>
-                            <th class="px-4 py-2">Action</th>
-                        </thead>
+                        <table class="custom-table w-full text-center mt-2 mb-2">
 
-                        <tbody>
-                            @foreach ($dataPolis as $key => $item)
-                                <tr>
-                                    <td class="bg-white py-2 px-4">{{ $key + 1 }}</td>
-                                    <td class="bg-white py-2 px-4">{{ $item->user_name }}</td>
-                                    <td class="bg-white py-2 px-4">{{ $item->poli_name }}</td>
-                                    <td class="bg-white py-2 px-4">
-                                        <x-dropdown align="right" width="48">
-                                            <x-slot name="trigger">
-                                                <button
-                                                    class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                                                    Click Me
-                                                </button>
-                                            </x-slot>
+                            <thead class="bg-gray-300 mb-[10px]">
+                                <th class="px-4 py-2">No</th>
+                                <th class="px-4 py-2">Nama Dokter</th>
+                                <th class="px-4 py-2">Nama Poli</th>
+                                <th class="px-4 py-2">Action</th>
+                            </thead>
 
-                                            <x-slot name="content">
-                                                <div name="box" class="bg-gray-400 ">
-                                                    <a href="{{ route('UpdatePoliPage', $item->id) }}"
-                                                        class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Update
-                                                        Poli</a>
-                                                    <form method="POST"
-                                                        action="{{ route('DeleteDataPoli', $item->id) }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Delete
-                                                            Data
-                                                            Poli</button>
-                                                    </form>
+                            <tbody>
+                                @foreach ($dataPolis as $key => $item)
+                                    <tr>
+                                        <td class="bg-white py-2 px-4">{{ $key + 1 }}</td>
+                                        <td class="bg-white py-2 px-4">{{ $item->user_name }}</td>
+                                        <td class="bg-white py-2 px-4">{{ $item->poli_name }}</td>
+                                        <td class="bg-white py-2 px-4">
+                                            <x-dropdown align="right" width="48">
+                                                <x-slot name="trigger">
+                                                    <button
+                                                        class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                                                        Click Me
+                                                    </button>
+                                                </x-slot>
 
-                                                    <form method="POST" action="{{ route('DeletePoli', $item->id) }}">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Delete
-                                                            Poli</button>
-                                                    </form>
+                                                <x-slot name="content">
+                                                    <div name="box" class="bg-gray-400 ">
+                                                        <a href="{{ route('UpdatePoliPage', $item->id) }}"
+                                                            class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Update
+                                                            Poli</a>
+                                                        <form method="POST"
+                                                            action="{{ route('DeleteDataPoli', $item->id) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                            onclick="return confirm('Are you sure you want to delete this?')"
+                                                                class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Delete
+                                                                Data
+                                                                Poli</button>
+                                                        </form>
 
-                                                </div>
-                                            </x-slot>
-                                        </x-dropdown>
+                                                        <form method="POST"
+                                                            action="{{ route('DeletePoli', $item->id) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                            onclick="return confirm('Are you sure you want to delete this?')"
+                                                                class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Delete
+                                                                Poli</button>
+                                                        </form>
 
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    @if ($doctorWithoutPoli->count() > 0)
+                                                    </div>
+                                                </x-slot>
+                                            </x-dropdown>
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                    @endif
+
+
+                    @if ($doctorWithoutPoli->count() > 0 && $display == true)
                         <div class="p-3 lg:p-4 bg-white border-b border-gray-200 sm:rounded-lg">
                             <h1 class="text-2xl font-medium text-gray-900">
                                 Daftar Dokter yang belum memiliki Poli,Silahkan beri tindakan pada Dokter.
@@ -113,15 +124,16 @@
                                                     <div name="box" class="bg-gray-400 ">
                                                         <a href="{{ route('UpdateDoctorWithoutPoliPage', $item->id) }}"
                                                             class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Update
-                                                            Poli</a>
+                                                            Dokter</a>
 
                                                         <form method="POST"
-                                                            action="{{ route('DeletePoli', $item->id) }}">
+                                                            action="{{ route('DeleteUser', $item->id) }}">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
+                                                            onclick="return confirm('Are you sure you want to delete this?')"
                                                                 class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Delete
-                                                                Poli</button>
+                                                                Dokter</button>
                                                         </form>
                                                     </div>
                                                 </x-slot>
@@ -137,7 +149,12 @@
                     @if ($polisWithoutDoctor->count() > 0)
                         <div class="p-3 lg:p-4 bg-white border-b border-gray-200 sm:rounded-lg">
                             <h1 class="text-2xl font-medium text-gray-900">
+                                @if ($display == true)
                                 Daftar Poli yang belum memiliki Dokter,Silahkan beri tindakan pada Poli.
+                                @else
+                                Daftar Poli
+
+                                @endif
                             </h1>
                         </div>
 
@@ -172,7 +189,7 @@
                                                             action="{{ route('DeletePoli', $item->id) }}">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" onclick=""
+                                                            <button type="submit" onclick="return confirm('Are you sure you want to delete this?')"
                                                                 class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Delete
                                                                 Poli</button>
                                                         </form>

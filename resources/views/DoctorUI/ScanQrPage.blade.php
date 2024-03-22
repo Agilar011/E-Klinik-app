@@ -14,9 +14,10 @@
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
 
 </x-app-layout>
+@include('sweetalert::alert')
+
 
 
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>

@@ -67,4 +67,49 @@ class UserController extends Controller
 
 
 }
+public function daftarAntrian( $poli)
+{
+    $poli= Poli::where('name', $poli)->first();
+    // dd($poli);
+
+
+    $tanggalHariIni = now()->format('Y-m-d');
+
+    $query = $poli->id;
+
+
+    $antrian = PengajuanCheckUp::where('idpoli', 'like', "%$query%")
+    ->whereDate('tglpemeriksaan', $tanggalHariIni)
+    ->join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
+    ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
+    ->select('pengajuan_check_ups.*', 'users.name as user_name', 'users.divisi as user_divisi', 'polis.name as poli_name')
+    ->paginate(5);
+
+
+    // dd($antrian);
+
+    return view('UserUI.daftarAntrian', compact('antrian', 'poli'));
+}
+
+public function searchAntrian(Request $request)
+{
+    $query = $request->input('query');
+    $tanggalHariIni = now()->format('Y-m-d');
+
+
+
+    $antrian = PengajuanCheckUp::whereDate('tglpemeriksaan', $tanggalHariIni)
+    ->join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
+    ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
+    ->select('pengajuan_check_ups.*', 'users.name as user_name', 'users.divisi as user_divisi', 'polis.name as poli_name')->get();
+
+    $pengajuan = $antrian::where('name', 'like', "%$query%")
+    ->orWhere('user_divisi', 'like', "%$query%")
+    ->get();
+
+    dd($antrian);
+    return view('UserUI.daftarAntrian', compact('antrian'));
+
+
+}
 }
