@@ -23,22 +23,24 @@
     </head>
 
     <body class="antialiased font-sans">
-
         <nav class="bg-white shadow-md sticky top-0 z-50">
             <div class="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-14 rounded-md">
                     <div class="flex">
                         <div class="flex-shrink-0 flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-7 w-100" src="https://www.pal.co.id/wp-content/uploads/2020/07/BUMN-PAL-R1.png" alt="">
-                                <span align="left"></span>
-                            </div>
+                            <a href="/">
+                                <div class="flex-shrink-0">
+                                    <img class="h-7 w-100" src="https://www.pal.co.id/wp-content/uploads/2020/07/BUMN-PAL-R1.png" alt="">
+                                    <span align="left"></span>
+                                </div>
+                            </a>
+
                         </div>
                     </div>
 
 
                     <div class="hidden md:flex md:items-center md:space-x-6">
-                        <a href="#" class="text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Home </a>
+                        <a href="/" class="text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Home </a>
                         <div class="container mx-auto">
                             <!-- Dropdown with dividers -->
                             <div class="relative inline-block text-right">
@@ -52,23 +54,27 @@
                               </div>
 
                               <!-- Dropdown menu with dividers -->
-                              <div class="absolute right-0 w-38 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" style="display: none;" id="dropdown-menu" style="font-family: sans-serif">
+                              <div class="absolute right-0 w-38 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-left" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" style="display: none;" id="dropdown-menu" style="font-family: sans-serif">
                                 <div class="py-1" role="none">
                                   <!-- Menu items with dividers -->
-                                  <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" style="font-family: sans-serif">Poli Umum</a>
-                                  <a href="#" class="text-gray-700 block px-4 py-2 text-sm border-t border-gray-200" role="menuitem" tabindex="-1" id="menu-item-1" style="font-family: sans-serif">Poli Mata</a>
+                                  @php
+                                        $polis = \App\Models\Poli::all();
+                                  @endphp
+                                  @foreach ($polis as $item)
+
+                                  <a href="{{ route('daftarAntrian', $item->name) }}"
+                                  class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0" style="font-family: sans-serif">Poli {{ $item->name }}</a>
+
+                                  @endforeach
                                 </div>
                               </div>
                         </div>
                         <a href="https://www.pal.co.id/" class="ml-3 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">About Us</a>
-                        <a href="#" class="ml-4 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Information</a>
                         <a href="#" class="ml-4 mr-5 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Contact</a>
                         <a href="{{ route('login') }}" class="right-0 inline-flex items-center justify-center px-3 py-1 border border-transparent rounded-md shadow-sm text-white bg-blue-400 font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" style="font-family: sans-serif">Log In</a>
                     </div>
                 </div>
             </div>
-        </div>
-
         </nav>
 
         <script>
@@ -86,7 +92,7 @@
             }
         </script>
 
-        <div id="home">
+        <div id="home" class="pt-[100px]">
             <div class="bg-white p-4 rounded-xl"
             style="min-width: 80%;"
             >
@@ -94,15 +100,22 @@
             <div class="flex py-auto justify-between mb-5">
                 <p class=" text-2xl text-bold">
                     Daftar Antrian
+                    @if ($poli == 'disable')
+
+                    @else
+                    dari poli {{ $poli->name }}
+
+                    @endif
                     {{-- dari poli {{$poli->name}} --}}
                 </p>
 
-                {{-- <div class="flex items-center">
+                <div class="flex text-center">
                     <form action="{{ route('searchAntrian') }}" method="GET" class="flex bg-blue-500 rounded-md">
                         <input type="text" name="query" placeholder="Search..." class="border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300">
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
                     </form>
-                </div> --}}
+
+                </div>
 
 
             </div>
@@ -166,7 +179,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: middle;
         height: 100vh; /* Mengisi tinggi layar */
     }
 

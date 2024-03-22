@@ -23,6 +23,7 @@
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Pasien</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Divisi</th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Poli</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Keluhan</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Pengajuan Pemeriksaan</th>
                                     <th scope="col" class="px-6 py-3 text-center
@@ -34,9 +35,11 @@
                                     <tr>
                                         @php
                                             $user = App\Models\User::where('nip', $item->nip)->first();
+                                            $poli = App\Models\Poli::where('id', $item->idpoli)->first();
                                         @endphp
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $user->divisi }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $poli->name }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $item->keluhan }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $item->tglpengajuan }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -50,7 +53,8 @@
                             </tbody>
                         </table>
                         <div class="mt-6">
-        {{ $Pengajuan->links() }}
+                            {{ $Pengajuan->links() }}
+
     </div>
                     </div>
                 </div>

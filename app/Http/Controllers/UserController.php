@@ -69,8 +69,9 @@ class UserController extends Controller
 }
 public function daftarAntrian( $poli)
 {
+        // dd($poli);
+
     $poli= Poli::where('name', $poli)->first();
-    // dd($poli);
 
 
     $tanggalHariIni = now()->format('Y-m-d');
@@ -80,11 +81,12 @@ public function daftarAntrian( $poli)
 
     $antrian = PengajuanCheckUp::where('idpoli', 'like', "%$query%")
     ->whereDate('tglpemeriksaan', $tanggalHariIni)
+    ->where('status', 'approved')
     ->join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
     ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
     ->select('pengajuan_check_ups.*', 'users.name as user_name', 'users.divisi as user_divisi', 'polis.name as poli_name')
+    ->orderBy('updated_at', 'asc') // Mengurutkan berdasarkan 'updated_at' secara descending (terbaru dulu)
     ->paginate(5);
-
 
     // dd($antrian);
 
@@ -96,20 +98,26 @@ public function searchAntrian(Request $request)
     $query = $request->input('query');
     $tanggalHariIni = now()->format('Y-m-d');
 
-
-
     $antrian = PengajuanCheckUp::whereDate('tglpemeriksaan', $tanggalHariIni)
-    ->join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
-    ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
-    ->select('pengajuan_check_ups.*', 'users.name as user_name', 'users.divisi as user_divisi', 'polis.name as poli_name')->get();
+        ->join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
+        ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
+        ->select('pengajuan_check_ups.*', 'users.name as user_name', 'users.divisi as user_divisi', 'polis.name as poli_name');
 
-    $pengajuan = $antrian::where('name', 'like', "%$query%")
-    ->orWhere('user_divisi', 'like', "%$query%")
-    ->get();
+    // Terapkan filter pencarian pada query
+    if ($query) {
+        $antrian->where(function ($queryBuilder) use ($query) {
+            $queryBuilder->where('users.name', 'like', "%$query%")
+                ->orWhere('users.divisi', 'like', "%$query%");
+        });
+    }
 
-    dd($antrian);
-    return view('UserUI.daftarAntrian', compact('antrian'));
+    // Ambil hasil antrian
+    $antrian = $antrian->get();
+     $poli = 'disable';
 
 
+    // Tampilkan hasil pada halaman
+    return view('UserUI.daftarAntrian', compact('antrian', 'poli'));
 }
+
 }

@@ -60,7 +60,7 @@ use App\Http\Middleware\EncryptUrlMiddleware;
 
     Route::get('daftarAntrian/{poli}', [UserController::class, 'daftarAntrian'])->name('daftarAntrian');
 
-    Route::get('daftarAntrian/search', [UserController::class, 'searchAntrian'])->name('searchAntrian');
+    Route::get('cari', [UserController::class, 'searchAntrian'])->name('searchAntrian');
 
 
 
