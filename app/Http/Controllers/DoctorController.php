@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataPoli;
 use App\Models\Divisi;
+use App\Models\Poli;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\PengajuanCheckUp;
@@ -24,11 +26,45 @@ class DoctorController extends Controller
     }
     public function index()
     {
-        $Pengajuan = PengajuanCheckUp::where('status', 'pending')
-        ->orderBy('created_at', 'desc') // Urutkan berdasarkan waktu pengajuan dari yang terbaru
-        ->paginate(5);
+        $polidokter = DataPoli::where('id_dokter',auth()->user()->id)->get();
 
-        return view('DoctorUI.index', compact('Pengajuan'));
+        $jenisPoli = [];
+
+        foreach ($polidokter as $p) {
+            $jenisPoli[] = $p->id_poli; // Misalkan jenis poli disimpan dalam properti 'jenis'
+        };
+
+        $jenisPoli = array_unique($jenisPoli);
+
+        $namapoli = [];
+
+        foreach ($jenisPoli as $key => $value) {
+            $namapolitemp = Poli::where('id', $value)->first();
+            $namapoli[] = $namapolitemp->name;
+        }
+
+        $pengajuan = [];
+
+        foreach ($jenisPoli as $key => $value) {
+            $pengajuan[] = PengajuanCheckUp::where('status', 'pending')
+            ->orWhere('idpoli', $value)
+            ->orderBy('created_at', 'desc') // Urutkan berdasarkan waktu pengajuan dari yang terbaru
+            ->get();
+        }
+
+
+        // dd($pengajuan);
+        // $divisi = Divisi::where('name', $polidokter->divisi)->first();
+        // dd($divisi);
+        // $Pengajuan = PengajuanCheckUp::where('status', 'pending')
+        // ->orWhere('idpoli', $polidokter->id_poli)
+        // ->orderBy('created_at', 'desc') // Urutkan berdasarkan waktu pengajuan dari yang terbaru
+        // ->paginate(5);
+
+        // dd($Pengajuan);
+
+
+        return view('DoctorUI.index', compact('pengajuan'));
     }
     public function RejectionPage(PengajuanCheckUp $pengajuan)
     {
@@ -159,10 +195,15 @@ class DoctorController extends Controller
             $value->pasien = $pasien->name;
             $value->divisi = $pasien->divisi;
             if ($text == request('qr_code_result')) {
-                alert()->success('Data ditemukan','pasien ditemukan');
+                alert()->warning('Data tidak ditemukan','silahkan coba lagi');
+
+                // alert()->success('Data ditemukan','pasien ditemukan');
                 return view('DoctorUI.resultPage', compact('value'));
                 # code...
             } else {
+                alert()->warning('Data tidak ditemukan','silahkan coba lagi');
+                return view('DoctorUI.ScanQrPage');
+
                 # code...
             }
 

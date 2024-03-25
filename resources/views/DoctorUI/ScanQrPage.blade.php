@@ -7,16 +7,16 @@
                     <form method="POST" action="{{ route('ScanQrResult') }}">
                         @csrf
                         <label for="">Kode QR: <br></label>
-                        <input type="text" name="qr_code_result" id="result" class="w-1/2">
+                        <input type="text" name="qr_code_result" id="result" class="w-1/2" readonly>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Kirim</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @include('sweetalert::alert')
 
 </x-app-layout>
-@include('sweetalert::alert')
 
 
 

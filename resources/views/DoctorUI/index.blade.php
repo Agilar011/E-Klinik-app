@@ -31,7 +31,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($Pengajuan as $item)
+                                @foreach ($pengajuan as $item)
                                     <tr>
                                         @php
                                             $user = App\Models\User::where('nip', $item->nip)->first();

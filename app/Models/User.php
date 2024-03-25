@@ -32,7 +32,6 @@ class User extends Authenticatable
         'tinggi_badan',
         'berat_badan',
         'password',
-        'profile_photo_path',
     ];
 
     /**
