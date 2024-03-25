@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-3 lg:p-4 bg-white border-b border-gray-200">
                     <div class="p-3 lg:p-4 bg-white">
-                        <h1 class=" text-2xl font-medium text-gray-900">
+                        <h1 class="text-2xl font-medium text-gray-900">
                             Selamat Datang Dokter {{ Auth::user()->name }}
                         </h1>
                     </div>
@@ -13,7 +13,6 @@
                         .custom-table {
                             border-collapse: separate;
                             border-spacing: 0 0.5rem;
-                            /* Menentukan jarak vertikal antara baris (0.5 rem disini, bisa disesuaikan) */
                         }
                     </style>
 
@@ -26,17 +25,16 @@
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Poli</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Keluhan</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Pengajuan Pemeriksaan</th>
-                                    <th scope="col" class="px-6 py-3 text-center
-                                     text-xs font-medium text-gray-500 uppercase tracking-wider" colspan="2">Action</th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" colspan="2">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($pengajuan as $item)
+                                    @php
+                                        $user = App\Models\User::where('nip', $item->nip)->first();
+                                        $poli = App\Models\Poli::where('id', $item->idpoli)->first();
+                                    @endphp
                                     <tr>
-                                        @php
-                                            $user = App\Models\User::where('nip', $item->nip)->first();
-                                            $poli = App\Models\Poli::where('id', $item->idpoli)->first();
-                                        @endphp
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $user->divisi }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $poli->name }}</td>
@@ -53,14 +51,12 @@
                             </tbody>
                         </table>
                         <div class="mt-6">
-                            {{ $Pengajuan->links() }}
-
-    </div>
+                            {{ $pengajuan->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     @include('sweetalert::alert')
-
 </x-app-layout>

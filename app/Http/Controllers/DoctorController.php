@@ -16,6 +16,7 @@ use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class DoctorController extends Controller
@@ -24,48 +25,47 @@ class DoctorController extends Controller
     {
         return view('dashboardUser');
     }
-    public function index()
-    {
-        $polidokter = DataPoli::where('id_dokter',auth()->user()->id)->get();
 
-        $jenisPoli = [];
+public function index()
+{
+    $polidokter = DataPoli::where('id_dokter', auth()->user()->id)->get();
 
-        foreach ($polidokter as $p) {
-            $jenisPoli[] = $p->id_poli; // Misalkan jenis poli disimpan dalam properti 'jenis'
-        };
+    $jenisPoli = [];
 
-        $jenisPoli = array_unique($jenisPoli);
-
-        $namapoli = [];
-
-        foreach ($jenisPoli as $key => $value) {
-            $namapolitemp = Poli::where('id', $value)->first();
-            $namapoli[] = $namapolitemp->name;
-        }
-
-        $pengajuan = [];
-
-        foreach ($jenisPoli as $key => $value) {
-            $pengajuan[] = PengajuanCheckUp::where('status', 'pending')
-            ->orWhere('idpoli', $value)
-            ->orderBy('created_at', 'desc') // Urutkan berdasarkan waktu pengajuan dari yang terbaru
-            ->get();
-        }
-
-
-        // dd($pengajuan);
-        // $divisi = Divisi::where('name', $polidokter->divisi)->first();
-        // dd($divisi);
-        // $Pengajuan = PengajuanCheckUp::where('status', 'pending')
-        // ->orWhere('idpoli', $polidokter->id_poli)
-        // ->orderBy('created_at', 'desc') // Urutkan berdasarkan waktu pengajuan dari yang terbaru
-        // ->paginate(5);
-
-        // dd($Pengajuan);
-
-
-        return view('DoctorUI.index', compact('pengajuan'));
+    foreach ($polidokter as $p) {
+        $jenisPoli[] = $p->id_poli;
     }
+
+    $jenisPoli = array_unique($jenisPoli);
+
+    $pengajuan = [];
+
+    foreach ($jenisPoli as $value) {
+        $dataPengajuan = PengajuanCheckUp::where('status', 'pending')
+            ->where('idpoli', $value)
+            ->get(); // Ambil data tanpa paginate()
+
+        // Lakukan pengolahan manual di sini
+
+        // Misalnya, urutkan data berdasarkan updated_at
+        $dataPengajuan = collect($dataPengajuan)->sortByDesc('updated_at')->values();
+
+        // Buat objek paginator secara manual
+        $perPage = 15;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $items = $dataPengajuan->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $total = count($dataPengajuan);
+        $paginator = new LengthAwarePaginator($items, $total, $perPage, $currentPage, [
+            'path' => LengthAwarePaginator::resolveCurrentPath(),
+        ]);
+
+        $pengajuan[] = $paginator;
+    }
+
+    return view('DoctorUI.index', compact('pengajuan'));
+}
+
+
     public function RejectionPage(PengajuanCheckUp $pengajuan)
     {
         return view('DoctorUI.Rejection', compact('pengajuan'));
@@ -81,7 +81,7 @@ class DoctorController extends Controller
             'catatan_dokter' => request('catatan_dokter'),
             'status' => 'rejected'
         ]);
-        alert()->warning('Penolakan Pengajuan','Pengajuan oleh user dengan nip '.$pengajuan->nip.' telah ditolak');
+        alert()->warning('Penolakan Pengajuan', 'Pengajuan oleh user dengan nip ' . $pengajuan->nip . ' telah ditolak');
 
         return redirect()->route('Doctor.index')->with('success', 'Pengajuan Telah Disetujui.');
     }
@@ -93,7 +93,7 @@ class DoctorController extends Controller
         $pengajuan->nipdokter = Auth::user()->nip;
         $pengajuan->tglpemeriksaan = $request->tglpemeriksaan;
 
-        $text = $pengajuan->id.' '.$pengajuan->nip.' '.$pengajuan->tglpemeriksaan;
+        $text = $pengajuan->id . ' ' . $pengajuan->nip . ' ' . $pengajuan->tglpemeriksaan;
 
         $renderer = new ImageRenderer(
             new RendererStyle(400),
@@ -109,7 +109,7 @@ class DoctorController extends Controller
 
         // Simpan perubahan ke dalam database
         $pengajuan->save();
-        alert()->success('Pengajuan Diterima','Pengajuan oleh user dengan nip '.$pengajuan->nip.' telah disetujui');
+        alert()->success('Pengajuan Diterima', 'Pengajuan oleh user dengan nip ' . $pengajuan->nip . ' telah disetujui');
 
 
         return redirect()->route('Doctor.index')->with('success', 'Pengajuan Telah Disetujui.');
@@ -195,13 +195,13 @@ class DoctorController extends Controller
             $value->pasien = $pasien->name;
             $value->divisi = $pasien->divisi;
             if ($text == request('qr_code_result')) {
-                alert()->warning('Data tidak ditemukan','silahkan coba lagi');
+                alert()->warning('Data tidak ditemukan', 'silahkan coba lagi');
 
                 // alert()->success('Data ditemukan','pasien ditemukan');
                 return view('DoctorUI.resultPage', compact('value'));
                 # code...
             } else {
-                alert()->warning('Data tidak ditemukan','silahkan coba lagi');
+                alert()->warning('Data tidak ditemukan', 'silahkan coba lagi');
                 return view('DoctorUI.ScanQrPage');
 
                 # code...
