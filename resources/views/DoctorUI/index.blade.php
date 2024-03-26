@@ -22,46 +22,34 @@
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Pasien</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Divisi</th>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">item</th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Poli</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Keluhan</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Pengajuan Pemeriksaan</th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" colspan="2">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($pengajuan as $paginator)
-                                    @foreach ($paginator as $item)
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->nip_name }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->nip_divisi }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->idpoli_name }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->keluhan }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->tglpengajuan }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <a href="{{ route('RecectionPage', $item->id) }}" class="bg-red-500 text-white px-4 py-2 text-center text-sm font-semibold rounded-lg shadow-md hover:bg-red-600">Tolak Pengajuan</a>
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <a href="{{ route('AcceptionPage', $item->id) }}" class="bg-green-500 text-white px-4 py-2 text-center text-sm font-semibold rounded-lg shadow-md hover:bg-green-600">Setujui Pengajuan</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                @foreach ($pengajuan as $item)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $item->nip_name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $item->nip_divisi }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $item->idpoli_name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $item->keluhan }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $item->tglpengajuan }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <a href="{{ route('RecectionPage', $item->id) }}" class="bg-red-500 text-white px-4 py-2 text-center text-sm font-semibold rounded-lg shadow-md hover:bg-red-600">Tolak Pengajuan</a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <a href="{{ route('AcceptionPage', $item->id) }}" class="bg-green-500 text-white px-4 py-2 text-center text-sm font-semibold rounded-lg shadow-md hover:bg-green-600">Setujui Pengajuan</a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- <div class="mt-6">
-                            {{ $pengajuan->links() }}
-                        </div> --}}
-
-                        @foreach ($pengajuan as $key => $paginator)
-                        @if ($key == 0)
                         <div class="mt-6">
-                            {{ $paginator->links() }}
+                            {{-- Tampilkan pagination --}}
+                            {{-- {{ $pengajuan->links() }} --}}
                         </div>
-                        @else
-
-                        @endif
-
-                    @endforeach
                     </div>
                 </div>
             </div>
