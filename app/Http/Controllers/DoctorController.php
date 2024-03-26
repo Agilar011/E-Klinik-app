@@ -26,44 +26,49 @@ class DoctorController extends Controller
         return view('dashboardUser');
     }
 
-public function index()
-{
-    $polidokter = DataPoli::where('id_dokter', auth()->user()->id)->get();
+    public function index()
+    {
+        $polidokter = DataPoli::where('id_dokter', auth()->user()->id)->get();
 
-    $jenisPoli = [];
+        $jenisPoli = [];
 
-    foreach ($polidokter as $p) {
-        $jenisPoli[] = $p->id_poli;
+        foreach ($polidokter as $p) {
+            $jenisPoli[] = $p->id_poli;
+        }
+
+        $jenisPoli = array_unique($jenisPoli);
+
+        $pengajuan = [];
+
+        foreach ($jenisPoli as $value) {
+            $dataPengajuan = PengajuanCheckUp::where('status', 'pending')
+                ->where('idpoli', $value)
+                ->join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
+                ->join('polis', 'pengajuan_check_ups.idpoli', '=','polis.id')
+                ->select('pengajuan_check_ups.*', 'users.name as nip_name','users.divisi as nip_divisi', 'polis.name as idpoli_name')
+                ->get(); // Ambil data tanpa paginate()
+
+            // Lakukan pengolahan manual di sini
+
+            // Misalnya, urutkan data berdasarkan updated_at
+            $dataPengajuan = collect($dataPengajuan)->sortByDesc('updated_at')->values();
+
+            // Buat objek paginator secara manual
+            $perPage = 5;
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            $currentItems = $dataPengajuan->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            $total = count($dataPengajuan);
+            $paginator = new LengthAwarePaginator($currentItems, $total, $perPage, $currentPage, [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+            ]);
+
+            $pengajuan[] = $paginator;
+            // dd($pengajuan);
+        }
+
+        return view('DoctorUI.index', compact('pengajuan'));
     }
 
-    $jenisPoli = array_unique($jenisPoli);
-
-    $pengajuan = [];
-
-    foreach ($jenisPoli as $value) {
-        $dataPengajuan = PengajuanCheckUp::where('status', 'pending')
-            ->where('idpoli', $value)
-            ->get(); // Ambil data tanpa paginate()
-
-        // Lakukan pengolahan manual di sini
-
-        // Misalnya, urutkan data berdasarkan updated_at
-        $dataPengajuan = collect($dataPengajuan)->sortByDesc('updated_at')->values();
-
-        // Buat objek paginator secara manual
-        $perPage = 15;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $items = $dataPengajuan->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        $total = count($dataPengajuan);
-        $paginator = new LengthAwarePaginator($items, $total, $perPage, $currentPage, [
-            'path' => LengthAwarePaginator::resolveCurrentPath(),
-        ]);
-
-        $pengajuan[] = $paginator;
-    }
-
-    return view('DoctorUI.index', compact('pengajuan'));
-}
 
 
     public function RejectionPage(PengajuanCheckUp $pengajuan)
