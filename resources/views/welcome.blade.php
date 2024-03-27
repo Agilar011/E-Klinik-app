@@ -38,7 +38,7 @@
 
 
                     <div class="hidden md:flex md:items-center md:space-x-6">
-                        <a href="/" class="text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Home </a>
+                        <a href="/dashboard" class="text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Home </a>
                         <div class="container mx-auto">
                             <!-- Dropdown with dividers -->
                             <div class="relative inline-block text-right">
@@ -69,7 +69,7 @@
                         </div>
                         <a href="https://www.pal.co.id/" class="ml-3 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">About Us</a>
                         <a href="#" class="ml-4 mr-5 text-black hover:text-blue-700 font-semibold" style="font-family: sans-serif">Contact</a>
-                        <a href="{{ route('login') }}" class="right-0 inline-flex items-center justify-center px-3 py-1 border border-transparent rounded-md shadow-sm text-white bg-blue-400 font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" style="font-family: sans-serif">Log In</a>
+                        <a href="{{ route('login') }}" class="inline-flex items-center justify-center px-3 py-1 border border-transparent rounded-md shadow-sm text-white bg-blue-400 font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" style="font-family: sans-serif">Log In</a>
                     </div>
                 </div>
             </div>
@@ -94,10 +94,12 @@
             <div class="container" style="flex-direction: column;">
                 <img src="img/pal-logo.png" width="400px">
                 <div class="bor">
-                    <p class="paragraf1">
+                    <p class="text-xl font-bold mb-4 sm:text-4xl md:text-4xl"
+                        style="font-family: sans-serif;">
                         Welcome to E-klinik PT. PAL Indonesia
                     </p>
-                    <p class="paragraf2">
+                    <p class="text-md mb-4 md:text-lg"
+                    style="font-family: sans-serif;">
                         Situs Rekam Medis untuk Membantu Pemantauan Kesehatan Anda
                     </p>
                 </div>
@@ -155,7 +157,7 @@
         border-radius: 8px;
         outline: 0;
     }
-
+/*
     #home .container .paragraf1 {
         font-size: 45px;
         text-align: center;
@@ -170,7 +172,7 @@
         text-align: center;
         padding: 4px;
         font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-    }
+    } */
 </style>
 
 {{-- <style>

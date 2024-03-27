@@ -92,13 +92,13 @@
             }
         </script>
 
-        <div id="home" class="pt-[100px]">
+        <div id="home" class="pt-[80px]">
             <div class="bg-white p-4 rounded-xl"
             style="min-width: 80%;"
             >
 
             <div class="flex py-auto justify-between mb-5">
-                <p class=" text-2xl text-bold">
+                <p class=" text-2xl text-bold mr-2">
                     Daftar Antrian
                     @if ($poli == 'disable')
 
@@ -109,13 +109,13 @@
                     {{-- dari poli {{$poli->name}} --}}
                 </p>
 
-                <div class="flex text-center">
+                <div class="flex justify-center sm:justify-start">
                     <form action="{{ route('searchAntrian') }}" method="GET" class="flex bg-blue-500 rounded-md">
                         <input type="text" name="query" placeholder="Search..." class="border border-gray-300 rounded-l-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300">
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-md focus:outline-none focus:ring focus:border-blue-300">Search</button>
                     </form>
-
                 </div>
+
 
 
             </div>
