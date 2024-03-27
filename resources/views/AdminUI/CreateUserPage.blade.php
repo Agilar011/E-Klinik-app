@@ -10,7 +10,7 @@
             @include('sweetalert::alert')
             @csrf
             <div>
-                <x-label for="nip" value="{{ __('Nip') }}" />  
+                <x-label for="nip" value="{{ __('Nip') }}" />
                 <x-input id="nip" class="block mt-1 w-full" type="text" name="nip" :value="old('nip')" required
                     autofocus autocomplete="nip" />
             </div>
@@ -25,7 +25,7 @@
                 <x-label for="divisi" value="{{ __('Divisi') }}" />
                 <select name="divisi" id="divisi" class="block mt-1 w-full">
                     @foreach ($divisi as $item)
-                    <option value="{{$item->name}}">{{$item->name}}</option>
+                        <option value="{{ $item->name }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -66,12 +66,12 @@
                 <x-label for="poli" value="{{ __('Poli') }}" />
                 <select name="poli" id="poli" class="block mt-1 w-full">
                     @foreach ($polis as $item)
-                    <option value="{{$item->name}}">{{$item->name}}</option>
+                        <option value="{{ $item->name }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
                 {{-- <x-input id="poli" class="block mt-1 w-full" type="text" name="poli" :value="old('poli')" required autocomplete="poli" /> --}}
             </div>
-{{--
+            {{--
             <div class="mt-4">
                 <x-label for="role" value="{{ __('Role') }}" />
                 <select id="role" name="role" class="block mt-1 w-full" autocomplete="role">
@@ -106,10 +106,11 @@
             </script>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
+                <button type="button" onclick="window.history.back()"
+                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
+                    Batal
+                </button>
+
 
                 <x-button class="ms-4">
                     {{ __('Register') }}

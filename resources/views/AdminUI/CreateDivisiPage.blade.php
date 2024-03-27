@@ -25,6 +25,11 @@
                             </div>
                         </div>
 
+                        <button type="button" onclick="window.history.back()"
+                            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
+                            Batal
+                        </button>
+
                         <button type="submit" class="bg-blue-400 hover:bg-blues-600 text-white font-bold py-2 px-4 rounded-full">
                             Simpan Perubahan
                         </button>

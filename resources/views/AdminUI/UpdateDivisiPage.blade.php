@@ -1,12 +1,12 @@
 <x-app-layout>
     <div class="py-12">
-        <div class="min-h-screen mx-auto sm:px-6 lg:px-8">
+        <div class=" mt-[60px] mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                    <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
+                <div class="p-3 lg:p-4 bg-white border-b border-gray-200">
+                    <div class="p-3 lg:p-4 bg-white border-b border-gray-200">
                         {{-- <x-application-logo class="block h-12 w-auto" /> --}}
 
-                        <h1 class="mt-8 text-2xl font-medium text-gray-900">
+                        <h1 class="text-2xl font-medium text-gray-900">
                             Masukkan Perubahan Data {{ $divisi->name }}
                         </h1>
 
@@ -25,10 +25,17 @@
                             </div>
                         </div>
 
-                        <button type="submit"
-                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
-                        Simpan Perubahan
-                    </button>
+                        <div class="flex justify-center gap-10">
+                            <button type="button" onclick="window.history.back()"
+                                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
+                                Batal
+                            </button>
+
+                            <button type="submit"
+                                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
+                                Simpan
+                            </button>
+                        </div>
                 </div>
             </div>
         </div>

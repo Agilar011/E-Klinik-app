@@ -40,22 +40,22 @@ class AdminController extends Controller
     {
         $query = $request->input('query');
         $dataPolis = DataPoli::join('polis', 'data_polis.id_poli', '=', 'polis.id')
-        ->join('users', 'data_polis.id_dokter', '=', 'users.id')
-        ->select('data_polis.*', 'users.name as user_name', 'polis.name as poli_name')
-        ->get();
-
-    $polisWithoutDoctor = Poli::whereDoesntHave('datapoli')->get();
-    $polisWithoutDoctor = Poli::where('name', 'like', "%$query%")
+            ->join('users', 'data_polis.id_dokter', '=', 'users.id')
+            ->select('data_polis.*', 'users.name as user_name', 'polis.name as poli_name')
             ->get();
-    $doctorWithoutPoli = User::whereDoesntHave('datapoli')
-        ->where('role', 'dokter')
-        ->get();
+
+        $polisWithoutDoctor = Poli::whereDoesntHave('datapoli')->get();
+        $polisWithoutDoctor = Poli::where('name', 'like', "%$query%")
+            ->get();
+        $doctorWithoutPoli = User::whereDoesntHave('datapoli')
+            ->where('role', 'dokter')
+            ->get();
 
 
-            $display = false;
+        $display = false;
 
         // return view('AdminUI.PoliPage', compact('dataPolis'));
-        return view('AdminUI.PoliPage', compact('dataPolis', 'polisWithoutDoctor', 'doctorWithoutPoli','display'));
+        return view('AdminUI.PoliPage', compact('dataPolis', 'polisWithoutDoctor', 'doctorWithoutPoli', 'display'));
 
 
     }
@@ -72,9 +72,9 @@ class AdminController extends Controller
             ->where('role', 'dokter')
             ->get();
 
-            $display = true;
+        $display = true;
 
-        return view('AdminUI.PoliPage', compact('dataPolis', 'polisWithoutDoctor', 'doctorWithoutPoli','display'));
+        return view('AdminUI.PoliPage', compact('dataPolis', 'polisWithoutDoctor', 'doctorWithoutPoli', 'display'));
 
     }
     public function showDivisi()

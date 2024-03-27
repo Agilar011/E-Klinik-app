@@ -64,7 +64,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                            onclick="return confirm('Are you sure you want to delete this?')"
+                                                                onclick="return confirm('Are you sure you want to delete this?')"
                                                                 class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Delete
                                                                 Data
                                                                 Poli</button>
@@ -75,7 +75,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                            onclick="return confirm('Are you sure you want to delete this?')"
+                                                                onclick="return confirm('Are you sure you want to delete this?')"
                                                                 class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Delete
                                                                 Poli</button>
                                                         </form>
@@ -104,7 +104,7 @@
 
                             <thead class="bg-gray-300 mb-[10px]">
                                 <th class="px-4 py-2">No</th>
-                                <th class="px-4 py-2">Nama Poli</th>
+                                <th class="px-4 py-2">Nama Dokter</th>
                                 <th class="px-4 py-2">Action</th>
                             </thead>
                             <tbody>
@@ -131,7 +131,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                            onclick="return confirm('Are you sure you want to delete this?')"
+                                                                onclick="return confirm('Are you sure you want to delete this?')"
                                                                 class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Delete
                                                                 Dokter</button>
                                                         </form>
@@ -150,10 +150,9 @@
                         <div class="p-3 lg:p-4 bg-white border-b border-gray-200 sm:rounded-lg">
                             <h1 class="text-2xl font-medium text-gray-900">
                                 @if ($display == true)
-                                Daftar Poli yang belum memiliki Dokter,Silahkan beri tindakan pada Poli.
+                                    Daftar Poli yang belum memiliki Dokter,Silahkan beri tindakan pada Poli.
                                 @else
-                                Daftar Poli
-
+                                    Daftar Poli
                                 @endif
                             </h1>
                         </div>
@@ -189,7 +188,8 @@
                                                             action="{{ route('DeletePoli', $item->id) }}">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" onclick="return confirm('Are you sure you want to delete this?')"
+                                                            <button type="submit"
+                                                                onclick="return confirm('Are you sure you want to delete this?')"
                                                                 class="text-left w-48 block px-4 py-2 text-sm text-white bg-gray-400 hover:bg-gray-600">Delete
                                                                 Poli</button>
                                                         </form>
@@ -204,7 +204,7 @@
                     @else
                     @endif
                     <a href="{{ route('CreatePoliPage') }}"
-                        class="bg-blue-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">Create
+                        class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">Create
                         Poli</a>
                 </div>
             </div>

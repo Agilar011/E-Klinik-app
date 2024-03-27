@@ -65,7 +65,8 @@
                                 <label for="tglpemeriksaan" class="font-medium text-gray-700">Tanggal
                                     Pemeriksaan:</label>
                                 <input type="date" name="tglpemeriksaan" id="tglpemeriksaan"
-                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500" required>
+                                    class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
+                                    required>
                             </div>
 
                         </div>

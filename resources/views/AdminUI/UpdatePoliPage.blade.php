@@ -1,12 +1,12 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="min-h-screen mx-auto sm:px-6 lg:px-8">
+    <div class="py-12 pt-[90px]">
+        <div class="max-w-auto mx-auto sm:px-3 lg:px-4">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                    <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
+                <div class="p-3 lg:p-4 bg-white border-b border-gray-200">
+                    <div class="p-3 lg:p-4 bg-white border-b border-gray-200">
                         {{-- <x-application-logo class="block h-12 w-auto" /> --}}
 
-                        <h1 class="mt-8 text-2xl font-medium text-gray-900">
+                        <h1 class=" text-2xl font-medium text-gray-900">
                             Masukkan Perubahan Poli
                         </h1>
 
@@ -28,10 +28,11 @@
                                 <label for="dokter" class="font-bold text-black">Nama Dokter:</label>
                                 <select name="dokter" id="dokter">
                                     @foreach ($dokters as $item)
-                                    <option value="{{ $item->name }}" {{ $dokter->name === $item->name ? 'selected' : '' }}>
-                                        {{ $item->name }}
-                                    </option>
-                                @endforeach
+                                        <option value="{{ $item->name }}"
+                                            {{ $dokter->name === $item->name ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
 
 
 
@@ -43,10 +44,11 @@
                                 <label for="poli" class="font-bold text-black">Poli:</label>
                                 <select name="poli" id="poli">
                                     @foreach ($polis as $item)
-                                    <option value="{{ $item->name }}" {{ $poli->name === $item->name ? 'selected' : '' }}>
-                                        {{ $item->name }}
-                                    </option>
-                                @endforeach
+                                        <option value="{{ $item->name }}"
+                                            {{ $poli->name === $item->name ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
 
 
 
@@ -56,10 +58,18 @@
 
                         </div>
 
-                        <button type="submit"
-                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
-                        Simpan Perubahan
-                    </button>
+                        <div class="flex justify-center gap-10 pb-5 rounded-bl-xl rounded-br-xl">
+
+                            <button type="button" onclick="window.history.back()"
+                                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
+                                Batal
+                            </button>
+
+                            <button type="submit"
+                                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
+                                Simpan
+                            </button>
+                        </div>
                 </div>
             </div>
         </div>
