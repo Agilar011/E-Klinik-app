@@ -13,7 +13,7 @@
                     <th class="border px-4 py-2 text-left">Keluhan</th>
                     <th class="border px-4 py-2 text-left">Catatan</th>
                     <th class="border px-4 py-2 text-left">Status</th>
-                    <th class="border px-4 py-2 text-left">QR Code</th>
+                    <th class="border px-4 py-2 text-left">Keterangan</th>
                 </tr>
             </thead>
             @php
@@ -33,24 +33,32 @@
                         <td class="border px-4 py-2">{{ $item->catatan_dokter }}</td>
                         <td class="border px-4 py-2">{{ $item->status }}</td>
                         <td class="border px-4 py-2">
-                            @if ($item->qrcode != null)
-                                <form method="POST" action="{{ route('QRPage') }}">
-                                    @csrf
-                                    <input type="hidden" name="qr_code_result" id="result"
-                                        value="{{ $item->qrcode }}">
-                                    <button type="submit">
+                            @if ($status == 'Rejected')
+                            Pegajuan anda telah Ditolak
 
-                                        <img src="{{ asset('qrcodes/' . $item->qrcode) }}" alt="QR Code"
-                                            class="w-40 h-auto object-cover">
+                            @elseif ($status == 'Approve')
+                            {{-- iki QR --}}
+                            <form method="POST" action="{{ route('QRPage') }}">
+                                @csrf
+                                <input type="hidden" name="qr_code_result" id="result"
+                                    value="{{ $item->qrcode }}">
+                                <button type="submit">
 
-                                    </button>
-                                </form>
+                                    <img src="{{ asset('qrcodes/' . $item->qrcode) }}" alt="QR Code"
+                                        class="w-40 h-auto object-cover">
 
-                                {{--
-                            <a href="{{ route('QRPage', ['QR' => $item->qrcode]) }}">
-                            </a> --}}
+                                </button>
+                            @elseif ($status == 'done')
+                            @if ($suratIzin != null)
+                            {{-- ini surat izin --}}
+
                             @else
-                                <p>QR Code belum tersedia</p>
+                            Proses pemeriksaan kesehatan anda telah selesai.
+
+                            @endif
+
+
+
                             @endif
                         </td>
                     </tr>

@@ -231,21 +231,23 @@ class DoctorController extends Controller
     public function ScanQrResult(Request $request)
     {
         $dataHariIni = PengajuanCheckUp::where('tglpemeriksaan', date('Y-m-d'))->get();
+        // dd($dataHariIni);
         foreach ($dataHariIni as $key => $value) {
             $text = $value->id . ' ' . $value->nip . ' ' . $value->tglpemeriksaan;
             $pasien = User::where('nip', $value->nip)->first();
             // dd($pasien->divisi);
             $value->pasien = $pasien->name;
             $value->divisi = $pasien->divisi;
+            // dd($text);
             if ($text == request('qr_code_result')) {
-                alert()->warning('Data tidak ditemukan', 'silahkan coba lagi');
+                // alert()->warning('Data tidak ditemukan', 'silahkan coba lagi');
 
-                // alert()->success('Data ditemukan','pasien ditemukan');
+                alert()->success('Data ditemukan','pasien ditemukan');
                 return view('DoctorUI.resultPage', compact('value'));
                 # code...
             } else {
-                alert()->warning('Data tidak ditemukan', 'silahkan coba lagi');
-                return view('DoctorUI.ScanQrPage');
+                // alert()->warning('Data tidak ditemukan', 'silahkan coba lagi');
+                // return view('DoctorUI.ScanQrPage');
 
                 # code...
             }
