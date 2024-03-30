@@ -36,6 +36,10 @@
                     <x-nav-link href="{{ route('scanQrPage') }}" :active="request()->routeIs('scanQrPage')">
                         {{ __('Scan QR') }}
                     </x-nav-link>
+
+                    <x-nav-link href="{{ route('daftarPemeriksaan') }}" :active="request()->routeIs('daftarPemeriksaan')">
+                        {{ __('Daftar Pemeriksaan') }}
+                    </x-nav-link>
                     @endif
 
                 </div>

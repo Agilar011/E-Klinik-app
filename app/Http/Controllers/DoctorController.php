@@ -16,6 +16,7 @@ use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
+use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -231,7 +232,6 @@ class DoctorController extends Controller
     public function ScanQrResult(Request $request)
     {
         $dataHariIni = PengajuanCheckUp::where('tglpemeriksaan', date('Y-m-d'))->get();
-        // dd($dataHariIni);
         foreach ($dataHariIni as $key => $value) {
             $text = $value->id . ' ' . $value->nip . ' ' . $value->tglpemeriksaan;
             $pasien = User::where('nip', $value->nip)->first();
@@ -241,8 +241,11 @@ class DoctorController extends Controller
             // dd($text);
             if ($text == request('qr_code_result')) {
                 // alert()->warning('Data tidak ditemukan', 'silahkan coba lagi');
+                $pengajuan = PengajuanCheckUp::where('nip', $value->nip)->first();
+                $pengajuan->status = 'on process';
+                $pengajuan->save();
 
-                alert()->success('Data ditemukan','pasien ditemukan');
+                alert()->success('Data ditemukan', 'pasien ditemukan');
                 return view('DoctorUI.resultPage', compact('value'));
                 # code...
             } else {
@@ -260,11 +263,106 @@ class DoctorController extends Controller
     // dd($request);
     {
         // dd($request->qr_code_result);
-        $QR = PengajuanCheckUp::where('qrcode', $request->qr_code_result)->first();
 
-        $QR = $QR->qrcode;
+        $QR = PengajuanCheckUp::where('qrcode', $request->qr_code_result)
+            ->join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
+            ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
+            ->join('users as dokter', 'pengajuan_check_ups.nipdokter', '=', 'dokter.nip') // Use 'as' to alias the joined table
+            ->select('pengajuan_check_ups.*', 'users.name as nip_name', 'users.divisi as nip_divisi', 'users.tanggal_lahir as nip_tgl_lahir', 'polis.name as idpoli_name', 'dokter.name as dokter_name')
+            ->first(); // Ambil data dengan paginasi
+
+        // $QR = $QR->qrcode;
         return view('DoctorUI.QRPage', compact('QR'));
     }
+
+    public function daftarPemeriksaan()
+    {
+
+        $polidokter = DataPoli::where('id_dokter', auth()->user()->id)->get();
+
+        $jenisPoli = [];
+
+        foreach ($polidokter as $p) {
+            $jenisPoli[] = $p->id_poli;
+        }
+
+        $jenisPoli = array_unique($jenisPoli);
+
+        $pengajuan = collect(); // Inisialisasi kumpulan koleksi kosong
+
+        foreach ($jenisPoli as $key => $value) {
+            $dataPengajuan = PengajuanCheckUp::where('status', 'on process')
+                ->where('idpoli', $value)
+                ->join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
+                ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
+                ->select('pengajuan_check_ups.*', 'users.name as nip_name', 'users.divisi as nip_divisi', 'polis.name as idpoli_name')
+                ->get(); // Ambil data dengan paginasi
+
+            $pengajuan = $pengajuan->merge($dataPengajuan); // Gabungkan item dataPengajuan ke dalam koleksi pengajuan
+
+        }
+        $pengajuan = $pengajuan->sortByDesc('updated_at');
+
+        // $pengajuan = new Paginator($pengajuan, 5); // Konversi pengajuan menjadi objek paginator
+        // $pengajuan->withPath('/antrianpengajuan'); // Contoh path khusus, sesuaikan dengan rute Anda
+
+        return view('DoctorUI.daftarPemeriksaanPage', compact('pengajuan'));
+    }
+
+    public function pemeriksaanPage(PengajuanCheckUp $pengajuan)
+    {
+        // $pengajuan = PengajuanCheckUp::where('id', $id)
+        //     ->join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
+        //     ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
+        //     ->select('pengajuan_check_ups.*', 'users.name as nip_name', 'users.divisi as nip_divisi', 'polis.name as idpoli_name')
+        //     ->first();
+
+        return view('DoctorUI.pemeriksaanPage', compact('pengajuan'));
+    }
+
+    public function suratizin(PengajuanCheckUp $pengajuan, Request $request)
+    {
+        // dd(request('suratizin'));
+        if (request('suratizin') == 'tanpasuratizin') {
+            return redirect()->route('tanpasuratizin', $pengajuan)->with('success', 'Pemeriksaan Selesai.');
+
+            # code...
+        } else {
+            // dd(request());
+            $datapoli = Poli::where('id', $pengajuan->idpoli)->first();
+            $datauser = User::where('nip', $pengajuan->nip)->first();
+            $idpengajuan = $pengajuan->id;
+
+            $tanggal_lahir = Carbon::createFromFormat('Y-m-d', $datauser->tanggal_lahir);
+
+            // Hitung umur berdasarkan tanggal lahir
+            $umur = $tanggal_lahir->age;
+
+            dd($umur);
+
+            return view('DoctorUI.formSuratSakit', compact('pengajuan', 'request', 'datapoli', 'datauser', 'umur'));
+            // redirect()->route('dengansuratizin', $pengajuan)->with('success', 'Pemeriksaan telah selesai.');
+            # code...
+        }
+
+
+    }
+
+    public function tanpasuratizin(PengajuanCheckUp $pengajuan)
+    {
+        $pengajuan->status = 'done';
+        $pengajuan->save();
+
+        alert()->success('Pemeriksaan Selesai', 'User dapat langsung bekerja kembali');
+        return redirect()->route('dashboard')->with('success', 'Pemeriksaan Selesai.');
+    }
+    public function dengansuratizin(PengajuanCheckUp $pengajuan)
+    {
+        $pengajuan->status = 'done';
+        $pengajuan->save();
+
+        // alert()->success('Pemeriksaan Selesai','User dapat langsung bekerja kembali');
+        return redirect()->route('dashboard')->with('success', 'Pemeriksaan Selesai.');
+    }
+
 }
-
-

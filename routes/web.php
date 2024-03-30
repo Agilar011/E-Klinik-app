@@ -132,4 +132,14 @@ Route::middleware('role:dokter')->group(function () {
 });
 
 Route::post('/QRPage', [DoctorController::class, 'QrPage'])->name('QRPage');
+Route::get('/inputRating/{id}',[UserController::class, 'inputRatingPage'])->name('inputRating');
+Route::post('/ratingProcessing/{id}', [UserController::class, 'ratingProcessing'])->name('ratingProcessing');
 
+Route::get('/daftarPemeriksaan', [DoctorController::class, 'daftarPemeriksaan'])->name('daftarPemeriksaan');
+Route::get('/pemeriksaanPage/{pengajuan}', [DoctorController::class, 'pemeriksaanPage'])->name('pemeriksaanPage');
+
+Route::get('/tanpasuratizin/{pengajuan}', [DoctorController::class, 'tanpasuratizin'])->name('tanpasuratizin');
+Route::get('/dengansuratizin/{pengajuan}', [DoctorController::class, 'dengansuratizin'])->name('dengansuratizin');
+
+Route::get('/suratizin/{pengajuan}', [DoctorController::class, 'suratizin'])->name('suratizin');
+Route::get('/formSuratIzin/{pengajuan}', [DoctorController::class, 'formSuratIzin'])->name('formSuratIzin');

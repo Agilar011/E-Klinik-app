@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Poli; // Pastikan model Poli telah dibuat
 use App\Models\PengajuanCheckUp;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Rating;
 
 
 class UserController extends Controller
@@ -119,5 +120,44 @@ public function searchAntrian(Request $request)
     // Tampilkan hasil pada halaman
     return view('UserUI.daftarAntrian', compact('antrian', 'poli'));
 }
+
+    public function inputRatingPage($id)
+    {
+        // dd($id);
+        $pengajuan = PengajuanCheckUp::where('id', $id)->first();
+    // dd($pengajuan);
+
+    $namPoli = Poli::where('id', $pengajuan->idpoli)->first();
+
+    $namaPoli = $namPoli->name;
+        // dd($namaPoli);
+
+
+    $namaDokter = User::where('nip', $pengajuan->nipdokter)->first();
+    $namaDokter = $namaDokter->name;
+
+            // dd($namaDokter->name);
+        return view('UserUI.ratingPage', compact('pengajuan', 'namaDokter', 'namaPoli'));
+    }
+
+    public function ratingProcessing(Request $request, $id)
+    {
+        $idpengajuan = PengajuanCheckUp::find($id);
+
+        $pengajuan = new Rating();
+        $pengajuan->id_poli = $idpengajuan->idpoli;
+        $pengajuan->nip_pasien = $idpengajuan->nip;
+        $pengajuan->id_dokter = $idpengajuan->nipdokter;
+        $pengajuan->keluhan = $idpengajuan->keluhan;
+        $pengajuan->rating = $request->rating;
+        $pengajuan->komentar = $request->komentar;
+        $pengajuan->id_pengajuan = $idpengajuan->id;
+        // Remove the line below
+        // dd($pengajuan);
+        $pengajuan->save();
+
+        alert()->success('Rating Berhasil Diberikan', 'Terima kasih atas rating yang diberikan');
+        return redirect()->route('dashboard')->with('success', 'Rating berhasil diberikan.');
+    }
 
 }
