@@ -143,3 +143,8 @@ Route::get('/dengansuratizin/{pengajuan}', [DoctorController::class, 'dengansura
 
 Route::get('/suratizin/{pengajuan}', [DoctorController::class, 'suratizin'])->name('suratizin');
 Route::get('/formSuratIzin/{pengajuan}', [DoctorController::class, 'formSuratIzin'])->name('formSuratIzin');
+
+Route::post('/generate-pdf', [DoctorController::class, 'generatePDF'])->name('generate.pdf');
+
+
+// Route::get('/formSuratIzin/{pengajuan}', [DoctorController::class, 'formSuratIzin'])->name('formSuratIzin');

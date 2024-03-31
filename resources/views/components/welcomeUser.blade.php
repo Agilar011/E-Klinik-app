@@ -119,11 +119,11 @@
                             <td class="border px-4 py-2">{{ $item->keluhan }}</td>
                             <td class="border px-4 py-2">{{ $item->catatan_dokter }}</td>
                             <td class="border px-4 py-2">{{ $item->status }}</td>
-                            @if ($suratIzin != null)
-                                {{-- ini surat izin --}}
-                            @else
+                            {{-- @if ($suratIzin != null)
+                                ini surat izin
+                            @else --}}
                                 Proses pemeriksaan kesehatan anda telah selesai.
-                            @endif
+                            {{-- @endif --}}
                         </tr>
 
                         @else

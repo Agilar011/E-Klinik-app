@@ -17,6 +17,7 @@ use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Carbon\Carbon;
+use PDF;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -333,12 +334,12 @@ class DoctorController extends Controller
             $datauser = User::where('nip', $pengajuan->nip)->first();
             $idpengajuan = $pengajuan->id;
 
+            // dd($datauser->tanggal_lahir);
+
             $tanggal_lahir = Carbon::createFromFormat('Y-m-d', $datauser->tanggal_lahir);
 
             // Hitung umur berdasarkan tanggal lahir
             $umur = $tanggal_lahir->age;
-
-            dd($umur);
 
             return view('DoctorUI.formSuratSakit', compact('pengajuan', 'request', 'datapoli', 'datauser', 'umur'));
             // redirect()->route('dengansuratizin', $pengajuan)->with('success', 'Pemeriksaan telah selesai.');
@@ -363,6 +364,46 @@ class DoctorController extends Controller
 
         // alert()->success('Pemeriksaan Selesai','User dapat langsung bekerja kembali');
         return redirect()->route('dashboard')->with('success', 'Pemeriksaan Selesai.');
+    }
+
+    public function formSuratIzin(PengajuanCheckUp $pengajuan, Request $request)
+    {
+        $datapoli = Poli::where('id', $pengajuan->idpoli)->first();
+        $datauser = User::where('nip', $pengajuan->nip)->first();
+        $idpengajuan = $pengajuan->id;
+
+        // dd($datauser->tanggal_lahir);
+
+        $tanggal_lahir = Carbon::createFromFormat('Y-m-d', $datauser->tanggal_lahir);
+
+        // Hitung umur berdasarkan tanggal lahir
+        $umur = $tanggal_lahir->age;
+
+        // Hitung Durasi Izin
+        $tglmulai = Carbon::createFromFormat('Y-m-d', $request->tglpemeriksaan);
+
+        $tglakhir = $tglmulai->add($request->jumlahHariIzin, 'days');
+
+        $tglmulai = date_format($tglmulai, 'Y-m-d');
+        $tglakhir = date_format($tglakhir, 'Y-m-d');
+
+        return view('DoctorUI.suratIzin', compact('pengajuan', 'datapoli', 'datauser', 'umur', 'request', 'tglmulai', 'tglakhir'));
+    }
+
+    public function generatePDF(Request $request)
+    {
+        // Mendapatkan konten dari request
+        $content = json_decode($request->content, true);
+
+        // Generate PDF dengan menggunakan library DOMPDF
+        $pdf = PDF::loadView('pdf.template', $content);
+
+        // Simpan atau kirim PDF sesuai kebutuhan Anda
+        $pdf->save(public_path('Surat Izin/lembar_izin.pdf'));
+
+                alert()->success('Pembuatan Surat Selesai','Surat Izin telah Dibuat');
+        return redirect()->route('dashboard');
+
     }
 
 }

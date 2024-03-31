@@ -15,9 +15,8 @@
 
 
                     {{-- <form action="{{ route('setujuipengajuan', $pengajuan->id) }}" method="POST"> --}}
-                    <form action="{{ route('setujuipengajuan', $idpengajuan) }}" method="POST">
+                    <form action="{{ route('formSuratIzin', $idpengajuan) }}" method="GET">
                         @csrf
-                        @method('PUT')
                         {{-- @php
                         dd($idpengajuan);
 
@@ -25,8 +24,8 @@
 
                         <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
                             <div class="flex flex-col space-y-2">
-                                <label for="idpoli" class="font-medium text-gray-700">No Surat:</label>
-                                <input type="text" name="idpoli" id="idpoli" value=""
+                                <label for="noSurat" class="font-medium text-gray-700">No Surat:</label>
+                                <input type="text" name="noSurat" id="noSurat" value=""
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
                                     required>
                             </div>
@@ -38,60 +37,54 @@
                                     readonly>
                             </div>
 
-<div class="flex flex-col space-y-2">
-    <label for="tglpemeriksaan" class="font-medium text-gray-700">Umur:</label>
-    <input type="number" name="tglpemeriksaan" id="tglpemeriksaan"
-        value="{{ $umur }}">
+                            <div class="flex flex-col space-y-2">
+                                <label for="umur" class="font-medium text-gray-700">Umur:</label>
+                                <input type="number" name="umur" id="umur"
+                                    value="{{ $umur }}">
 
-</div>
+                            </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="idpoli" class="font-medium text-gray-700">Pangkat /Gol:</label>
-                                <input type="text" name="idpoli" id="idpoli" value=""
+                                <label for="pangkat" class="font-medium text-gray-700">Pangkat /Gol:</label>
+                                <input type="text" name="pangkat" id="pangkat" value=""
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
                                     required>
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="idpoli" class="font-medium text-gray-700">NIP:</label>
-                                <input type="text" name="idpoli" id="idpoli" value="{{ $datauser->nip }}"
+                                <label for="NIPPasien" class="font-medium text-gray-700">NIP:</label>
+                                <input type="text" name="NIPPasien" id="NIPPasien" value="{{ $datauser->nip }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
                                     required>
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="idpoli" class="font-medium text-gray-700">Cost Centre:</label>
-                                <input type="text" name="idpoli" id="idpoli" value=""
+                                <label for="cost" class="font-medium text-gray-700">Cost Centre:</label>
+                                <input type="text" name="cost" id="cost" value=""
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
                                     required>
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="idpoli" class="font-medium text-gray-700">Jumlah Hari Izin:</label>
-                                <input type="number" name="idpoli" id="idpoli" value="{{ $request->jumlahhari }}"
+                                <label for="jumlahHariIzin" class="font-medium text-gray-700">Jumlah Hari Izin:</label>
+                                <input type="number" name="jumlahHariIzin" id="jumlahHariIzin" value="{{ $request->jumlahhari }}"
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
                                     required>
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="idpoli" class="font-medium text-gray-700">Alasan:</label>
-                                <input type="text" name="idpoli" id="idpoli" value=""
+                                <label for="alasan" class="font-medium text-gray-700">Alasan:</label>
+                                <input type="text" name="alasan" id="alasan" value=""
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
                                     required>
                             </div>
 
                             <div class="flex flex-col space-y-2">
-                                <label for="idpoli" class="font-medium text-gray-700">Keterangan:</label>
-                                <input type="text" name="idpoli" id="idpoli" value=""
+                                <label for="keterangan" class="font-medium text-gray-700">Keterangan:</label>
+                                <input type="text" name="keterangan" id="keterangan" value=""
                                     class="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-sky-500"
                                     required>
                             </div>
-
-
-
-
-
-
 
                             <div class="flex flex-col space-y-2">
                                 <label for="divisi" class="font-medium text-gray-700">Divisi:</label>
