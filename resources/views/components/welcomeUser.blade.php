@@ -120,16 +120,19 @@
                             @else --}}
 
                             @php
-                                $namaPDF = App\Models\RekapMedis::where(
-                                    'surat_izin',
-                                    $item->id . $item->nip . $item->tglpemeriksaan . '.pdf',
-                                )->first();
+                                $namaPDF = App\Models\RekapMedis::where('surat_izin', $item->id . $item->nip . $item->tglpemeriksaan . '.pdf')->first();
+
+                                // dd($namaPDF);
 
                             @endphp
 
                             @if ($namaPDF != null)
                                 <td>
-                                    ada
+                                    <a href="{{ asset('pdf/' . $namaPDF->surat_izin) }}" download>
+                                        <button class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-blue-600">
+                                            Download Surat Izin
+                                        </button>
+                                    </a>
                                 </td>
                             @else
                                 <td class="border px-4 py-2">
