@@ -233,6 +233,34 @@ class DoctorController extends Controller
         $pengajuan->status = 'done';
         $pengajuan->save();
 
+        $datapoli = Poli::where('id', $pengajuan->idpoli)->first();
+        $datauser = User::where('nip', $pengajuan->nip)->first();
+        $idpengajuan = $pengajuan->id;
+        // dd($datauser->tanggal_lahir);
+
+        $tanggal_lahir = Carbon::createFromFormat('Y-m-d', $datauser->tanggal_lahir);
+
+        // Hitung umur berdasarkan tanggal lahir
+        $umur = $tanggal_lahir->age;
+
+        // Hitung Durasi Izin
+        $tglmulai = Carbon::createFromFormat('Y-m-d', $pengajuan->tglpemeriksaan);
+
+        // $tglakhir = $tglmulai->add($request->jumlahHariIzin, 'days');
+
+        $tglmulai = date_format($tglmulai, 'Y-m-d');
+        // $tglakhir = date_format($tglakhir, 'Y-m-d');
+
+        $rekapmedis = new RekapMedis();
+        $rekapmedis->no_rekap_medis = 'RM_PT_PAL'.$pengajuan->id.$datauser->nip. $tglmulai;
+        $rekapmedis->nip = $datauser->nip;
+        $rekapmedis->nip_dokter = Auth::user()->nip;
+        $rekapmedis->id_pengajuan = $pengajuan->id;
+        $rekapmedis->qrcode = $pengajuan->qrcode;
+        $rekapmedis->surat_izin = null;
+
+        $rekapmedis->save();
+
         alert()->success('Pemeriksaan Selesai', 'User dapat langsung bekerja kembali');
         return redirect()->route('dashboard')->with('success', 'Pemeriksaan Selesai.');
     }
