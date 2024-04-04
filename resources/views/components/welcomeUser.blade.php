@@ -54,8 +54,7 @@
                                 </div>
                             </td>
                         </tr>
-
-                        @elseif ($item->status == 'approved')
+                    @elseif ($item->status == 'approved')
                         <tr class="m-2 bg-green-400">
                             <td class="border px-4 py-2">{{ Auth::user()->name }}</td>
                             <td class="border px-4 py-2">{{ $item->poli->name }}</td>
@@ -77,8 +76,7 @@
                                 </form>
                             </td>
                         </tr>
-
-                        @elseif ($item->status == 'on process')
+                    @elseif ($item->status == 'on process')
                         <tr class="m-2 bg-green-400">
                             <td class="border px-4 py-2">{{ Auth::user()->name }}</td>
                             <td class="border px-4 py-2">{{ $item->poli->name }}</td>
@@ -91,27 +89,25 @@
                                 // dd($item->id);
                             @endphp
                             @if ($statusrating == null)
-                            <td class="border px-4 py-2">
+                                <td class="border px-4 py-2">
 
-                                <a href="{{ route('inputRating', ['id' => $item->id]) }}" class="bg-white py-2 px-4 rounded-2xl">Berikan Penilaian Anda</a>
+                                    <a href="{{ route('inputRating', ['id' => $item->id]) }}"
+                                        class="bg-white py-2 px-4 rounded-2xl">Berikan Penilaian Anda</a>
 
 
 
-                            </td>
-
+                                </td>
                             @else
-                            <td class="border px-4 py-2">
-                                <div class="text-center p-2">
-                                    Anda telah memberikan penilaian
-                                </div>
+                                <td class="border px-4 py-2">
+                                    <div class="text-center p-2">
+                                        Anda telah memberikan penilaian
+                                    </div>
 
-                            </td>
-
+                                </td>
                             @endif
 
                         </tr>
-
-                        @elseif ($item->status == 'done')
+                    @elseif ($item->status == 'done')
                         <tr class="m-2">
                             <td class="border px-4 py-2">{{ Auth::user()->name }}</td>
                             <td class="border px-4 py-2">{{ $item->poli->name }}</td>
@@ -122,11 +118,31 @@
                             {{-- @if ($suratIzin != null)
                                 ini surat izin
                             @else --}}
-                                Proses pemeriksaan kesehatan anda telah selesai.
+
+                            @php
+                                $namaPDF = App\Models\RekapMedis::where(
+                                    'surat_izin',
+                                    $item->id . $item->nip . $item->tglpemeriksaan . '.pdf',
+                                )->first();
+
+                            @endphp
+
+                            @if ($namaPDF != null)
+                                <td>
+                                    ada
+                                </td>
+                            @else
+                                <td class="border px-4 py-2">
+                                    <div class="text-center p-2">
+                                        Proses pemeriksaan kesehatan anda telah selesai.
+                                    </div>
+
+                                </td>
+                            @endif
+
                             {{-- @endif --}}
                         </tr>
-
-                        @else
+                    @else
                         <tr class="m-2 bg-blue-400 ">
                             <td class="border px-4 py-2">{{ Auth::user()->name }}</td>
                             <td class="border px-4 py-2">{{ $item->poli->name }}</td>

@@ -1,122 +1,84 @@
-<x-app-layout>
-    <div class="py-12 pt-[90px]">
-        <div class="min-w-screen mx-auto sm:px-6 lg:px-8">
-            <form action="{{ route('generate.pdf') }}" method="POST">
-                @csrf
-                <input type="hidden" name="content" value="{{ json_encode($content) }}">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Kirim</button>
-            </form>
-            <div name="lembarIzin" class="w-[21cm]">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-10">
-                    <div class="p-3 lg:p-4 bg-white">
-                        <img src="/img/pal-logo.png" alt="Logo Klinik" class="h-20 w-auto pb-5">
-                        <h1 class="text-lg font-medium text-gray-900 pb-10">
-                            No: {{ $request->noSurat }}
-                        </h1>
-                        <div class="flex justify-center text-center ">
-                            <p class="text-3xl border-b border-black">SURAT KETERANGAN DOKTER</p>
-                        </div>
+<!DOCTYPE html>
+<html lang="en">
 
-                        <div class="p-3 lg:p-4 bg-white">
-                            <p class="text-justify">
-                                Yang bertanda tangan di bawah ini, Dokter Puskesmas Pekayon, menerangkan bahwa:
-                            </p>
-                        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
 
-                        <div class="flex justify-between px-20 pb-5">
-                            <div class="flex font-bold">Nama:&nbsp;
-                                <p class="font-light">{{ $request->name }}</p>
-                            </div>
-
-                            <div class="flex font-bold">Umur:&nbsp;
-                                <p class="font-light">{{ $request->umur }}</p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between px-20 pb-5">
-                            <div class="flex font-bold">Pangkat:&nbsp;
-                                <p class="font-light">{{ $request->pangkat }}</p>
-                            </div>
-
-                            <div class="flex font-bold">NIP:&nbsp;
-                                <p class="font-light">{{ $request->NIPPasien }}</p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between px-20 pb-5">
-                            <div class="flex font-bold">Bagian:&nbsp;
-                                <p class="font-light">{{ $request->divisi }}</p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between px-20 pb-5">
-                            <div class="flex font-bold">Cost Centre:&nbsp;
-                                <p class="font-light">{{ $request->cost }}</p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between px-20 pb-5">
-                            <div class="flex font-bold">Perlu mendapatkan istirahat/Dinas ringan selama:&nbsp;
-                                <p class="font-light">{{ $request->jumlahHariIzin }}</p>
-                            </div>
-
-                            <div class="flex font-bold"> hari terhitung mulai
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between px-20 pb-5">
-                            <div class="flex font-bold">Tanggal:&nbsp;
-                                <p class="font-light">{{ $tglmulai }}</p> &nbsp;s/d&nbsp; <p class="font-light">{{ $tglakhir }}</p>
-                            </div>
-
-                            <div class="flex font-bold">Karena menderita sakit.
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between px-20 pb-5">
-                            <div class="flex font-bold">Keterangan Lain-lain:&nbsp;
-                                <p class="font-light">{{ $request->keterangan }}
-                            </p>
-                            </div>
-                        </div>
-
-                        <div class="text-right px-20 items-right">
-                            <div style="float: right; text-align: right;">
-                                <div name="dataDokter" class="text-center items-center">
-                                    <p>Tanggal : {{ $request->tglpemeriksaan }}</p>
-
-                                    <p class="pb-5">
-                                        Dokter yang memeriksa
-                                    </p>
-
-                                    <div style="display: flex; justify-content: center;">
-                                        <img src="/images/1 00000000 2022-11-15.png" alt="TTD"
-                                            class="h-20 w-auto items-center">
-                                    </div>
-
-                                    <p class="pb-5">
-                                        Dr {{ auth()->user()->name }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
+<body style="width: 19cm; font-family: sans-serif;">
+    <table id="lembarIzin" style="font-family: sans-serif; background-color: #ffffff; overflow: hidden; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 0.5rem; padding: 2.5rem; width: 100%;">
+        <tr>
+            <td colspan="4" style="text-align: center;">
+                {{-- <img id="logo" src="/img/pal-logo.png" alt="Logo Klinik"> --}}
+                <div id="div-foto" style="text-align: left; margin-top: 20px;">
+                    <img id="foto" src="/img/pal-logo.png" alt="" style="height: 40px; width: auto;">
                 </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                No: {{ $request->noSurat }}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: center; margin-top: 20px; text-decoration: underline;">
+                SURAT KETERANGAN DOKTER
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: justify;">
+                Yang bertanda tangan di bawah ini, Dokter Puskesmas Pekayon, menerangkan bahwa:
+            </td>
+        </tr>
+        <tr>
+            <td class="bold" style="font-weight: bold;">Nama:</td>
+            <td class="non-bold" style="font-weight: normal;">{{ $request->name }}</td>
+            <td class="bold" style="font-weight: bold;">Umur:</td>
+            <td class="non-bold" style="font-weight: normal;">{{ $request->umur }}</td>
+        </tr>
+        <tr>
+            <td class="bold" style="font-weight: bold;">Pangkat:</td>
+            <td class="non-bold" style="font-weight: normal;">{{ $request->pangkat }}</td>
+            <td class="bold" style="font-weight: bold;">NIP:</td>
+            <td class="non-bold" style="font-weight: normal;">{{ $request->NIPPasien }}</td>
+        </tr>
+        <tr>
+            <td class="bold" style="font-weight: bold;">Bagian:</td>
+            <td class="non-bold" style="font-weight: normal;">{{ $request->divisi }}</td>
+            <td class="bold" style="font-weight: bold;">Cost Centre:</td>
+            <td class="non-bold" style="font-weight: normal;">{{ $request->cost }}</td>
+        </tr>
+        <tr>
+            <td class="bold" style="font-weight: bold;">Perlu mendapatkan istirahat/Dinas ringan selama:</td>
+            <td class="non-bold" style="font-weight: normal;">{{ $request->jumlahHariIzin }}</td>
+            <td colspan="2" class="bold" style="font-weight: bold;"> hari terhitung mulai</td>
+        </tr>
+        <tr>
+            <td class="bold" style="font-weight: bold;">Tanggal:</td>
+            <td class="non-bold" style="font-weight: normal;">{{ $tglmulai }}</td>
+            <td class="bold" style="font-weight: bold;">s/d</td>
+            <td class="non-bold" style="font-weight: normal;">{{ $tglakhir }}</td>
+        </tr>
+        <tr>
+            <td class="bold" style="font-weight: bold;">Keterangan Lain-lain: </td>
+            <td colspan="3" class="non-bold" style="font-weight: normal;">{{ $request->keterangan }}</td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: right; padding-right: 20px;">
+                <div id="dataDokter" class="text-center" style="text-align: center;">
+                    <p>Tanggal : {{ $request->tglpemeriksaan }}</p>
+                    <p>Dokter yang memeriksa</p>
+                    <div class="text-center" style="text-align: center;">
+                        <img id="ttd" src="/images/1 00000000 2022-11-15.png" alt="TTD" style="height: 100px; width: auto; align-items: center;">
+                    </div>
+                    <p>Dr {{ auth()->user()->name }}</p>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
 
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+</html>

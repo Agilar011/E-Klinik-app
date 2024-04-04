@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
+use Barryvdh\DomPDF\Facade\Pdf;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Middleware\EncryptUrlMiddleware;
 
