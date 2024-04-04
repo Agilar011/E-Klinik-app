@@ -48,14 +48,14 @@
                             <td class="border px-4 py-2">{{ $item->catatan_dokter }}</td>
                             <td class="border px-4 py-2">{{ $item->status }}</td>
                             <td class="border px-4 py-2 ">
-                                <div class="bg-red-500 text-center p-2">
+                                <div class="    text-center p-2">
                                     Pengajuan anda telah Ditolak
 
                                 </div>
                             </td>
                         </tr>
                     @elseif ($item->status == 'approved')
-                        <tr class="m-2 bg-green-400">
+                        <tr class="m-2 bg-blue-400">
                             <td class="border px-4 py-2">{{ Auth::user()->name }}</td>
                             <td class="border px-4 py-2">{{ $item->poli->name }}</td>
                             <td class="border px-4 py-2">{{ $item->created_at->format('d-m-Y') }}</td>
@@ -77,7 +77,7 @@
                             </td>
                         </tr>
                     @elseif ($item->status == 'on process')
-                        <tr class="m-2 bg-green-400">
+                        <tr class="m-2 bg-yellow-200">
                             <td class="border px-4 py-2">{{ Auth::user()->name }}</td>
                             <td class="border px-4 py-2">{{ $item->poli->name }}</td>
                             <td class="border px-4 py-2">{{ $item->created_at->format('d-m-Y') }}</td>
@@ -108,28 +108,39 @@
 
                         </tr>
                     @elseif ($item->status == 'done')
-                        <tr class="m-2">
+                        <tr class="m-2 bg-green-400">
                             <td class="border px-4 py-2">{{ Auth::user()->name }}</td>
                             <td class="border px-4 py-2">{{ $item->poli->name }}</td>
                             <td class="border px-4 py-2">{{ $item->created_at->format('d-m-Y') }}</td>
                             <td class="border px-4 py-2">{{ $item->keluhan }}</td>
                             <td class="border px-4 py-2">{{ $item->catatan_dokter }}</td>
                             <td class="border px-4 py-2">{{ $item->status }}</td>
-                            {{-- @if ($suratIzin != null)
-                                ini surat izin
-                            @else --}}
-
                             @php
-                                $namaPDF = App\Models\RekapMedis::where('surat_izin', $item->id . $item->nip . $item->tglpemeriksaan . '.pdf')->first();
+                                $statusrating = App\Models\Rating::where('id_pengajuan', $item->id)->first();
+
+                                $namaPDF = App\Models\RekapMedis::where(
+                                    'surat_izin',
+                                    $item->id . $item->nip . $item->tglpemeriksaan . '.pdf',
+                                )->first();
 
                                 // dd($namaPDF);
 
                             @endphp
 
-                            @if ($namaPDF != null)
-                            <td class="border px-4 py-2">
+                            @if ($statusrating == null)
+                                <td class="border px-4 py-2">
+
+                                    <a href="{{ route('inputRating', ['id' => $item->id]) }}"
+                                        class="bg-white py-2 px-4 rounded-2xl">Berikan Penilaian Anda</a>
+
+
+
+                                </td>
+                            @elseif ($statusrating != null && $namaPDF != null)
+                                <td class="border px-4 py-2">
                                     <a href="{{ asset('pdf/' . $namaPDF->surat_izin) }}" download>
-                                        <button class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-blue-600">
+                                        <button
+                                            class="bg-green-500 text-white px-8 py-2 text-center text-base font-semibold rounded-lg shadow-md hover:bg-blue-600">
                                             Download Surat Izin
                                         </button>
                                     </a>
@@ -143,10 +154,9 @@
                                 </td>
                             @endif
 
-                            {{-- @endif --}}
                         </tr>
                     @else
-                        <tr class="m-2 bg-blue-400 ">
+                        <tr class="m-2 bg-sky-400 ">
                             <td class="border px-4 py-2">{{ Auth::user()->name }}</td>
                             <td class="border px-4 py-2">{{ $item->poli->name }}</td>
                             <td class="border px-4 py-2">{{ $item->created_at->format('d-m-Y') }}</td>

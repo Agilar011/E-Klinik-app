@@ -126,7 +126,7 @@ Route::middleware('role:dokter')->group(function () {
     Route::put('/setujuipengajuan/{id}', [DoctorController::class, 'SetujuiPengajuan'])->name('setujuipengajuan');
 
     Route::get('/scan-qr-code', [DoctorController::class, 'ScanQrPage'])->name('scanQrPage');
-    Route::post('/QrCodeProcessing', [DoctorController::class, 'ScanQr'])->name('scanQr');
+    // Route::post('/QrCodeProcessing', [DoctorController::class, 'ScanQr'])->name('scanQr');
     Route::post('/QrCodeResultProcessing', [DoctorController::class, 'ScanQrResult'])->name('ScanQrResult');
 
 

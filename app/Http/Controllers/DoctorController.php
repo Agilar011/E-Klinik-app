@@ -95,6 +95,7 @@ class DoctorController extends Controller
         $writer = new Writer($renderer);
         $writer->writeFile($text, $ruteSimpan);
         $pengajuan->qrcode = $text . '.png';
+        $pengajuan->status_qrcode = 'aktif';
 
         // Simpan perubahan ke dalam database
         $pengajuan->save();
@@ -136,11 +137,12 @@ class DoctorController extends Controller
             $value->pasien = $pasien->name;
             $value->divisi = $pasien->divisi;
             // dd($text);
-            if ($text == request('qr_code_result')) {
-                // alert()->warning('Data tidak ditemukan', 'silahkan coba lagi');
-                $pengajuan = PengajuanCheckUp::where('nip', $value->nip)->first();
+            if ($text == request('qr_code_result') && $value->status_qrcode == 'aktif') {
+                $pengajuan = PengajuanCheckUp::where('id', $value->id)->first();
                 $pengajuan->status = 'on process';
+                $pengajuan->status_qrcode = 'expired';
                 $pengajuan->save();
+                // dd($pengajuan);
 
                 alert()->success('Data ditemukan', 'pasien ditemukan');
                 return view('DoctorUI.resultPage', compact('value'));
@@ -151,6 +153,8 @@ class DoctorController extends Controller
 
             # code...
         }
+        alert()->error('Data tidak ditemukan', 'Data tidak ditemukan / QR Code sudah expired');
+
         return redirect()->route('scanQrPage')->with('success', 'Pengajuan Telah Disetujui.');
     }
     public function QrPage(Request $request)

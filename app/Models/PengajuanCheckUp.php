@@ -15,6 +15,7 @@ class PengajuanCheckUp extends Model
         'nipdokter',
         'idpoli',
         'qrcode',
+        'status_qrcode',
         'tglpengajuan',
         'tglpemeriksaan',
         'keluhan',

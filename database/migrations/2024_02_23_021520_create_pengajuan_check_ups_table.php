@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nipdokter')->nullable();
             $table->unsignedBigInteger('idpoli');
             $table->string('qrcode')->default(null)->nullable();
+            $table->enum('status_qrcode', ['null', 'aktif', 'expired'])->default('null');
             $table->date('tglpengajuan');
             $table->date('tglpemeriksaan')->nullable();
             $table->string('keluhan');
