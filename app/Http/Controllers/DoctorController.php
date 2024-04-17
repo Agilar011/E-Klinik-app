@@ -360,6 +360,7 @@ $data = [
         $rekapmedis->save();
         // dd($pengajuan);
         alert()->success('Pembuatan Surat Selesai','Surat Izin telah Dibuat');
+        // return view('DoctorUI.suratIzin', $data);
         return redirect()->route('dashboard');
     }
 

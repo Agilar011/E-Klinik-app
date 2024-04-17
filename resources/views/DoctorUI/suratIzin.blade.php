@@ -9,7 +9,7 @@
 </head>
 
 <body style="width: 19cm; font-family: sans-serif;">
-    <table id="lembarIzin" style="font-family: sans-serif; background-color: #ffffff; overflow: hidden; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 0.5rem; padding: 2.5rem; width: 100%;">
+    <table id="lembarIzin" style="font-family: sans-serif; background-color: #ffffff; padding: 2.5rem; width: 100%;">
         <tr>
             <td colspan="4" style="text-align: center;">
                 {{-- <img id="logo" src="/img/pal-logo.png" alt="Logo Klinik"> --}}
@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <td colspan="4" style="text-align: justify;">
-                Yang bertanda tangan di bawah ini, Dokter Puskesmas Pekayon, menerangkan bahwa:
+                Yang bertanda tangan di bawah ini, Dokter Puskesmas PT PAL, menerangkan bahwa:
             </td>
         </tr>
         <tr>
