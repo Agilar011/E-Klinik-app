@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             PoliSeeder::class,
             PengajuanCheckUpSeeder::class,
             DataPoliSeeder::class,
-            DivisiSeeder::class,]);
+            DivisiSeeder::class,
+            ChatRoomSeeder::class,
+            ChatMessages::class,]);
     }
 }

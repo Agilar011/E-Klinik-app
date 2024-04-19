@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\ChatController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Middleware\EncryptUrlMiddleware;
@@ -149,3 +150,9 @@ Route::post('/generate-pdf', [DoctorController::class, 'generatePDF'])->name('ge
 
 
 // Route::get('/formSuratIzin/{pengajuan}', [DoctorController::class, 'formSuratIzin'])->name('formSuratIzin');
+
+Route::get('/chatPage', [ChatController::class, 'index'])->name('chat');
+
+Route::get('/chat', [ChatController::class, 'rooms']);
+Route::get('/chat/{roomId}/messages', [ChatController::class, 'messages']);
+Route::post('/chat/{roomId}/newMessage', [ChatController::class, 'newMessage']);

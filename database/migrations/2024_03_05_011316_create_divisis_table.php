@@ -1,4 +1,3 @@
-// database/migrations/2024_03_05_000000_create_divisis_table.php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
