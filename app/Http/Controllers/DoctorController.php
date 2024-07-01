@@ -19,6 +19,8 @@ use BaconQrCode\Writer;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use TCPDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 
 class DoctorController extends Controller
@@ -387,5 +389,85 @@ $data = [
         return redirect()->route('dashboard');
 
     }
+
+    public function HistoryPage()
+{
+    $pengajuan = PengajuanCheckUp::join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
+        ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
+        ->select('pengajuan_check_ups.*', 'users.name as username', 'users.divisi', 'polis.name as poli')
+        ->orderBy('pengajuan_check_ups.created_at', 'desc') // Order by created_at descending
+        ->paginate(10); // Adjust the number 10 to the number of items per page you want
+
+    return view('DoctorUI.historyPengajuan', compact('pengajuan'));
+}
+public function searchHistory(Request $request)
+    {
+        $query = $request->input('query');
+
+        $pengajuan = PengajuanCheckUp::join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
+        ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
+        ->select('pengajuan_check_ups.*', 'users.name as username', 'users.divisi', 'polis.name as poli')
+        ->where(function($q) use ($query) {
+            $q->where('users.name', 'like', "%$query%")
+              ->orWhere('users.name', 'like', "%$query%")
+              ->orWhere('users.divisi', 'like', "%$query%")
+              ->orWhere('polis.name', 'like', "%$query%")
+            //   ->orWhere('pengajuan_check_ups.tglpengajuan', 'like', "%$query%")
+              ->orWhere('pengajuan_check_ups.tglpemeriksaan', 'like', "%$query%")
+              ->orWhere('pengajuan_check_ups.keluhan', 'like', "%$query%")
+              ->orWhere('pengajuan_check_ups.status', 'like', "%$query%");
+        })
+        ->orderBy('pengajuan_check_ups.created_at', 'desc') // Order by created_at descending
+        ->paginate(10); // Adjust the number 10 to the number of items per page you want
+
+        // dd($pengajuan);
+
+            return view('DoctorUI.historyPengajuan', compact('pengajuan'));
+        }
+
+        public function printPDF(Request $request)
+        {
+            $pengajuan = json_decode($request->input('pengajuan'));
+
+            // $options = new Options();
+            // $options->set('isHtml5ParserEnabled', true);
+            // $options->set('isPhpEnabled', true);
+
+            // $dompdf = new Dompdf($options);
+            // $html = view('DoctorUI.historyPengajuanPDF', compact('pengajuan'))->render();
+            // $dompdf->loadHtml($html);
+
+            // // (Optional) Setup the paper size and orientation
+            // $dompdf->setPaper('A4', 'portrait');
+
+            // // Render the HTML as PDF
+            // $dompdf->render();
+
+            // // Output the generated PDF to Browser
+            // return $dompdf->stream('pengajuan_check_up.pdf');
+
+            $pdf = Pdf::loadView('DoctorUI.historyPengajuanPDF', compact('pengajuan'));
+
+            return $pdf->download('pengajuan_check_up.pdf');
+
+            // return view('DoctorUI.historyPengajuanPDF', compact('pengajuan'));
+
+        }
+
+
+
+// public function printPDF()
+//     {
+//         $pengajuan = PengajuanCheckUp::join('users', 'pengajuan_check_ups.nip', '=', 'users.nip')
+//             ->join('polis', 'pengajuan_check_ups.idpoli', '=', 'polis.id')
+//             ->select('pengajuan_check_ups.*', 'users.name as username', 'users.divisi', 'polis.name as poli')
+//             ->orderBy('pengajuan_check_ups.created_at', 'desc')
+//             ->get();
+
+//         $pdf = PDF::loadView('DoctorUI.historyPengajuan', compact('pengajuan'));
+
+//         return $pdf->download('pengajuan_check_up.pdf');
+//     }
+
 
 }

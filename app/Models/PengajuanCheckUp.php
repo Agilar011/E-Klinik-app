@@ -37,4 +37,23 @@ class PengajuanCheckUp extends Model
     {
         return $this->belongsTo(Poli::class, 'idpoli');
     }
+
+    public function getStatusClass()
+    {
+        switch ($this->status) {
+            case 'done':
+                return 'bg-green-400';
+            case 'on process':
+                return 'bg-yellow-400';
+            case 'approved':
+                return 'bg-blue-400';
+            case 'rejected':
+                return 'bg-red-400';
+            case 'pending':
+                return 'bg-blue-200';
+            default:
+                return 'bg-blue-200';
+        }
+    }
+
 }

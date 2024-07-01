@@ -129,6 +129,14 @@ Route::middleware('role:dokter')->group(function () {
     // Route::post('/QrCodeProcessing', [DoctorController::class, 'ScanQr'])->name('scanQr');
     Route::post('/QrCodeResultProcessing', [DoctorController::class, 'ScanQrResult'])->name('ScanQrResult');
 
+    Route::get('/historypengajuan', [DoctorController::class, 'HistoryPage'])->name('daftarHistory');
+    // routes/web.php
+    Route::post('/print-history', [DoctorController::class, 'printPDF'])->name('print.history');
+
+    Route::get('/historypengajuan/search', [DoctorController::class, 'searchHistory'])->name('searchHistory');
+
+
+
 
 });
 

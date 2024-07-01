@@ -40,6 +40,11 @@
                     <x-nav-link href="{{ route('daftarPemeriksaan') }}" :active="request()->routeIs('daftarPemeriksaan')">
                         {{ __('Daftar Pemeriksaan') }}
                     </x-nav-link>
+
+                    <x-nav-link href="{{ route('daftarHistory') }}" :active="request()->routeIs('daftarHistory')">
+                        {{ __('History Pengajuan') }}
+                    </x-nav-link>
+
                     @endif
 
                 </div>

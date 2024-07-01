@@ -28,7 +28,7 @@
             @php
                 // Mendapatkan daftar pengajuan check up berdasarkan NIP pengguna saat ini
                 $pengajuanCheckUps = App\Models\PengajuanCheckUp::where('nip', Auth::user()->nip)
-                    ->orderBy('created_at', 'desc') // Urutkan berdasarkan waktu pengajuan dari yang terbaru
+                    ->orderBy('created_at', 'asc') // Urutkan berdasarkan waktu pengajuan dari yang terbaru
                     ->paginate(5);
             @endphp
 
